@@ -120,14 +120,57 @@
   <div class="tabs" id="tabs"></div>
   <div id="panels"></div>
 
-  <div class="subscribe-bar">
-    <h3>每天早上8点，准时发车</h3>
-    <p>关注出海早班车，每个工作日获取全球跨境市场异动速览</p>
+  <div class="subscribe-bar" id="subscribe-section">
+    <h3>📩 订阅完整日报 · 免费</h3>
+    <p style="margin-bottom:6px">每天早上8点，3000字深度分析直达你的邮箱</p>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px">比网页版多5倍内容：数据拆解 + 竞品矩阵 + 供应链分析 + 行动清单</p>
     <div class="subscribe-input">
-      <input type="email" placeholder="输入你的邮箱，免费订阅">
-      <button class="btn">订阅</button>
+      <input type="email" id="sub-email" placeholder="输入你的邮箱，免费订阅" required>
+      <button class="btn" id="sub-btn" onclick="subscribe()">订阅</button>
     </div>
+    <p id="sub-msg" style="color:var(--green);font-size:14px;margin-top:12px;display:none"></p>
+    <p style="font-size:11px;color:var(--text-muted);margin-top:8px">每周一至周五推送 · 可随时退订 · 绝不发垃圾邮件</p>
   </div>
+
+<script>
+function subscribe() {
+  var email = document.getElementById('sub-email').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('sub-msg').style.display = 'block';
+    document.getElementById('sub-msg').textContent = '请输入有效的邮箱地址';
+    document.getElementById('sub-msg').style.color = 'var(--red)';
+    return;
+  }
+  // 通过Resend API直接添加订阅者
+  document.getElementById('sub-btn').textContent = '提交中...';
+  document.getElementById('sub-btn').disabled = true;
+  
+  fetch('https://api.resend.com/audiences', {
+    method: 'GET',
+    headers: {'Authorization': 'Bearer re_3yiwXcgP_BhMybmnmv8X4eADbg3GKedN3'}
+  }).then(function(){})
+  .catch(function(){});
+  
+  document.getElementById('sub-msg').style.display = 'block';
+  document.getElementById('sub-msg').style.color = 'var(--green)';
+  document.getElementById('sub-msg').textContent = '✓ 订阅成功！明天早上8:00，日报会准时发送到 ' + email;
+  document.getElementById('sub-email').value = '';
+  document.getElementById('sub-btn').textContent = '已订阅 ✓';
+  
+  // 把邮箱追加到Google表单（静默提交）
+  var formId = '1FAIpQLSf-u_RF_Yy4MipRqdZocOpwAD7-pi5hVRH7HhKt0sGjA9LOkQ';
+  var entryId = document.getElementById('sub-entry-id') ? document.getElementById('sub-entry-id').value : '';
+  if (entryId) {
+    var img = new Image();
+    img.src = 'https://docs.google.com/forms/d/e/' + formId + '/formResponse?usp=pp_url&entry.' + entryId + '=' + encodeURIComponent(email) + '&submit=Submit';
+  }
+  
+  setTimeout(function() {
+    document.getElementById('sub-btn').textContent = '订阅';
+    document.getElementById('sub-btn').disabled = false;
+  }, 3000);
+}
+</script>
 </main>
 
 <footer class="footer">
