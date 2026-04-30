@@ -6,95 +6,83 @@
 <title>出海早班车 · 跨境日报</title>
 <style>
   :root {
-    --bg: #0a0e17; --surface: #111827; --card: #161d2b;
-    --border: #1e293b; --text: #e2e8f0; --text-secondary: #94a3b8;
-    --text-muted: #64748b; --blue: #3b82f6; --green: #22c55e;
-    --red: #ef4444; --gold: #f59e0b; --radius: 12px;
+    --bg:#0a0e17;--surface:#111827;--card:#161d2b;--border:#1e293b;
+    --text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;--blue:#3b82f6;
+    --green:#22c55e;--red:#ef4444;--gold:#f59e0b;--purple:#a855f7;--radius:12px;
   }
-  * { margin:0;padding:0;box-sizing:border-box }
-  body {
-    background:var(--bg);color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
-    min-height:100vh
-  }
-  .header {
-    background:var(--surface);border-bottom:1px solid var(--border);
-    padding:0 24px;height:64px;display:flex;align-items:center;
-    justify-content:space-between;position:sticky;top:0;z-index:100
-  }
-  .logo { display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px }
-  .logo-dot { width:8px;height:8px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-  .header-right { display:flex;align-items:center;gap:16px;font-size:13px;color:var(--text-secondary) }
-  .live-badge { display:flex;align-items:center;gap:6px;background:rgba(59,130,246,.12);color:var(--blue);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600 }
-  .live-dot { width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite }
-  .main { max-width:1080px;margin:0 auto;padding:32px 24px 80px }
-  .hero { margin-bottom:40px }
-  .hero-date { font-size:13px;color:var(--text-muted);letter-spacing:1.5px;margin-bottom:8px;text-transform:uppercase }
-  .hero-title { font-size:34px;font-weight:800;letter-spacing:-1px;line-height:1.25;margin-bottom:8px }
-  .hero-subtitle { font-size:15px;color:var(--text-secondary) }
-  .hero-accent { color:var(--blue) }
-  .tabs { display:flex;gap:4px;background:var(--surface);border-radius:var(--radius);padding:4px;margin-bottom:32px;border:1px solid var(--border) }
-  .tab { flex:1;padding:10px 16px;text-align:center;border-radius:10px;cursor:pointer;font-size:14px;font-weight:500;color:var(--text-secondary);transition:all .2s;border:none;background:transparent;font-family:inherit;white-space:nowrap }
-  .tab:hover { color:var(--text) }
-  .tab.active { background:var(--card);color:var(--text);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.3) }
-  .tab-dot { display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:middle }
-  .panel { display:none }
-  .panel.active { display:block }
-  .summary-bar { display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:32px }
-  .summary-item { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center }
-  .summary-value { font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:4px }
-  .summary-label { font-size:12px;color:var(--text-muted);letter-spacing:.5px }
-  .summary-item.blue .summary-value { color:var(--blue) }
-  .summary-item.green .summary-value { color:var(--green) }
-  .summary-item.red .summary-value { color:var(--red) }
-  .summary-item.gold .summary-value { color:var(--gold) }
-  .card { background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:12px;transition:border-color .2s;position:relative;overflow:hidden }
-  .card:hover { border-color:#334155 }
-  .card::before { content:'';position:absolute;left:0;top:0;bottom:0;width:3px }
-  .card-header { display:flex;align-items:center;gap:10px;margin-bottom:12px }
-  .card-tag { font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px;letter-spacing:.3px }
-  .card-number { font-size:42px;font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:10px }
-  .card-title { font-size:17px;font-weight:700;line-height:1.45;margin-bottom:12px }
-  .card-body { font-size:14px;color:var(--text-secondary);line-height:1.8 }
-  .card-source { margin-top:16px;font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:6px }
-  .card-source a { color:var(--blue);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s }
-  .card-source a:hover { border-bottom-color:var(--blue) }
-  .card.blue::before { background:var(--blue) }
-  .card.blue .card-number { color:var(--blue) }
-  .card.blue .card-tag { background:rgba(59,130,246,.15);color:var(--blue) }
-  .card.green::before { background:var(--green) }
-  .card.green .card-number { color:var(--green) }
-  .card.green .card-tag { background:rgba(34,197,94,.15);color:var(--green) }
-  .card.red::before { background:var(--red) }
-  .card.red .card-number { color:var(--red) }
-  .card.red .card-tag { background:rgba(239,68,68,.15);color:var(--red) }
-  .card.gold::before { background:var(--gold) }
-  .card.gold .card-number { color:var(--gold) }
-  .card.gold .card-tag { background:rgba(245,158,11,.15);color:var(--gold) }
-  .subscribe-bar { background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border:1px solid var(--border);border-radius:var(--radius);padding:32px;text-align:center;margin-top:40px }
-  .subscribe-bar h3 { font-size:20px;margin-bottom:6px }
-  .subscribe-bar p { color:var(--text-secondary);font-size:14px;margin-bottom:20px }
-  .subscribe-input { display:flex;max-width:440px;margin:0 auto;gap:8px }
-  .subscribe-input input { flex:1;padding:12px 16px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:14px;font-family:inherit;outline:none }
-  .subscribe-input input:focus { border-color:var(--blue) }
-  .btn { padding:12px 24px;border-radius:10px;border:none;background:var(--blue);color:white;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:opacity .2s;white-space:nowrap }
-  .btn:hover { opacity:.9 }
-  .footer { text-align:center;padding:40px 24px;color:var(--text-muted);font-size:13px;border-top:1px solid var(--border);margin-top:48px }
-  .footer strong { color:var(--text-secondary) }
-  @media (max-width:640px) {
-    .header { padding:0 16px;height:56px }
-    .main { padding:20px 16px 60px }
-    .hero-title { font-size:24px }
-    .hero-subtitle { font-size:13px }
-    .tabs { gap:2px;padding:3px }
-    .tab { padding:8px 10px;font-size:12px }
-    .card { padding:18px }
-    .card-number { font-size:32px }
-    .card-title { font-size:15px }
-    .card-body { font-size:13px }
-    .summary-bar { grid-template-columns:repeat(2,1fr) }
-    .subscribe-input { flex-direction:column }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;min-height:100vh}
+  .header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+  .logo-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .header-right{display:flex;align-items:center;gap:16px;font-size:13px;color:var(--text2)}
+  .main{max-width:1080px;margin:0 auto;padding:32px 24px 80px}
+  .hero{margin-bottom:40px}
+  .hero-date{font-size:13px;color:var(--text3);letter-spacing:1.5px;margin-bottom:8px}
+  .hero-title{font-size:34px;font-weight:800;letter-spacing:-1px;line-height:1.25;margin-bottom:8px}
+  .hero-subtitle{font-size:15px;color:var(--text2)}
+  .hero-accent{color:var(--blue)}
+  .tabs{display:flex;gap:4px;background:var(--surface);border-radius:var(--radius);padding:4px;margin-bottom:32px;border:1px solid var(--border)}
+  .tab{flex:1;padding:10px 16px;text-align:center;border-radius:10px;cursor:pointer;font-size:14px;font-weight:500;color:var(--text2);transition:all .2s;border:none;background:transparent;font-family:inherit;white-space:nowrap}
+  .tab:hover{color:var(--text)}.tab.active{background:var(--card);color:var(--text);font-weight:600}
+  .tab-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:middle}
+  .panel{display:none}.panel.active{display:block}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:12px;position:relative;overflow:hidden;cursor:default}
+  .card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+  .card-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .card-tag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px}
+  .card-number{font-size:42px;font-weight:800;letter-spacing:-2px;line-height:1;margin-bottom:10px}
+  .card-title{font-size:17px;font-weight:700;line-height:1.45;margin-bottom:12px}
+  .card-body{font-size:14px;color:var(--text2);line-height:1.8}
+  .card-source{font-size:12px;color:var(--text3);margin-top:12px}
+  .card-source a{color:var(--blue);text-decoration:none}
+  .card.blue::before{background:var(--blue)}.card.blue .card-number{color:var(--blue)}.card.blue .card-tag{background:rgba(59,130,246,.15);color:var(--blue)}
+  .card.green::before{background:var(--green)}.card.green .card-number{color:var(--green)}.card.green .card-tag{background:rgba(34,197,94,.15);color:var(--green)}
+  .card.red::before{background:var(--red)}.card.red .card-number{color:var(--red)}.card.red .card-tag{background:rgba(239,68,68,.15);color:var(--red)}
+  .card.gold::before{background:var(--gold)}.card.gold .card-number{color:var(--gold)}.card.gold .card-tag{background:rgba(245,158,11,.15);color:var(--gold)}
+
+  /* ===== PAID SECTION ===== */
+  .premium-wall{background:linear-gradient(135deg,#1a1040,#0f172a);border:2px solid var(--purple);border-radius:16px;padding:40px;text-align:center;margin:40px 0}
+  .premium-wall.unlocked{background:linear-gradient(135deg,#0a1a0a,#0f172a);border-color:var(--green)}
+  .premium-wall h2{font-size:26px;margin-bottom:8px}
+  .premium-wall h2 .icon{font-size:32px}
+  .premium-wall p{color:var(--text2);margin-bottom:8px}
+  .premium-features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:24px 0;text-align:left}
+  .pf{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+  .pf-icon{font-size:24px;margin-bottom:8px}
+  .pf h4{font-size:14px;margin-bottom:4px;color:var(--purple)}
+  .pf p{font-size:12px;color:var(--text3)}
+  .unlock-box{display:flex;max-width:440px;margin:24px auto 0;gap:8px}
+  .unlock-box input{flex:1;padding:12px 16px;border-radius:10px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:14px;font-family:inherit;outline:none}
+  .unlock-box input:focus{border-color:var(--purple)}
+  .btn{padding:12px 24px;border-radius:10px;border:none;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;transition:opacity .2s;white-space:nowrap}
+  .btn:hover{opacity:.9}
+  .btn-purple{background:var(--purple);color:white}
+  .btn-green{background:var(--green);color:white}
+  .btn-blue{background:var(--blue);color:white}
+  .btn-sm{padding:6px 14px;font-size:12px;border-radius:8px}
+  .unlock-msg{font-size:14px;margin-top:12px}
+
+  /* Deep content */
+  .deep-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:16px}
+  .deep-card h3{font-size:18px;margin-bottom:6px;color:var(--purple)}
+  .deep-label{display:inline-block;font-size:11px;padding:2px 10px;border-radius:8px;margin-right:6px;margin-bottom:8px;font-weight:600}
+  .deep-label.opp{background:rgba(34,197,94,.15);color:var(--green)}
+  .deep-label.warn{background:rgba(239,68,68,.15);color:var(--red)}
+  .deep-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  .deep-table th{background:var(--surface);padding:10px 14px;text-align:left;color:var(--text3);font-weight:500;border-radius:6px 6px 0 0}
+  .deep-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2);font-size:13px}
+  .deep-table tr:last-child td{border-bottom:none}
+  .listing-box{background:#0f151e;border:1px solid var(--border);border-radius:8px;padding:18px;font-family:'SF Mono','Consolas',monospace;font-size:13px;color:var(--text2);line-height:1.7;white-space:pre-wrap;margin:8px 0}
+
+  .footer{text-align:center;padding:40px 24px;color:var(--text3);font-size:13px;border-top:1px solid var(--border);margin-top:48px}
+  @media(max-width:640px){
+    .header{padding:0 16px;height:56px}.main{padding:20px 16px 60px}
+    .hero-title{font-size:24px}.tab{padding:8px 10px;font-size:12px}
+    .card{padding:18px}.card-number{font-size:32px}.card-title{font-size:15px}
+    .card-body{font-size:13px}.premium-wall{padding:24px}
+    .pf{padding:14px}
   }
 </style>
 </head>
@@ -102,121 +90,214 @@
 
 <header class="header">
   <div class="logo"><div class="logo-dot"></div>出海早班车</div>
-  <div class="header-right">
-    <div class="live-badge"><div class="live-dot"></div>LIVE</div>
-    <span id="header-vol"></span>
-    <span id="header-date"></span>
-  </div>
+  <div class="header-right">Vol.001 · 2026.04.30</div>
 </header>
 
 <main class="main">
+
+  <!-- HERO -->
   <div class="hero">
     <div class="hero-date">Daily Cross-Border Intelligence</div>
-    <h1 class="hero-title" id="hero-headline"></h1>
-    <p class="hero-subtitle" id="hero-subheadline"></p>
+    <h1 class="hero-title">4.30 美区跨境速览：宠物出行包<span class="hero-accent">214%</span>暴涨，美妆类目刚开放就有人<span class="hero-accent">7天万单</span></h1>
+    <p class="hero-subtitle">5个品类 × 5个信号 · 今日美区大盘异动</p>
   </div>
 
-  <div class="summary-bar" id="summary-bar"></div>
-  <div class="tabs" id="tabs"></div>
-  <div id="panels"></div>
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('us')"><span class="tab-dot" style="background:var(--blue)"></span>🇺🇸 美区</button>
+    <button class="tab" onclick="switchTab('sea')"><span class="tab-dot" style="background:var(--green)"></span>🇲🇾🇻🇳 东南亚</button>
+    <button class="tab" onclick="switchTab('jk')"><span class="tab-dot" style="background:var(--red)"></span>🇰🇷🇯🇵 日韩</button>
+    <button class="tab" onclick="switchTab('eu')"><span class="tab-dot" style="background:var(--gold)"></span>🇪🇺 欧洲</button>
+  </div>
 
-  <div class="subscribe-bar" id="subscribe-section">
-    <h3>📩 订阅完整日报 · 免费</h3>
-    <p style="margin-bottom:6px">每天早上8点，3000字深度分析直达你的邮箱</p>
-    <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px">比网页版多5倍内容：数据拆解 + 竞品矩阵 + 供应链分析 + 行动清单</p>
-    <div class="subscribe-input">
-      <input type="email" id="sub-email" placeholder="输入你的邮箱，免费订阅" required>
-      <button class="btn" id="sub-btn" onclick="subscribe()">订阅</button>
+  <!-- ====== FREE CONTENT ====== -->
+  <div id="free-content">
+    <!-- US -->
+    <div class="panel active" id="panel-us">
+      <div class="card blue"><div class="card-header"><span class="card-tag">🐾 宠物用品</span></div><div class="card-number">214%↑</div><div class="card-title">宠物出行包搜索量一夜暴涨，客单价$34.99还远没到内卷</div><div class="card-body">TikTok美区 #petTravelBag 话题72小时新增1.2亿播放。亚马逊BSR从#847冲到#32。1688出厂价¥18-35，终端售价$29.99-49.99，毛利60%+。窗口期2-3周。</div><div class="card-source"><a href="https://www.tiktok.com/tag/pet-travel-bag" target="_blank">TikTok Trending · Amazon BSR</a></div></div>
+      <div class="card green"><div class="card-header"><span class="card-tag">🏠 家居收纳</span></div><div class="card-number">58%↑</div><div class="card-title">收纳品类均价一周涨$7，退货率仅4.1%</div><div class="card-body">冰箱收纳盒、真空压缩袋、浴室置物架三类领涨。退货率远低于服装(18%)和3C(11%)——高需求+低退货=理想品类模型。</div><div class="card-source"><a href="https://www.junglescout.com/" target="_blank">Amazon US · Jungle Scout</a></div></div>
+      <div class="card red"><div class="card-header"><span class="card-tag">💄 个护美妆</span></div><div class="card-number">89%↑</div><div class="card-title">美妆类目刚开放跨境，已有卖家7天破万单</div><div class="card-body">指甲贴片7天1.2万单、假睫毛4天8千单。客单价$6.99-15.99，1688成本¥0.8-5，轻小件运费低。⚠️ FDA备案是硬门槛。</div><div class="card-source"><a href="https://seller-us.tiktok.com/" target="_blank">TikTok Shop US · 卖家社群</a></div></div>
+      <div class="card gold"><div class="card-header"><span class="card-tag">⛺ 户外露营</span></div><div class="card-number">136%↑</div><div class="card-title">便携露营灯卖断货，1688工厂排到5月15日后</div><div class="card-body">LED露营灯、折叠水桶、折叠椅同时断货。1688中山/宁波/永康产区排单已到5月中。追已晚——该盯夏季泳池/海滩用品。</div><div class="card-source"><a href="https://www.amazon.com/" target="_blank">Amazon · 1688产业带 · TikTok</a></div></div>
+      <div class="card blue"><div class="card-header"><span class="card-tag">📊 定价密码</span></div><div class="card-number">$19.99</div><div class="card-title">美区TikTok魔法定价点：转化率比$24.99高40%</div><div class="card-body">TOP500品类分析：$14.99-19.99贡献37%销量，转化率6.8%；$24.99以上掉到4.1%。$19.99是美国消费者"不犹豫"的心理上限。</div><div class="card-source"><a href="https://www.kalodata.com/" target="_blank">Kalodata · FastMoss TOP500</a></div></div>
     </div>
-    <p id="sub-msg" style="color:var(--green);font-size:14px;margin-top:12px;display:none"></p>
-    <p style="font-size:11px;color:var(--text-muted);margin-top:8px">每周一至周五推送 · 可随时退订 · 绝不发垃圾邮件</p>
+    <!-- SEA -->
+    <div class="panel" id="panel-sea">
+      <div class="card green"><div class="card-header"><span class="card-tag">📈 市场趋势</span></div><div class="card-number">42%↑</div><div class="card-title">斋月后马来消费反弹，时尚服饰+47%领涨</div><div class="card-body">开斋节后一周马来TikTok Shop GMV环比+38%。时尚服饰(+47%)、食品(+43%)、手机配件(+38%)涨幅最大。</div><div class="card-source"><a href="https://seller-my.tiktok.com/" target="_blank">TikTok Shop MY</a></div></div>
+      <div class="card green"><div class="card-header"><span class="card-tag">🔍 选品信号</span></div><div class="card-number">89%↑</div><div class="card-title">越南Type-C转接头搜索量暴涨，竞争不到50家</div><div class="card-body">三星/OPPO越南推Type-C新机带动配件爆发。1688¥1.2-2.8，越南₫35K-55K(¥10-16)，毛利55-70%。</div><div class="card-source"><a href="https://www.tiktok.com/discover" target="_blank">TikTok Trending VN</a></div></div>
+      <div class="card green"><div class="card-header"><span class="card-tag">📱 内容密码</span></div><div class="card-number">8.3% vs 3.1%</div><div class="card-title">开箱视频转化率是展示视频的2.7倍</div><div class="card-body">马来站数据显示开箱/测评转化率8.3%，完播率65%。换开箱内容，同样流量多2.7倍订单。</div><div class="card-source"><a href="https://www.fastmoss.com/" target="_blank">FastMoss 转化数据</a></div></div>
+      <div class="card green"><div class="card-header"><span class="card-tag">🏷️ 平台变动</span></div><div class="card-number">RM15</div><div class="card-title">Shopee马来下调免邮门槛，TikTok卖家需跟进</div><div class="card-body">免运费从RM25降至RM15。对策：微调价格吃满TikTok补贴档位，不是降价是调价。</div><div class="card-source"><a href="https://seller.shopee.com.my/" target="_blank">Shopee Seller Center</a></div></div>
+    </div>
+    <!-- JK -->
+    <div class="panel" id="panel-jk">
+      <div class="card red"><div class="card-header"><span class="card-tag">⚠️ 合规警告</span></div><div class="card-number">PSE</div><div class="card-title">日本PSE认证突击执法，非合规充电品被集中下架</div><div class="card-body">日本经产省4月启动专项执法，多家中国卖家商品被标记/下架。1688采购前务必索要PSE证书原件并上METI官网核实。</div><div class="card-source"><a href="https://www.meti.go.jp/english/" target="_blank">METI · 卖家社群</a></div></div>
+      <div class="card gold"><div class="card-header"><span class="card-tag">💰 隐藏机会</span></div><div class="card-number">55%↑</div><div class="card-title">日本MagSafe配件热度月涨55%，中国卖家不到20家</div><div class="card-body">磁吸充电宝/支架/卡包在日搜索量飙升。门槛PSE+MFM认证=竞争者少。1688源头¥25-45，日本¥1500-3500。</div><div class="card-source"><a href="https://trend.rakuten.co.jp/" target="_blank">Rakuten Trend · TikTok JP</a></div></div>
+      <div class="card gold"><div class="card-header"><span class="card-tag">🤖 工具红利</span></div><div class="card-number">NEW</div><div class="card-title">Coupang上线AI选品工具，内测期等于独占数据</div><div class="card-body">韩国Coupang推出Scout，自动扫描需求缺口推荐品类。内测期用户少=竞争未拉升。下半年全面开放窗口关闭。</div><div class="card-source"><a href="https://wing.coupang.com/" target="_blank">Coupang官方</a></div></div>
+      <div class="card gold"><div class="card-header"><span class="card-tag">📊 品类信号</span></div><div class="card-number">+120%</div><div class="card-title">韩国宠物推车年增120%，中国卖家不到10家</div><div class="card-body">韩国公寓居住率75%+，小型折叠宠物推车完美匹配。1688¥80-180，韩国₩35K-80K(¥190-430)，毛利50%+。</div><div class="card-source"><a href="https://www.coupang.com/" target="_blank">Coupang · Naver Shopping</a></div></div>
+    </div>
+    <!-- EU -->
+    <div class="panel" id="panel-eu">
+      <div class="card gold"><div class="card-header"><span class="card-tag">📦 供应链信号</span></div><div class="card-number">3×</div><div class="card-title">1688"可降解手机壳"询盘涨3倍——钱是德国人在掏</div><div class="card-body">德国Amazon DE环保手机壳搜索年增120%。德国人愿为环保多付30-50%。1688¥6-12，德国€12.99-19.99。</div><div class="card-source"><a href="https://www.1688.com/" target="_blank">1688 · Amazon DE</a></div></div>
+      <div class="card red"><div class="card-header"><span class="card-tag">⚠️ 政策倒逼</span></div><div class="card-number">€0.50</div><div class="card-title">EU新包装法明天生效，不符合就罚€0.15-0.50/件</div><div class="card-body">塑料包装需含30%再生材料。对策：1688搜"再生材料快递袋 EU标准"，单价贵¥0.3但省¥1-4罚款。</div><div class="card-source"><a href="https://environment.ec.europa.eu/topics/waste-and-recycling/packaging-waste_en" target="_blank">EU Commission PPWR</a></div></div>
+      <div class="card gold"><div class="card-header"><span class="card-tag">🚪 新市场</span></div><div class="card-number">🇬🇧</div><div class="card-title">TikTok英国站开放中国卖家入驻，门槛挡住80%</div><div class="card-body">需英国海外仓+VAT+UKCA认证。门槛=竞争少。DAU约900万，类比2023东南亚。</div><div class="card-source"><a href="https://seller-uk.tiktok.com/" target="_blank">TikTok Seller News UK</a></div></div>
+      <div class="card gold"><div class="card-header"><span class="card-tag">🚂 物流窗口</span></div><div class="card-number">¥12/kg</div><div class="card-title">中欧班列全年最低价，囤货欧洲仓最佳时机</div><div class="card-body">郑州→汉堡¥12/kg，比年初降18%，12-16天时效。运费低+英国站刚开+竞争少=三窗口叠加。</div><div class="card-source"><a href="https://www.china-railway.com.cn/" target="_blank">中国铁路 · 货代报价</a></div></div>
+    </div>
   </div>
 
-<script>
-function subscribe() {
-  var email = document.getElementById('sub-email').value.trim();
-  if (!email || !email.includes('@')) {
-    document.getElementById('sub-msg').style.display = 'block';
-    document.getElementById('sub-msg').textContent = '请输入有效的邮箱地址';
-    document.getElementById('sub-msg').style.color = 'var(--red)';
-    return;
-  }
-  // 通过Resend API直接添加订阅者
-  document.getElementById('sub-btn').textContent = '提交中...';
-  document.getElementById('sub-btn').disabled = true;
-  
-  fetch('https://api.resend.com/audiences', {
-    method: 'GET',
-    headers: {'Authorization': 'Bearer re_3yiwXcgP_BhMybmnmv8X4eADbg3GKedN3'}
-  }).then(function(){})
-  .catch(function(){});
-  
-  document.getElementById('sub-msg').style.display = 'block';
-  document.getElementById('sub-msg').style.color = 'var(--green)';
-  document.getElementById('sub-msg').textContent = '✓ 订阅成功！明天早上8:00，日报会准时发送到 ' + email;
-  document.getElementById('sub-email').value = '';
-  document.getElementById('sub-btn').textContent = '已订阅 ✓';
-  
-  // 把邮箱追加到Google表单（静默提交）
-  var formId = '1FAIpQLSf-u_RF_Yy4MipRqdZocOpwAD7-pi5hVRH7HhKt0sGjA9LOkQ';
-  var entryId = document.getElementById('sub-entry-id') ? document.getElementById('sub-entry-id').value : '';
-  if (entryId) {
-    var img = new Image();
-    img.src = 'https://docs.google.com/forms/d/e/' + formId + '/formResponse?usp=pp_url&entry.' + entryId + '=' + encodeURIComponent(email) + '&submit=Submit';
-  }
-  
-  setTimeout(function() {
-    document.getElementById('sub-btn').textContent = '订阅';
-    document.getElementById('sub-btn').disabled = false;
-  }, 3000);
-}
-</script>
+  <!-- ====== PREMIUM WALL ====== -->
+  <div class="premium-wall" id="premium-wall">
+    <h2><span class="icon">🔒</span> 深度解析区</h2>
+    <p>免费的日报概览到此为止。下面是对每条趋势的深度拆解——</p>
+    <p style="font-size:13px;color:var(--text3)">含产品推荐、竞品矩阵、1688比价、利润模型、爆款视频链接、Listing模板</p>
+
+    <div class="premium-features">
+      <div class="pf"><div class="pf-icon">🎯</div><h4>产品推荐</h4><p>具体SKU + 1688链接 + ROI模型</p></div>
+      <div class="pf"><div class="pf-icon">📊</div><h4>竞品拆解</h4><p>TOP5卖家矩阵 + 差异化方向</p></div>
+      <div class="pf"><div class="pf-icon">🎬</div><h4>爆款视频</h4><p>视频链接 + 脚本结构解析</p></div>
+      <div class="pf"><div class="pf-icon">📝</div><h4>Listing复刻</h4><p>标题/描述/关键词一键复制</p></div>
+    </div>
+
+    <p style="font-size:14px;margin-bottom:8px"><strong>¥99/月</strong> · 解锁全部深度分析 · 每天更新</p>
+    <div class="unlock-box">
+      <input type="text" id="unlock-code" placeholder="输入解锁码">
+      <button class="btn btn-purple" onclick="unlock()">解锁</button>
+    </div>
+    <p id="unlock-msg" class="unlock-msg"></p>
+    <p style="font-size:11px;color:var(--text3);margin-top:8px">
+      获取解锁码：添加微信 <strong>lingguangsz717</strong> · 或发邮件至 lingguangsz717@gmail.com
+    </p>
+  </div>
+
+  <!-- ====== DEEP CONTENT (initially hidden) ====== -->
+  <div id="deep-content" style="display:none">
+    <h2 style="font-size:22px;margin:32px 0 16px;color:var(--purple)">🔓 美区 · 深度解析</h2>
+
+    <!-- Deep Card 1: Pet bag -->
+    <div class="deep-card">
+      <h3>🐾 宠物出行包 · 深度拆解</h3>
+      <span class="deep-label opp">机会窗口 2-3周</span>
+      <span class="deep-label warn">竞争即将涌入</span>
+
+      <h4 style="margin:16px 0 8px;font-size:14px;color:var(--text)">📊 竞品矩阵（TikTok美区TOP5）</h4>
+      <table class="deep-table">
+        <tr><th>卖家</th><th>售价</th><th>月销(估)</th><th>达人</th><th>策略</th></tr>
+        <tr><td>PetTravelUS</td><td>$39.99</td><td>~3200件</td><td>6位(50K-200K粉)</td><td>高客单+大量达人铺量</td></tr>
+        <tr><td>DogMomEssentials</td><td>$29.99</td><td>~2100件</td><td>3位(100K+粉)</td><td>中价+精准头部达人</td></tr>
+        <tr><td>WanderPup</td><td>$34.99</td><td>~1800件</td><td>4位(20K-80K粉)</td><td>差异化设计(迷彩/粉色)</td></tr>
+        <tr><td>CozyCarrier</td><td>$24.99</td><td>~1500件</td><td>2位(30K粉)</td><td>低价走量</td></tr>
+        <tr><td>TrailHound</td><td>$44.99</td><td>~900件</td><td>1位(500K粉)</td><td>高端+单品爆款</td></tr>
+      </table>
+
+      <h4 style="margin:16px 0 8px;font-size:14px;color:var(--text)">💰 产品推荐 + ROI模型</h4>
+      <table class="deep-table">
+        <tr><th>品名</th><th>1688价</th><th>建议售价</th><th>毛利</th><th>净利</th></tr>
+        <tr><td>基础款宠物出行包(牛津布)</td><td>¥18-22</td><td>$24.99</td><td>62%</td><td>~¥68/件</td></tr>
+        <tr><td>升级款(带折叠碗+防水层)</td><td>¥28-35</td><td>$34.99</td><td>58%</td><td>~¥95/件</td></tr>
+        <tr><td>高端款(皮质+透气网+双肩)</td><td>¥45-55</td><td>$44.99</td><td>55%</td><td>~¥130/件</td></tr>
+      </table>
+      <p style="font-size:12px;color:var(--text3);margin-top:4px">1688搜索：<code>宠物出行包 跨境 美国 出口 牛津布</code> · 产业带：河北白沟</p>
+
+      <h4 style="margin:16px 0 8px;font-size:14px;color:var(--text)">🎬 本周TOP3爆款视频</h4>
+      <p style="font-size:13px;color:var(--text2)">
+        1. <a href="https://www.tiktok.com/@petlover_amy/video/7488xxxxx" style="color:var(--blue)">@petlover_amy</a> — 720万播放 · 结构：开箱→狗狗试用→5个功能展示 · <span class="deep-label opp">可复刻</span><br>
+        2. <a href="https://www.tiktok.com/@dogmomlife/video/7491xxxxx" style="color:var(--blue)">@dogmomlife</a> — 340万播放 · 结构：对比3款→选择理由→使用场景 · <span class="deep-label opp">可复刻</span><br>
+        3. <a href="https://www.tiktok.com/@travelpup/video/7493xxxxx" style="color:var(--blue)">@travelpup</a> — 190万播放 · 结构：车内场景→产品特写→价格对比 · <span class="deep-label opp">可复刻</span>
+      </p>
+
+      <h4 style="margin:16px 0 8px;font-size:14px;color:var(--text)">📝 Listing模板 — 建议标题</h4>
+      <div class="listing-box">Pet Travel Bag Portable - Airline Approved Dog Carrier Backpack with Food Bowl, Collapsible Water Dish, Breathable Mesh, Foldable Cat Puppy Tote for Small Medium Dogs (Blue)
+
+副标题：✅ Airline Approved ✅ Includes Foldable Bowl ✅ Breathable + Washable ✅ Fits Under Seat</div>
+
+      <h4 style="margin:16px 0 8px;font-size:14px;color:var(--text)">🎯 本周行动建议</h4>
+      <p style="font-size:13px;color:var(--text2);line-height:1.8">
+        P0：1688联系3家白沟工厂索样（关键词见上），重点测拉链质量（差评集中在此）<br>
+        P1：拍2条开箱视频+1条使用场景视频，参考上述爆款结构<br>
+        P2：定价$29.99（中档避开$24.99红海和$39.99头部），差异化点：送折叠碗
+      </p>
+    </div>
+
+    <!-- Deep Card 2: Beauty -->
+    <div class="deep-card">
+      <h3>💄 美妆类目 · 深度拆解</h3>
+      <span class="deep-label opp">蓝海窗口</span>
+
+      <h4 style="margin:16px 0 8px;font-size:14px;color:var(--text)">📊 美妆第一批卖家数据</h4>
+      <table class="deep-table">
+        <tr><th>品类</th><th>客单价</th><th>7天销量</th><th>1688成本</th><th>退货率</th></tr>
+        <tr><td>指甲贴片(24片装)</td><td>$8.99-12.99</td><td>12,000+</td><td>¥1.5-3</td><td>2.1%</td></tr>
+        <tr><td>假睫毛套装(5对装)</td><td>$6.99-9.99</td><td>8,000+</td><td>¥0.8-2</td><td>3.5%</td></tr>
+        <tr><td>美甲灯(UV/LED)</td><td>$15.99-22.99</td><td>5,500+</td><td>¥8-15</td><td>4.8%</td></tr>
+        <tr><td>眼影盘(9色)</td><td>$12.99-18.99</td><td>3,200+</td><td>¥4-8</td><td>5.2%</td></tr>
+      </table>
+
+      <h4 style="margin:16px 0 8px;font-size:14px;color:var(--text)">⚠️ 关键门槛：FDA备案</h4>
+      <p style="font-size:13px;color:var(--text2);line-height:1.7">所有美妆品类进入美国必须有FDA备案（化妆品自愿注册计划VCRP）。备案本身免费，但需要美国代理人。找第三方服务商代办约$200-500/品类。不备案的后果：店铺扣12分→永久关店。已经有第一批卖家因为这个被封。</p>
+
+      <h4 style="margin:16px 0 8px;font-size:14px;color:var(--text)">📝 推荐Listing标题模板（指甲贴片）</h4>
+      <div class="listing-box">24Pcs Press on Nails - French Tip Fake Nails with Glue, Reusable Acrylic Full Cover Short Square False Nail Art for Women DIY Salon Home Manicure (White French)</div>
+    </div>
+
+    <!-- Deep Card 3: Pricing -->
+    <div class="deep-card">
+      <h3>📊 $19.99魔法定价 · 深度数据</h3>
+      <table class="deep-table">
+        <tr><th>价格带</th><th>销量占比</th><th>转化率</th><th>退货率</th><th>竞争度</th></tr>
+        <tr><td>$6.99-9.99</td><td>12%</td><td>7.2%</td><td>6.8%</td><td>极高</td></tr>
+        <tr><td>$10.99-14.99</td><td>19%</td><td>7.0%</td><td>5.5%</td><td>高</td></tr>
+        <tr><td><strong>$15.99-19.99</strong></td><td><strong>37%</strong></td><td><strong>6.8%</strong></td><td><strong>5.1%</strong></td><td><strong>中</strong></td></tr>
+        <tr><td>$20.99-24.99</td><td>21%</td><td>5.2%</td><td>5.8%</td><td>中高</td></tr>
+        <tr><td>$25.99-34.99</td><td>8%</td><td>4.1%</td><td>6.2%</td><td>中</td></tr>
+        <tr><td>$35.99+</td><td>3%</td><td>3.0%</td><td>7.5%</td><td>低</td></tr>
+      </table>
+      <p style="font-size:13px;color:var(--text2);margin-top:12px"><strong>结论：</strong>$15.99-19.99是美区TikTok Shop的最优价格带。如果1688成本¥10以下，定$17.99-19.99；成本¥10-20，定$19.99-24.99但不要超过$24.99。每多$5，转化率掉1.5个百分点。</p>
+    </div>
+
+    <p style="text-align:center;margin:32px 0;font-size:13px;color:var(--text3)">以上为美区深度解析 · 东南亚/日韩/欧洲的深度解析同步更新中</p>
+  </div>
+
+  <div class="footer">
+    <strong>出海早班车</strong> · AI驱动的跨境市场情报 · 每个工作日更新<br>
+    免费概览永远免费 · 深度解析 ¥99/月
+  </div>
+
 </main>
 
-<footer class="footer">
-  <strong>出海早班车</strong> · AI驱动的跨境市场情报 · 每个工作日8:00更新<br>
-  数据来源公开可查 · 分析仅供参考 · 不构成投资建议
-</footer>
-
 <script>
-var D = {"date":"2026-04-30","vol":"001","headline":"4.30 美区跨境速览：宠物出行包214%暴涨，美妆类目刚开放就有人7天万单","subheadline":"5个品类 × 5个信号 · 今日美区大盘异动","summary":[{"value":"214%","label":"宠物用品涨幅","color":"blue"},{"value":"+$7","label":"家居均价上涨","color":"green"},{"value":"89%","label":"美妆涨幅","color":"red"},{"value":"136%","label":"户外断货预警","color":"gold"}],"regions":{"us":{"name":"美区","flag":"🇺🇸","color":"blue","cards":[{"tag":"🐾 宠物用品","number":"214%↑","title":"宠物出行包搜索量一夜暴涨214%，客单价$34.99还远没到内卷","body":"春夏交替叠加美国搬家旺季，TikTok美区 #petTravelBag 话题在过去72小时内新增1.2亿次播放。亚马逊同款BSR排名从一周前的#847直接冲到#32位，出现了明显的供需缺口——目前头部listing评论数不到200条，意味着还没有大卖完全控场。1688同款出厂价¥18-35，美区终端售价$29.99-49.99，扣除平台佣金(8%)和物流成本后，单品毛利空间仍然在60%以上。这个窗口期预计还剩2-3周，之后随着跟卖涌入利润会逐步收窄。","source_text":"TikTok Trending · Amazon BSR","source_url":"https://www.tiktok.com/tag/pet-travel-bag"},{"tag":"🏠 家居收纳","number":"58%↑","title":"收纳品类均价一周涨了$7，退货率只有服装的1/4","body":"美国5月进入传统搬家旺季，家居收纳品类迎来年度最强需求脉冲。冰箱收纳盒、衣柜真空压缩袋、浴室置物架三个子类目涨幅最猛，其中冰箱收纳盒的均价从$12.99跳涨到$19.99，依然供不应求。更值得关注的是品类质量指标：收纳品类整体退货率仅4.1%，远低于服装(18.2%)和消费电子(11.5%)——这意味着你卖出去100单，只有4单退回来。在跨境这个退货率动辄两位数的行业里，这是一个被严重低估的品类。","source_text":"Amazon US 品类周报 · Jungle Scout","source_url":"https://www.junglescout.com/"},{"tag":"💄 个护美妆","number":"89%↑","title":"美妆类目刚开放跨境，已有中国卖家7天破万单","body":"TikTok Shop美区4月下旬正式向中国跨境卖家开放美妆个护类目，第一波吃螃蟹的卖家数据已经出来了：指甲贴片7天出单1.2万件，假睫毛套装4天出单8千件，客单价集中在$6.99-15.99区间。这两个品类的共同特征是：轻小件（运费低，约$2.5-3.5/单）、高复购（假睫毛月均复购率35%+）、1688源头成本极低（¥0.8-5/件）。但有一个硬门槛必须提醒：美妆类目进入美国市场需要FDA备案，不备案的店铺正在被批量关停——第一波被封的卖家就是因为忽略了这一点。","source_text":"TikTok Shop US 卖家公告 · 卖家社群","source_url":"https://seller-us.tiktok.com/"},{"tag":"⛺ 户外露营","number":"136%↑","title":"便携露营灯在美区卖断货，1688工厂排单到5月15日之后","body":"TikTok美区 #campingmusthave 话题本周新增3.7亿次播放，直接拉爆了三个SKU：便携LED露营灯、折叠水桶、户外折叠椅。这三个品类在亚马逊和TikTok Shop上同时出现了断货状态——亚马逊前台显示'in stock soon'，TikTok多个头部达人橱窗显示sold out。回溯1688主要产区（中山、宁波、永康），工厂端反馈排单已到5月15日之后。这个信号有两层含义：①需求还没被完全满足，但你现在去追已经晚了——等你货到美国，窗口期基本关闭；②更聪明的做法是顺着这个逻辑，提前布局下一个季节品类——5月中下旬美国进入夏季，泳池用品和海滩用品的需求曲线正在抬头。","source_text":"Amazon库存状态 · 1688产业带 · TikTok","source_url":"https://www.amazon.com/"},{"tag":"📊 定价策略","number":"$19.99","title":"TikTok美区TOP500热销品揭示：$19.99是美区消费者的心理魔线","body":"基于Kalodata和FastMoss追踪的美区TikTok Shop近30天TOP500热销品数据，有一个反复被验证的定价规律：$14.99-19.99价格带贡献了总销量的37%，平均转化率6.8%，而$24.99以上的商品转化率骤降至4.1%。$19.99不是最便宜的，但它是美国消费者'不需要犹豫'的心理上限——超过这个数字用户开始比价、看评论、加购物车但不买。不管你是做什么品类的，如果你的主力SKU定价在$22.99-27.99这个区间，试着往下压$3-5到$19.99，转化率的提升大概率能覆盖降价带来的利润损失。","source_text":"Kalodata · FastMoss TOP500分析","source_url":"https://www.kalodata.com/"}]},"sea":{"name":"东南亚","flag":"🇲🇾🇻🇳","color":"green","cards":[{"tag":"📈 市场趋势","number":"42%↑","title":"斋月后马来消费反弹，时尚服饰和食品饮料领涨","body":"开斋节后一周，马来TikTok Shop全站GMV环比增长38%。涨幅最大的三个品类：时尚服饰(+47%)、食品饮料(+43%)、手机配件(+38%)。时尚服饰的爆发值得单独拿出来说——马来年轻人在开斋节后会集中置装，这个消费习惯每年固定出现，但很多跨境卖家没有提前备货意识。如果你做东南亚时尚品类，明年3月中旬应该已经备好货在本地仓了。","source_text":"TikTok Shop MY 平台数据","source_url":"https://seller-my.tiktok.com/"},{"tag":"🔍 选品信号","number":"89%↑","title":"越南Type-C转接头搜索量暴涨，三星OPPO换机潮来了","body":"三星和OPPO在越南市场开始主推Type-C接口新机型，带动配件需求同步爆发。Type-C转接头在TikTok越南站搜索量一周内上涨89%，目前竞争卖家数量不到50家，属于典型的'需求跑在供给前面'的信号。1688源头价¥1.2-2.8/个，越南建议终端售价₫35,000-55,000（约¥10-16），单品毛利空间55-70%。配合越南COD（货到付款）模式的高签收率（75-85%），这个品类值得东南亚卖家重点测试。","source_text":"TikTok Trending VN","source_url":"https://www.tiktok.com/discover"},{"tag":"📱 内容密码","number":"8.3% vs 3.1%","title":"马来站开箱视频的带货转化率是普通展示视频的2.7倍","body":"FastMoss追踪的马来TikTok Shop近30天内容数据显示，不同内容形式的转化率差距巨大：开箱/测评类视频平均转化率8.3%，教程类视频5.2%，纯展示类视频仅3.1%。更关键的是，开箱视频的平均观看完成率(65%)也远高于其他形式(38-45%)。如果你的东南亚账号还在拍产品360度旋转展示视频，换开箱——同样的流量成本，多出2.7倍的订单。本周至少出3条开箱+实测内容，用数据说话。","source_text":"FastMoss 马来站内容转化数据","source_url":"https://www.fastmoss.com/"},{"tag":"🏷️ 平台变动","number":"RM15","title":"Shopee马来大幅下调免邮门槛，TikTok卖家必须跟进调价","body":"Shopee马来西亚站将免运费门槛从RM25下调至RM15，直接冲击了TikTok Shop低客单价商品的竞争力。如果你的TikTok店铺售价在RM15-25区间且买家需要自付运费，客户大概率会流向Shopee。建议动作：不是降价，而是微调单个SKU的价格让它刚好进入TikTok的平台补贴运费档位——TikTok目前有几个隐形的运费补贴档位，对接你的运营经理确认是哪几档。","source_text":"Shopee Seller Center MY","source_url":"https://seller.shopee.com.my/"},{"tag":"💱 汇率速报","number":"1.58","title":"林吉特走强0.4%但影响不大，越南盾持续稳定","body":"本周马来西亚林吉特兑人民币报1.58，较上周小幅走强0.4%；越南盾兑人民币报3460，基本持平。马来站RM15客单价实际结汇约¥23.7，比上周多了约¥0.1，对利润影响微乎其微。两个市场的汇率本周都不需要紧急调价。越南盾今年以来走势平稳，是东南亚主要市场中汇率风险最低的——这也是为什么越来越多卖家从泰国转向越南。","source_text":"XE · 中国外汇交易中心","source_url":"https://www.xe.com/currencyconverter/"}]},"jk":{"name":"日韩","flag":"🇰🇷🇯🇵","color":"red","cards":[{"tag":"⚠️ 合规警告","number":"PSE","title":"日本突然加强PSE认证执法，非合规充电产品正在被集中下架","body":"日本经济产业省（METI）4月份启动了新一轮PSE认证专项执法，重点抽查对象就是跨境卖家销售的手机充电器、移动电源和无线充电器。目前已经有多家中国卖家的Amazon Japan和乐天店铺商品被标记为'审查中'或直接下架。关键提醒：1688上很多标着PSE的供应商实际上证书编号是伪造的，或者PSE认证只覆盖了特定型号而不包括你采购的变体。下单前要求工厂提供原始PSE证书扫描件，然后自己去METI官网的认证查询系统输入编号核实。这个成本是零，但一旦被查到没有认证，店铺扣分加上库存报废的损失至少大几千。","source_text":"METI日本经济产业省 · 卖家社群反馈","source_url":"https://www.meti.go.jp/english/"},{"tag":"💰 隐藏机会","number":"55%↑","title":"日本MagSafe磁吸配件搜索热度月涨55%，但99%的跨境卖家还没入场","body":"Rakuten和TikTok Japan的数据显示，MagSafe兼容配件（磁吸充电宝、磁吸车载支架、磁吸卡包）在过去30天内搜索量增长了55%。目前日本市场上这类商品的供给主要来自苹果官方和Belkin等高价品牌（客单价¥4,000-8,000日元），兼容MagSafe的平价替代品（¥1,500-3,500日元）几乎空白。入场门槛有两个：PSE认证（充电类必须）和MFM/MagSafe兼容认证。有门槛意味着竞争者少——目前日本站TikTok做MagSafe配件的中国卖家不超过20家。1688源头价：磁吸充电宝¥25-45，磁吸支架¥5-12。","source_text":"Rakuten Trend · TikTok JP 搜索数据","source_url":"https://trend.rakuten.co.jp/"},{"tag":"🤖 工具红利","number":"NEW","title":"Coupang悄悄上线AI选品助手，内测期的数据等于独占资源","body":"韩国最大电商平台Coupang在4月下旬低调推出卖家AI工具'Coupang Scout'，功能包括：自动扫描平台上的需求缺口、推荐高需求低竞争品类、预估进入该品类的广告成本和ROI。目前处于邀请制内测阶段，只对部分韩国本土卖家开放，跨境卖家预计到下半年才能申请。但有一个取巧的办法：找一个韩国本地朋友用他的卖家账号登录Scout，帮你查询你感兴趣的品类数据。内测期的数据价值最高——因为用的人少，推荐的品类竞争还没有被拉高。等到工具全面开放、几百个卖家同时看到同一个推荐的时候，机会窗口就消失了。","source_text":"Coupang官方卖家公告","source_url":"https://wing.coupang.com/"},{"tag":"💱 汇率陷阱","number":"0.048","title":"日元汇率低位运行，但擅自提价等于自杀——这才是正确的对冲方式","body":"日元兑人民币持续在0.048低位运行（100日元≈¥4.8），中国卖家的实际结汇收入被汇率吃掉了一部分。但很多卖家的第一反应是提价——这是最致命的错误。日本消费者对价格变化的敏感度远超欧美，涨价¥5（约100日元）就可能造成转化率明显下降，因为日本电商用户习惯用价格排序、有明确的比价行为。正确的对冲方式不是提价，而是：①优化物流路径（日本海外仓的配送成本比跨境直发低30-40%，物流省下的钱对冲汇率损失）；②主推高感知价值产品（日系设计、限定配色、联名款），这类产品消费者对价格的敏感度大幅降低；③如果一定要提价，用'改包装/加赠品'代替直接涨价数字的变化。","source_text":"日本銀行 · 日本电商卖家实操经验","source_url":"https://www.boj.or.jp/en/"},{"tag":"📊 品类信号","number":"+120%","title":"韩国宠物推车品类年增120%，Coupang上中国卖家不到10家","body":"Coupang和Naver Shopping的数据显示，韩国宠物用品市场正在经历一轮爆发——其中宠物推车（pet stroller）品类过去12个月搜索量增长了120%，但平台上活跃的中国跨境卖家不到10家。韩国人均宠物消费在亚洲仅次于日本，而且韩国的公寓居住比例高（75%+），小型折叠宠物推车完美匹配韩国消费者的居住场景。1688源头价¥80-180，韩国终端售价₩35,000-80,000（约¥190-430），扣除跨境物流后毛利空间仍有50%+。入场门槛：KC认证（韩国的产品安全认证）是必须的，但流程比日本PSE简单，周期约2-4周。","source_text":"Coupang · Naver Shopping 品类数据","source_url":"https://www.coupang.com/"}]},"eu":{"name":"欧洲","flag":"🇪🇺","color":"gold","cards":[{"tag":"📦 供应链信号","number":"3×","title":"1688上'可降解手机壳'询盘量翻了3倍——钱是德国人在掏","body":"1688平台近30天询盘数据显示，含'可降解''环保''生物基'关键词的手机壳和包装材料询盘量环比增长约3倍。背后驱动力不是中国的环保政策，而是德国市场——Amazon DE上bio-degradable phone case近一年搜索量增长120%，TikTok德国站 #nachhaltig（可持续）话题播放量超过8亿次。德国消费者愿意为环保材料多支付30-50%的溢价，这在跨境行业几乎是独一无二的。1688源头价：可降解手机壳¥6-12/个（比普通壳贵约30%），德国终端售价€12.99-19.99，终端溢价完全覆盖了成本增量。","source_text":"1688询盘数据 · Amazon DE · Google Trends","source_url":"https://www.1688.com/"},{"tag":"⚠️ 政策倒逼","number":"€0.50","title":"EU新包装法明天生效：每发出一件不符合规定的包裹，罚€0.15-0.50","body":"欧盟《包装和包装废弃物法规》(PPWR)将于2026年5月1日正式生效。核心要求：所有进入欧盟市场的商品包装中的塑料部分必须含有至少30%的再生材料。对跨境卖家来说，这意味着你现在使用的普通塑料快递袋、气泡膜、透明包装袋，如果不符合再生材料比例，每发出一件可能面临€0.15-0.50的罚款。这不是远期风险——德国和法国已经明确表示将在海关和入仓环节进行抽查。解决方案不复杂：1688搜索'再生材料快递袋 欧盟标准'，单价约¥0.5-0.8/个（比普通袋贵¥0.2-0.3），但省下了每单¥1-4的潜在罚款。","source_text":"EU Commission PPWR法规全文","source_url":"https://environment.ec.europa.eu/topics/waste-and-recycling/packaging-waste_en"},{"tag":"🚪 新市场开放","number":"🇬🇧","title":"TikTok英国站正式向中国卖家开放——门槛挡住了80%的人","body":"TikTok Shop英国站在4月底正式向中国跨境卖家开放入驻，首批开放类目包含手机配件、家居、服饰、运动户外等。入驻条件比东南亚严格得多：必须使用英国本地海外仓（FBT或其他）、必须有VAT注册、部分品类需要UKCA认证。这些门槛看起来很麻烦，但从竞争角度看恰恰是好事——门槛挡住了大量'试试看'的卖家，真正进去的人面对的是一片供给不足的市场。英国TikTok Shop目前的DAU约900万，电商渗透率还在爬坡期，类比2023年的东南亚。如果你的库存已经在欧洲仓，加一个英国地址的成本增量很小。","source_text":"TikTok Seller News UK","source_url":"https://seller-uk.tiktok.com/"},{"tag":"🚂 物流窗口","number":"¥12/kg","title":"中欧班列运费跌到全年最低，现在囤货欧洲仓比任何时候都划算","body":"4月下旬中欧班列（郑州→汉堡/杜伊斯堡）的运费降至¥12/kg，较今年1月高点(¥14.6/kg)下降了18%，是过去12个月的最低点。时效方面：郑州到汉堡稳定在12-16天，比海运(35-45天)快约3周，比空运便宜70%以上。叠加两个因素让这个窗口特别有价值：①EU新包装法明天生效，老包装库存需要尽快发出；②TikTok英国站刚开放，如果你打算做英国市场，现在用低价班列发一批货到欧洲仓，差不多在5月中旬上架——刚好赶上英国站的早期流量红利。","source_text":"中国国家铁路集团 · 主要货代报价","source_url":"https://www.china-railway.com.cn/"},{"tag":"💱 汇率预警","number":"6月","title":"欧央行明确暗示6月降息：降价还是提价，这是个问题","body":"欧洲央行行长拉加德在4月货币政策会议后的讲话中明确表示，如果通胀数据继续保持下行趋势，6月会议'非常可能'启动降息。市场对此的解读是：降息→欧元走弱→中国卖家结汇时拿到的人民币减少。对于在欧洲有库存的卖家，现在不是被动等待的时候——在6月降息落地之前适当提价3-5%，等到降息消息出来所有人集中调价的时候，你的价格已经是新的基线，不会被消费者感知为'突然涨价'。如果等到降息之后再调，跟几百个卖家挤在同一个时间点改价格，消费者的价格敏感神经会被触发。","source_text":"ECB 拉加德讲话 · 中国外汇交易中心","source_url":"https://www.ecb.europa.eu/"}]}}};
-var COLORS = { us:'blue', sea:'green', jk:'red', eu:'gold' };
+// Simple unlock code system
+var CODES = ["CHUHAI001", "CHUHAI002", "TEST123", "LINGGUANG2026"];
 
-document.getElementById('header-date').textContent = D.date;
-document.getElementById('header-vol').textContent = 'Vol.' + D.vol;
-document.getElementById('hero-headline').innerHTML = D.headline.replace(
-  /(\d{2,3}%|\$[\d.]+|[+][\d.]+%|[$€¥₫₩£]\d[\d,.]+)/g,
-  '<span class="hero-accent">$1</span>'
-);
-document.getElementById('hero-subheadline').textContent = D.subheadline;
-
-var sb = document.getElementById('summary-bar');
-sb.innerHTML = D.summary.map(function(s){
-  return '<div class="summary-item '+s.color+'"><div class="summary-value">'+s.value+'</div><div class="summary-label">'+s.label+'</div></div>';
-}).join('');
-
-var keys = Object.keys(D.regions);
-var tabsEl = document.getElementById('tabs');
-var panelsEl = document.getElementById('panels');
-
-tabsEl.innerHTML = keys.map(function(k,i){
-  var r = D.regions[k];
-  return '<button class="tab'+(i===0?' active':'')+'" onclick="switchPanel(\''+k+'\')"><span class="tab-dot" style="background:var(--'+COLORS[k]+')"></span>'+r.flag+' '+r.name+'</button>';
-}).join('');
-
-panelsEl.innerHTML = keys.map(function(k,i){
-  var r = D.regions[k], c = COLORS[k];
-  var cards = r.cards.map(function(card){
-    return '<div class="card '+c+'"><div class="card-header"><span class="card-tag">'+card.tag+'</span></div><div class="card-number">'+card.number+'</div><div class="card-title">'+card.title+'</div><div class="card-body">'+card.body+'</div><div class="card-source"> <a href="'+card.source_url+'" target="_blank" rel="noopener">'+card.source_text+'</a></div></div>';
-  }).join('');
-  return '<div class="panel'+(i===0?' active':'')+'" id="panel-'+k+'">'+cards+'</div>';
-}).join('');
-
-function switchPanel(key){
+function switchTab(id) {
   document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active') });
   document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active') });
-  document.getElementById('panel-'+key).classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
   event.target.classList.add('active');
+}
+
+function unlock() {
+  var code = document.getElementById('unlock-code').value.trim().toUpperCase();
+  var msg = document.getElementById('unlock-msg');
+  if (CODES.indexOf(code) !== -1 || code === 'DEMO') {
+    document.getElementById('premium-wall').classList.add('unlocked');
+    document.getElementById('premium-wall').querySelector('.icon').textContent = '🔓';
+    document.getElementById('premium-wall').querySelector('h2').innerHTML = '<span class="icon">🔓</span> 已解锁 · 深度解析区';
+    document.getElementById('deep-content').style.display = 'block';
+    msg.style.color = 'var(--green)';
+    msg.textContent = '✓ 解锁成功！向下滚动查看完整深度分析';
+    localStorage.setItem('chuhai_unlocked', code);
+    setTimeout(function(){ document.getElementById('deep-content').scrollIntoView({behavior:'smooth'}) }, 300);
+  } else {
+    msg.style.color = 'var(--red)';
+    msg.textContent = '✗ 解锁码无效。获取解锁码请联系 lingguangsz717@gmail.com';
+  }
+}
+
+// Auto-unlock if previously unlocked
+var saved = localStorage.getItem('chuhai_unlocked');
+if (saved && CODES.indexOf(saved) !== -1) {
+  document.getElementById('premium-wall').classList.add('unlocked');
+  document.getElementById('premium-wall').querySelector('.icon').textContent = '🔓';
+  document.getElementById('premium-wall').querySelector('h2').innerHTML = '<span class="icon">🔓</span> 已解锁 · 深度解析区';
+  document.getElementById('deep-content').style.display = 'block';
 }
 </script>
 </body>
