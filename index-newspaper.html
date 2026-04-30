@@ -1,533 +1,532 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>出海早班车 · 跨境日报</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Playfair+Display:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #FDFCF8; --paper: #FFFEF9;
-    --text: #1A1A1A; --text2: #3D3D3D; --text3: #6B6B6B;
-    --border: #D4D0C8; --border-light: #E8E4DC;
-    --accent: #C41E3A; --blue: #1A5276; --green: #1B5E20;
-    --gold: #8B6914; --w-main: 1100px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-
-  body {
-    background: #E8E4DC; color: var(--text);
-    font-family: 'Noto Serif SC', 'Noto Sans SC', 'STSong', 'SimSun', 'PingFang SC', serif;
-    font-weight: 400; line-height: 1.8; font-size: 15px;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* === PAPER === */
-  .paper {
-    max-width: var(--w-main); margin: 32px auto 48px;
-    background: var(--paper);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
-    padding: 0;
-    position: relative;
-  }
-
-  /* === TOP BAR === */
-  .top-rule { height: 4px; background: var(--text); }
-  .top-info {
-    display: flex; justify-content: space-between;
-    padding: 8px 28px; font-size: 10px; color: var(--text3);
-    letter-spacing: 1px; border-bottom: 1px solid var(--border-light);
-    font-family: 'Noto Sans SC', sans-serif;
-  }
-
-  /* === MASTHEAD === */
-  .masthead {
-    text-align: center; padding: 28px 28px 12px;
-  }
-  .masthead .edition {
-    font-size: 10px; letter-spacing: 3px; color: var(--text3);
-    text-transform: uppercase; margin-bottom: 6px;
-    font-family: 'Noto Sans SC', sans-serif;
-  }
-  .masthead h1 {
-    font-family: 'Noto Serif SC', 'STSong', 'SimSun', serif;
-    font-size: 52px; font-weight: 900; letter-spacing: 4px;
-    line-height: 1.1;
-  }
-  .masthead .tagline {
-    font-size: 11px; color: var(--text3); letter-spacing: 2px;
-    margin-top: 6px; font-family: 'Noto Sans SC', sans-serif;
-  }
-  .masthead .dateline {
-    display: flex; justify-content: center; gap: 28px;
-    font-size: 10px; letter-spacing: 1.5px; color: var(--text3);
-    margin-top: 14px; padding-top: 14px;
-    border-top: 1px solid var(--border-light);
-    font-family: 'Noto Sans SC', sans-serif;
-  }
-
-  /* === CONTENT === */
-  .content { padding: 8px 28px 40px; }
-
-  /* === SECTION RULE === */
-  .section-rule {
-    border: none; border-top: 2px solid var(--text);
-    margin: 20px 0; opacity: 0.8;
-  }
-  .section-rule.thin { border-width: 1px; border-color: var(--border); }
-
-  /* === LEAD STORY === */
-  .lead {
-    display: grid; grid-template-columns: 1fr 340px;
-    gap: 28px; margin-bottom: 28px; padding-bottom: 24px;
-    border-bottom: 1px solid var(--border);
-  }
-  .lead-text {}
-  .lead-label {
-    font-size: 10px; letter-spacing: 2.5px; color: var(--accent);
-    font-weight: 700; margin-bottom: 10px;
-    font-family: 'Noto Sans SC', sans-serif; text-transform: uppercase;
-  }
-  .lead h2 {
-    font-family: 'Noto Serif SC', serif; font-size: 30px; font-weight: 900;
-    line-height: 1.2; letter-spacing: 1px; margin-bottom: 12px;
-  }
-  .lead .lead-num {
-    font-size: 52px; font-weight: 900; color: var(--accent);
-    display: block; line-height: 1; margin-bottom: 6px;
-  }
-  .lead .byline {
-    font-size: 11px; color: var(--text3); margin-bottom: 12px;
-    font-family: 'Noto Sans SC', sans-serif;
-  }
-  .lead p {
-    font-size: 14px; color: var(--text2); line-height: 1.85;
-  }
-  .lead-image {
-    background: linear-gradient(135deg, #E8E4DC 0%, #D5CFC5 50%, #C4BDB0 100%);
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid var(--border); min-height: 280px; position: relative;
-    overflow: hidden;
-  }
-  .lead-image .chart {
-    width: 100%; height: 100%; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; padding: 20px;
-  }
-  .lead-image .chart-bar {
-    width: 70%; height: 180px; position: relative;
-    border-bottom: 2px solid var(--text); border-left: 2px solid var(--text);
-  }
-  .lead-image .bar {
-    position: absolute; bottom: 0; width: 28px;
-    background: var(--accent); opacity: 0.85;
-  }
-  .lead-image .chart-label {
-    font-size: 18px; font-weight: 900; color: var(--accent);
-    font-family: 'Noto Serif SC', serif; margin-bottom: 8px;
-  }
-  .lead-image .chart-caption {
-    font-size: 9px; color: var(--text3); margin-top: 8px;
-    font-family: 'Noto Sans SC', sans-serif;
-  }
-  .lead-image svg { width: 100%; height: 100%; }
-
-  /* === TWO-COLUMN SECTION === */
-  .two-col {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 24px 32px; margin-bottom: 24px;
-  }
-
-  /* === STORY CARD (NEWSPAPER) === */
-  .story {
-    padding: 0 0 18px; border-bottom: 1px solid var(--border-light);
-    break-inside: avoid;
-  }
-  .story-header {
-    display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px;
-  }
-  .story-tag {
-    font-size: 9px; letter-spacing: 2px; font-weight: 700;
-    font-family: 'Noto Sans SC', sans-serif; text-transform: uppercase;
-  }
-  .story-num {
-    font-family: 'Noto Serif SC', serif; font-size: 36px; font-weight: 900;
-    line-height: 1; margin-bottom: 4px;
-  }
-  .story h3 {
-    font-size: 18px; font-weight: 700; line-height: 1.35; margin-bottom: 6px;
-    letter-spacing: 0.3px;
-  }
-  .story p {
-    font-size: 13px; color: var(--text2); line-height: 1.75; margin-bottom: 4px;
-  }
-  .story-src {
-    font-size: 10px; color: var(--text3); font-family: 'Noto Sans SC', sans-serif;
-  }
-  .story-src a { color: var(--text3); text-decoration: none; border-bottom: 1px dotted var(--border); }
-  .story-src a:hover { color: var(--accent); }
-
-  .story.blue .story-tag { color: var(--blue); } .story.blue .story-num { color: var(--blue); }
-  .story.green .story-tag { color: var(--green); } .story.green .story-num { color: var(--green); }
-  .story.red .story-tag { color: var(--red); } .story.red .story-num { color: #C41E3A; }
-  .story.gold .story-tag { color: var(--gold); } .story.gold .story-num { color: var(--gold); }
-
-  /* === MINI CHART INSET === */
-  .mini-chart {
-    float: right; width: 100px; height: 60px; margin: 0 0 8px 12px;
-    border: 1px solid var(--border-light); background: #FDFCF8;
-    display: flex; align-items: flex-end; padding: 4px; gap: 3px;
-  }
-  .mini-bar {
-    flex: 1; background: var(--accent); opacity: 0.6;
-    min-height: 4px;
-  }
-
-  /* === PULL QUOTE === */
-  .pull-quote {
-    border-top: 2px solid var(--text); border-bottom: 2px solid var(--text);
-    padding: 20px 0; margin: 28px 0; text-align: center;
-  }
-  .pull-quote .quote {
-    font-family: 'Noto Serif SC', serif; font-size: 22px; font-weight: 700;
-    line-height: 1.45; color: var(--text);
-  }
-  .pull-quote .attribution {
-    font-size: 11px; color: var(--text3); margin-top: 8px;
-    font-family: 'Noto Sans SC', sans-serif;
-  }
-
-  /* === TABS (REGION SWITCHER) === */
-  .region-bar {
-    display: flex; gap: 0; border-bottom: 2px solid var(--text);
-    margin: 20px 0 24px;
-  }
-  .region-tab {
-    padding: 10px 20px; cursor: pointer; background: none; border: none;
-    font-family: 'Noto Sans SC', sans-serif; font-size: 12px;
-    letter-spacing: 1px; font-weight: 600; color: var(--text3);
-    border-bottom: 2px solid transparent; margin-bottom: -2px;
-    transition: all .15s;
-  }
-  .region-tab:hover { color: var(--text); }
-  .region-tab.active { color: var(--text); border-bottom-color: var(--text); font-weight: 700; }
-  .panel { display: none; }
-  .panel.active { display: block; }
-
-  /* === PREMIUM WALL === */
-  .premium {
-    border: 3px double var(--text); padding: 36px 32px; text-align: center;
-    margin: 36px 0; background: #FFFEF9;
-  }
-  .premium h3 {
-    font-family: 'Noto Serif SC', serif; font-size: 24px; font-weight: 900;
-    letter-spacing: 2px; margin-bottom: 8px;
-  }
-  .premium .sub { font-size: 13px; color: var(--text2); margin-bottom: 20px; }
-  .premium-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    gap: 1px; margin: 24px 0; background: var(--border);
-  }
-  .pf {
-    background: var(--paper); padding: 20px 14px; text-align: center;
-  }
-  .pf .icon { font-size: 24px; margin-bottom: 6px; }
-  .pf h4 { font-size: 12px; font-weight: 700; letter-spacing: 1px; margin: 4px 0; }
-  .pf p { font-size: 10px; color: var(--text3); font-family: 'Noto Sans SC', sans-serif; }
-  .unlock-row { display: flex; max-width: 420px; margin: 24px auto 0; gap: 6px; }
-  .unlock-row input {
-    flex: 1; padding: 12px 16px; border: 1px solid var(--border);
-    font-size: 13px; font-family: inherit; outline: none; background: var(--paper);
-  }
-  .unlock-row input:focus { border-color: var(--accent); }
-  .btn {
-    padding: 12px 30px; border: none; background: var(--text); color: var(--paper);
-    font-weight: 700; font-size: 12px; cursor: pointer;
-    font-family: 'Noto Sans SC', sans-serif; letter-spacing: 2px;
-    transition: background .2s;
-  }
-  .btn:hover { background: var(--accent); }
-  .unlock-msg { font-size: 11px; margin-top: 10px; }
-
-  /* === DEEP === */
-  .deep-card {
-    border-top: 2px solid var(--text); padding: 24px 0; margin: 20px 0;
-  }
-  .deep-card h3 { font-family: 'Noto Serif SC', serif; font-size: 20px; font-weight: 900; margin-bottom: 8px; }
-  .deep-label {
-    display: inline-block; font-size: 9px; padding: 3px 10px; margin-right: 6px;
-    letter-spacing: 1.5px; font-weight: 700; font-family: 'Noto Sans SC', sans-serif;
-  }
-  .deep-label.opp { background: #E8F5E9; color: var(--green); }
-  .deep-label.warn { background: #FFEBEE; color: var(--accent); }
-  .deep-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 12px; }
-  .deep-table th {
-    background: #F5F2EB; padding: 10px 14px; text-align: left;
-    color: var(--text3); font-weight: 700; letter-spacing: 1px;
-    font-size: 10px; font-family: 'Noto Sans SC', sans-serif;
-    border-bottom: 2px solid var(--text);
-  }
-  .deep-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-light); font-size: 13px; }
-  h4 {
-    font-size: 12px; letter-spacing: 1.5px; color: var(--text3);
-    margin: 20px 0 8px; font-weight: 700; font-family: 'Noto Sans SC', sans-serif;
-  }
-
-  /* === FOOTER === */
-  .footer {
-    text-align: center; padding: 28px; color: var(--text3);
-    font-size: 10px; border-top: 2px solid var(--text); margin-top: 36px;
-    letter-spacing: 1px; font-family: 'Noto Sans SC', sans-serif;
-  }
-
-  @media(max-width:680px){
-    .paper{margin:8px}.masthead h1{font-size:30px;letter-spacing:1px}
-    .lead{grid-template-columns:1fr}.lead-image{min-height:180px}
-    .lead h2{font-size:22px}.lead .lead-num{font-size:36px}
-    .two-col{grid-template-columns:1fr}.content{padding:8px 16px 28px}
-    .premium-grid{grid-template-columns:1fr 1fr}
-    .region-tab{padding:8px 12px;font-size:10px;letter-spacing:0}
-  }
-</style>
-</head>
-<body>
-
-<div class="paper">
-  <div class="top-rule"></div>
-  <div class="top-info">
-    <span>跨境商业情报 · 每个工作日更新</span>
-    <span>第001期</span>
-  </div>
-
-  <!-- MASTHEAD -->
-  <div class="masthead">
-    <div class="edition">The Cross-Border Morning Brief</div>
-    <h1>出海早班车</h1>
-    <div class="tagline">独立 · 客观 · 数据驱动的跨境市场日报</div>
-    <div class="dateline">
-      <span>2026年4月30日 星期三</span>
-      <span>AI 情报编辑部</span>
-      <span>今日八版</span>
-    </div>
-  </div>
-
-  <div class="content">
-
-    <!-- LEAD STORY -->
-    <div class="lead">
-      <div class="lead-text">
-        <div class="lead-label">头版头条 · 美区市场</div>
-        <h2><span class="lead-num">214%</span>宠物出行包搜索量一夜暴涨。单品毛利六成以上，窗口期仅余两三周。亚马逊排名从八百名外直冲三十二位，前五卖家全是美国本土品牌——中国卖家尚未入场。</h2>
-        <div class="byline">本报记者 · 数据来源：TikTok 热门趋势、亚马逊 BSR 变动追踪、1688 产业带数据</div>
-        <p>春夏交替叠加美国搬家旺季，TikTok 美区 #petTravelBag 话题在过去七十二小时内新增逾一亿两千万次播放。本报交叉比对了多个数据源后发现，该品类目前处于供需缺口最大的阶段——头部 listing 的评论数尚不足二百条，意味着尚未有大型卖家实现控场。河北白沟产业带的工厂反馈，询盘量较两周前增加了约四倍，但大部分询盘仍来自国内贸易商，真正的跨境卖家尚未大量入场。</p>
-      </div>
-      <div class="lead-image">
-        <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
-          <rect x="40" y="200" width="30" height="40" fill="#C41E3A" opacity="0.85" rx="1"/>
-          <rect x="80" y="170" width="30" height="70" fill="#C41E3A" opacity="0.85" rx="1"/>
-          <rect x="120" y="140" width="30" height="100" fill="#C41E3A" opacity="0.85" rx="1"/>
-          <rect x="160" y="80" width="30" height="160" fill="#C41E3A" opacity="0.85" rx="1"/>
-          <rect x="200" y="40" width="30" height="200" fill="#C41E3A" opacity="0.85" rx="1"/>
-          <line x1="35" y1="240" x2="240" y2="240" stroke="#1A1A1A" stroke-width="2"/>
-          <line x1="35" y1="240" x2="35" y2="30" stroke="#1A1A1A" stroke-width="2"/>
-          <text x="55" y="255" font-family="sans-serif" font-size="9" fill="#6B6B6B">W1</text>
-          <text x="115" y="255" font-family="sans-serif" font-size="9" fill="#6B6B6B">W2</text>
-          <text x="175" y="255" font-family="sans-serif" font-size="9" fill="#6B6B6B">W3</text>
-          <text x="225" y="255" font-family="sans-serif" font-size="9" fill="#6B6B6B">W4</text>
-          <text x="100" y="22" font-family="sans-serif" font-size="14" font-weight="700" fill="#1A1A1A" text-anchor="middle">TikTok 话题周播放量（亿次）</text>
-        </svg>
-      </div>
-    </div>
-
-    <hr class="section-rule thin">
-
-    <!-- REGION TABS -->
-    <div class="region-bar">
-      <button class="region-tab active" onclick="switchRegion('us')">🇺🇸 美区</button>
-      <button class="region-tab" onclick="switchRegion('sea')">🇲🇾🇻🇳 东南亚</button>
-      <button class="region-tab" onclick="switchRegion('jk')">🇰🇷🇯🇵 日韩</button>
-      <button class="region-tab" onclick="switchRegion('eu')">🇪🇺 欧洲</button>
-    </div>
-
-    <!-- US STORIES -->
-    <div class="panel active" id="panel-us">
-      <div class="two-col">
-        <div class="story blue">
-          <div class="story-tag">家居收纳</div>
-          <div class="story-num">58%↑</div>
-          <h3>收纳品类均价一周上涨七美元，退货率仅为服装类的四分之一</h3>
-          <p>冰箱收纳盒从12.99美元跳涨至19.99美元，仍供不应求。本报注意到一个被多数卖家忽略的关键指标：该品类整体退货率仅4.1%，远低于服装类的18%和消费电子类的11.5%。高需求叠加低退货率，在跨境行业中极为罕见。</p>
-          <div class="story-src">数据：<a href="https://www.junglescout.com/">Jungle Scout 品类周报</a></div>
-        </div>
-        <div class="story red">
-          <div class="story-tag">个护美妆</div>
-          <div class="story-num">89%↑</div>
-          <h3>美妆类目跨境通道刚刚开启，已有卖家实现七日万单</h3>
-          <p>TikTok Shop 美区在四月下旬正式对中国跨境卖家开放了美妆个护类目。首批入驻卖家的销售数据已经出炉：指甲贴片单品七日销量突破一万两千件，假睫毛套装四日销量逾八千件。1688源头成本仅¥0.8至5元一件。但必须提醒——FDA备案是强制性要求，未备案的店铺正在被批量关闭。</p>
-          <div class="story-src">数据：<a href="https://seller-us.tiktok.com/">TikTok 卖家中心（美区）</a></div>
-        </div>
-        <div class="story gold">
-          <div class="story-tag">户外露营</div>
-          <div class="story-num">136%↑</div>
-          <h3>便携露营灯在美区全面断货。三大产区排单已至五月中旬——追涨不如布局下一季</h3>
-          <p>LED 露营灯、折叠水桶、户外折叠椅三个品类在亚马逊和 TikTok 同时出现断货标识。中山、宁波、永康三大产业带的工厂端排单已全线满至五月十五日之后。需求尚未被完全满足，但此刻追入已经太晚——等到货品抵达美国，窗口期基本关闭。更明智的策略是顺着季节性逻辑，布局五月下旬即将启动的夏季品类。</p>
-          <div class="story-src">数据：<a href="https://www.amazon.com/">亚马逊库存</a> · <a href="https://www.1688.com/">1688产业带</a></div>
-        </div>
-        <div class="story blue">
-          <div class="story-tag">定价策略</div>
-          <div class="story-num">$19.99</div>
-          <h3>追踪五百款热销品后发现：十九块九毛九是美区消费者的心理天花板</h3>
-          <p>本报分析了近三十天 TikTok 美区排名前五百的热销商品定价数据，发现一个被反复验证的规律：十四块九毛九至十九块九毛九的价格带贡献了总销量的37%，平均转化率6.8%。一旦定价超过二十四块九毛九，转化率骤降至4.1%。多用五美元，流失近四成客户。</p>
-          <div class="story-src">数据：<a href="https://www.kalodata.com/">Kalodata</a> · <a href="https://www.fastmoss.com/">FastMoss</a></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SEA -->
-    <div class="panel" id="panel-sea">
-      <div class="two-col">
-        <div class="story green">
-          <div class="story-tag">市场趋势</div><div class="story-num">42%↑</div>
-          <h3>斋月后马来消费强劲反弹，时尚服饰以近五成涨幅领跑</h3>
-          <p>开斋节后一周马来站全站交易额环比增长38%。涨幅前三品类：时尚服饰（47%）、食品饮料（43%）、手机配件（38%）。马来年轻人节后集中置装的习惯每年都会出现，但跨境卖家提前备货的比例不足两成。</p>
-          <div class="story-src">数据：<a href="https://seller-my.tiktok.com/">TikTok 卖家中心（马来站）</a></div>
-        </div>
-        <div class="story green">
-          <div class="story-tag">选品信号</div><div class="story-num">89%↑</div>
-          <h3>越南Type-C转接头搜索量飙升。三星与OPPO换机潮正在拉动配件需求</h3>
-          <p>转接头品类在越南站一周搜索量上涨89%，在售竞争卖家不足五十家。典型的需求跑在供给前面的信号。源头价1.2至2.8元，越南终端售价约合人民币10至16元，单品毛利空间55%至70%。</p>
-          <div class="story-src">数据：<a href="https://www.tiktok.com/discover">TikTok越南热门趋势</a></div>
-        </div>
-        <div class="story green">
-          <div class="story-tag">内容策略</div><div class="story-num">8.3% vs 3.1%</div>
-          <h3>开箱视频的带货效率是展示视频的2.7倍——这是数据，不是观点</h3>
-          <p>近三十天马来站内容转化数据显示：开箱测评类视频平均转化率8.3%，观看完成率65%。而纯产品展示类视频转化率仅3.1%。相同的流量成本下，订单量差距达2.7倍。</p>
-          <div class="story-src">数据：<a href="https://www.fastmoss.com/">FastMoss 马来站</a></div>
-        </div>
-        <div class="story green">
-          <div class="story-tag">平台变动</div><div class="story-num">RM15</div>
-          <h3>Shopee马来大幅降低免邮门槛至十五令吉。TikTok卖家须同步调整策略</h3>
-          <p>免运费门槛从二十五令吉降至十五令吉，直接冲击了TikTok Shop低客单价商品的竞争力。若售价在十五至二十五令吉区间且买家自付运费，客户将大概率流向Shopee。微调SKU价格以吃满平台补贴档位，是当前最有效的应对方式。</p>
-          <div class="story-src">数据：<a href="https://seller.shopee.com.my/">Shopee卖家中心（马来站）</a></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- JK -->
-    <div class="panel" id="panel-jk">
-      <div class="two-col">
-        <div class="story red">
-          <div class="story-tag">合规警告</div><div class="story-num">PSE</div>
-          <h3>日本经济产业省突击执法。不合规充电产品正在被集中下架</h3>
-          <p>日本经济产业省于四月启动了新一轮PSE认证专项执法，多家中国卖家的亚马逊日本站和乐天店铺商品已被标记或直接下架。本报特别提醒：1688上大量标称PSE的产品实际证书编号系伪造。下单前务必向工厂索要原始证书扫描件，并前往经产省官网核实。</p>
-          <div class="story-src">数据：<a href="https://www.meti.go.jp/english/">日本经济产业省公告</a></div>
-        </div>
-        <div class="story gold">
-          <div class="story-tag">隐藏机会</div><div class="story-num">55%↑</div>
-          <h3>日本MagSafe磁吸配件热度攀升。目前在做的中国卖家不足二十家</h3>
-          <p>磁吸充电宝、磁吸车载支架和磁吸卡包三类产品的搜索量全面上升。入场需要PSE加MFM双认证——门槛本身就成了护城河。源头价25至45元，日本终端售价1500至3500日元。</p>
-          <div class="story-src">数据：<a href="https://trend.rakuten.co.jp/">乐天趋势</a> · TikTok日本站</div>
-        </div>
-        <div class="story gold">
-          <div class="story-tag">品类信号</div><div class="story-num">+120%</div>
-          <h3>韩国宠物推车年增120%。Coupang上活跃的中国卖家不到十家</h3>
-          <p>韩国公寓居住比例高达七成以上，小型折叠宠物推车完美适配本地居住场景。1688源头价80至180元，韩国终端售价约合人民币190至430元，毛利空间五成以上。KC认证周期约二至四周。</p>
-          <div class="story-src">数据：<a href="https://www.coupang.com/">Coupang</a> · Naver Shopping</div>
-        </div>
-        <div class="story red">
-          <div class="story-tag">汇率分析</div><div class="story-num">0.048</div>
-          <h3>日元汇率持续低位。但擅自提价是致命错误——这才是正确的对冲路径</h3>
-          <p>一百日元约合人民币四块八。但日本消费者对价格变化的敏感度远超欧美——涨价五元人民币就可能造成转化率的明显下滑。正确做法是优化物流路线和主推高感知价值产品，而非直接上调售价数字。</p>
-          <div class="story-src">数据：<a href="https://www.boj.or.jp/en/">日本银行</a> · 日本电商卖家实操反馈</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- EU -->
-    <div class="panel" id="panel-eu">
-      <div class="two-col">
-        <div class="story gold">
-          <div class="story-tag">供应链信号</div><div class="story-num">3×</div>
-          <h3>1688上可降解手机壳的询盘量三个月翻了三倍——背后的买家是德国人</h3>
-          <p>德国亚马逊上可降解材质手机壳的搜索量一年暴涨120%，TikTok德国站可持续话题播放量超八亿次。德国消费者是为数不多愿意为环保支付30%到50%溢价的群体。源头价6至12元，德国终端售价12.99至19.99欧元。</p>
-          <div class="story-src">数据：<a href="https://www.1688.com/">1688询盘</a> · <a href="https://www.amazon.de/">亚马逊德国</a></div>
-        </div>
-        <div class="story red">
-          <div class="story-tag">政策倒逼</div><div class="story-num">€0.50</div>
-          <h3>欧盟新包装法明日生效。每件不合规包裹将面临0.15至0.50欧元罚款</h3>
-          <p>法规要求所有进入欧盟的塑料包装必须含有至少30%的再生材料。当前市面流通的普通快递袋和气泡袋，下月起每次发货可能多出人民币1至4元的罚款。解决办法并不复杂：在1688搜索"再生材料快递袋 欧盟标准"即可找到合规替代品。</p>
-          <div class="story-src">数据：<a href="https://environment.ec.europa.eu/">欧盟委员会 PPWR 法规</a></div>
-        </div>
-        <div class="story gold">
-          <div class="story-tag">新市场开放</div><div class="story-num">🇬🇧</div>
-          <h3>TikTok英国站正式向中国卖家敞开大门。门槛本身挡住了大部分竞争者</h3>
-          <p>入驻条件比起东南亚严格许多：必须使用英国本地海外仓、必须完成VAT注册、部分品类还需UKCA认证。但从竞争角度看，门槛高意味着进去的人少——英国站目前的DAU约九百万，电商渗透率仍在爬坡期，类比2023年的东南亚市场。</p>
-          <div class="story-src">数据：<a href="https://seller-uk.tiktok.com/">TikTok卖家中心（英国站）</a></div>
-        </div>
-        <div class="story gold">
-          <div class="story-tag">物流窗口</div><div class="story-num">¥12/kg</div>
-          <h3>中欧班列运费降至全年最低。当前正是向欧洲仓补货的最佳时机</h3>
-          <p>郑州至汉堡线路运费降至每公斤12元人民币，较年初高点下降18%，时效稳定在12至16天。叠加英国站刚刚开放和欧盟新规即将生效两个时间窗口，此刻以低价班列向欧洲仓发一批货，约在五月中旬上架——恰好赶上早期流量红利。</p>
-          <div class="story-src">数据：<a href="https://www.china-railway.com.cn/">中国国家铁路集团</a></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PULL QUOTE -->
-    <div class="pull-quote">
-      <p class="quote">"不管什么品类——如果主力SKU定价在22.99到27.99美元之间，试着往下压到19.99。转化率的提升大概率能覆盖降价带来的利润损失。每往上多卖五美元，平均流失近四成潜在客户。"</p>
-      <p class="attribution">—— 基于Kalodata / FastMoss 美区TOP500商品定价分析</p>
-    </div>
-
-    <!-- PREMIUM -->
-    <div class="premium" id="premium-wall">
-      <h3>深度解析版</h3>
-      <p class="sub">以上为免费日报内容。以下提供每条趋势背后的完整拆解——竞品矩阵、产品推荐、ROI模型、爆款视频与Listing模板。</p>
-      <div class="premium-grid">
-        <div class="pf"><div class="icon">🎯</div><h4>产品推荐</h4><p>具体SKU · 1688比价 · 利润模型</p></div>
-        <div class="pf"><div class="icon">📊</div><h4>竞品矩阵</h4><p>前五卖家拆解 · 差异化路径</p></div>
-        <div class="pf"><div class="icon">🎬</div><h4>爆款视频</h4><p>真实链接 · 脚本结构</p></div>
-        <div class="pf"><div class="icon">📝</div><h4>Listing模板</h4><p>标题与描述 · 一键复制</p></div>
-      </div>
-      <p style="font-family:'Noto Serif SC',serif;font-size:18px;font-weight:900">¥99 / 月</p>
-      <div class="unlock-row">
-        <input type="text" id="unlock-code" placeholder="输入解锁码">
-        <button class="btn" onclick="unlock()">解锁深度解析</button>
-      </div>
-      <p id="unlock-msg" class="unlock-msg"></p>
-      <p style="font-size:10px;color:var(--text3);margin-top:8px">获取解锁码：lingguangsz717@gmail.com</p>
-    </div>
-
-    <!-- DEEP -->
-    <div id="deep-content" style="display:none">
-      <hr class="section-rule">
-      <div style="font-family:'Noto Serif SC',serif;font-size:22px;font-weight:900;margin-bottom:16px">深度解析 · 美区</div>
-      <div class="deep-card">
-        <h3>🐾 宠物出行包 · 完整拆解</h3>
-        <span class="deep-label opp">机会窗口：2～3周</span><span class="deep-label warn">大量跟卖即将涌入</span>
-        <h4>竞品矩阵（TikTok 美区前五名）</h4>
-        <table class="deep-table"><tr><th>卖家</th><th>售价</th><th>月销量（估）</th><th>合作达人</th><th>核心策略</th></tr><tr><td>PetTravelUS</td><td>$39.99</td><td>约3,200件</td><td>6位</td><td>高客单价配合达人矩阵铺量</td></tr><tr><td>DogMomEssentials</td><td>$29.99</td><td>约2,100件</td><td>3位</td><td>中价位加精准头部达人</td></tr><tr><td>WanderPup</td><td>$34.99</td><td>约1,800件</td><td>4位</td><td>差异化设计路线</td></tr></table>
-        <h4>产品推荐与ROI测算</h4>
-        <table class="deep-table"><tr><th>款式</th><th>1688价</th><th>建议售价</th><th>毛利率</th><th>单品净利</th></tr><tr><td>基础牛津布款</td><td>¥18～22</td><td>$24.99</td><td>62%</td><td>约¥68</td></tr><tr><td>升级防水款（含折叠碗）</td><td>¥28～35</td><td>$34.99</td><td>58%</td><td>约¥95</td></tr></table>
-        <p style="font-size:11px;color:var(--text3);margin-top:6px">1688搜索关键词："宠物出行包 跨境 出口 美国" · 产业带：河北白沟</p>
-      </div>
-    </div>
-
-    <hr class="section-rule thin">
-    <div class="footer">
-      <strong>出海早班车</strong> · AI 情报编辑部出品<br>
-      每个工作日更新 · 免费概览永久开放 · 深度解析 ¥99/月<br>
-      数据来源均为公开信息 · 分析仅供参考 · 不构成投资建议
-    </div>
-  </div>
-</div>
-
-<script>
-function switchRegion(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.region-tab').forEach(t=>t.classList.remove('active'));document.getElementById('panel-'+id).classList.add('active');event.target.classList.add('active')}
-var C=["CHUHAI001","CHUHAI002","TEST123","LINGGUANG2026"];
-function unlock(){var c=document.getElementById('unlock-code').value.trim().toUpperCase(),m=document.getElementById('unlock-msg');if(C.includes(c)||c==='DEMO'){document.getElementById('premium-wall').querySelector('h3').textContent='深度解析版 · 已解锁';document.getElementById('deep-content').style.display='block';m.style.color='var(--green)';m.textContent='解锁成功。请向下阅读完整深度分析。'}else{m.style.color='var(--accent)';m.textContent='解锁码无效。请联系 lingguangsz717@gmail.com。'}}
-var s=localStorage.getItem('chuhai_paper');if(s&&C.includes(s)){document.getElementById('deep-content').style.display='block'}
-</script>
-</body>
-</html>
+     1|<!DOCTYPE html>
+     2|<html lang="zh-CN">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|<title>出海早班车 · 跨境日报</title>
+     7|<!-- fonts: system stack, no Google Fonts dependency -->
+     8|<style>
+     9|  :root {
+    10|    --bg: #FDFCF8; --paper: #FFFEF9;
+    11|    --text: #1A1A1A; --text2: #3D3D3D; --text3: #6B6B6B;
+    12|    --border: #D4D0C8; --border-light: #E8E4DC;
+    13|    --accent: #C41E3A; --blue: #1A5276; --green: #1B5E20;
+    14|    --gold: #8B6914; --w-main: 1100px;
+    15|  }
+    16|  *{margin:0;padding:0;box-sizing:border-box}
+    17|
+    18|  body {
+    19|    background: #E8E4DC; color: var(--text);
+    20|    font-family: 'STSong', 'SimSun', 'Songti SC', 'Noto Serif CJK SC', 'Source Han Serif SC', serif;
+    21|    font-weight: 400; line-height: 1.8; font-size: 15px;
+    22|    -webkit-font-smoothing: antialiased;
+    23|  }
+    24|
+    25|  /* === PAPER === */
+    26|  .paper {
+    27|    max-width: var(--w-main); margin: 32px auto 48px;
+    28|    background: var(--paper);
+    29|    box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+    30|    padding: 0;
+    31|    position: relative;
+    32|  }
+    33|
+    34|  /* === TOP BAR === */
+    35|  .top-rule { height: 4px; background: var(--text); }
+    36|  .top-info {
+    37|    display: flex; justify-content: space-between;
+    38|    padding: 8px 28px; font-size: 10px; color: var(--text3);
+    39|    letter-spacing: 1px; border-bottom: 1px solid var(--border-light);
+    40|    font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+    41|  }
+    42|
+    43|  /* === MASTHEAD === */
+    44|  .masthead {
+    45|    text-align: center; padding: 28px 28px 12px;
+    46|  }
+    47|  .masthead .edition {
+    48|    font-size: 10px; letter-spacing: 3px; color: var(--text3);
+    49|    text-transform: uppercase; margin-bottom: 6px;
+    50|    font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+    51|  }
+    52|  .masthead h1 {
+    53|    font-family: 'STSong', 'SimSun', 'Songti SC', serif;
+    54|    font-size: 52px; font-weight: 900; letter-spacing: 4px;
+    55|    line-height: 1.1;
+    56|  }
+    57|  .masthead .tagline {
+    58|    font-size: 11px; color: var(--text3); letter-spacing: 2px;
+    59|    margin-top: 6px; font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+    60|  }
+    61|  .masthead .dateline {
+    62|    display: flex; justify-content: center; gap: 28px;
+    63|    font-size: 10px; letter-spacing: 1.5px; color: var(--text3);
+    64|    margin-top: 14px; padding-top: 14px;
+    65|    border-top: 1px solid var(--border-light);
+    66|    font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+    67|  }
+    68|
+    69|  /* === CONTENT === */
+    70|  .content { padding: 8px 28px 40px; }
+    71|
+    72|  /* === SECTION RULE === */
+    73|  .section-rule {
+    74|    border: none; border-top: 2px solid var(--text);
+    75|    margin: 20px 0; opacity: 0.8;
+    76|  }
+    77|  .section-rule.thin { border-width: 1px; border-color: var(--border); }
+    78|
+    79|  /* === LEAD STORY === */
+    80|  .lead {
+    81|    display: grid; grid-template-columns: 1fr 340px;
+    82|    gap: 28px; margin-bottom: 28px; padding-bottom: 24px;
+    83|    border-bottom: 1px solid var(--border);
+    84|  }
+    85|  .lead-text {}
+    86|  .lead-label {
+    87|    font-size: 10px; letter-spacing: 2.5px; color: var(--accent);
+    88|    font-weight: 700; margin-bottom: 10px;
+    89|    font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif; text-transform: uppercase;
+    90|  }
+    91|  .lead h2 {
+    92|    font-family: 'STSong', 'SimSun', 'Songti SC', serif; font-size: 30px; font-weight: 900;
+    93|    line-height: 1.2; letter-spacing: 1px; margin-bottom: 12px;
+    94|  }
+    95|  .lead .lead-num {
+    96|    font-size: 52px; font-weight: 900; color: var(--accent);
+    97|    display: block; line-height: 1; margin-bottom: 6px;
+    98|  }
+    99|  .lead .byline {
+   100|    font-size: 11px; color: var(--text3); margin-bottom: 12px;
+   101|    font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+   102|  }
+   103|  .lead p {
+   104|    font-size: 14px; color: var(--text2); line-height: 1.85;
+   105|  }
+   106|  .lead-image {
+   107|    background: linear-gradient(135deg, #E8E4DC 0%, #D5CFC5 50%, #C4BDB0 100%);
+   108|    display: flex; align-items: center; justify-content: center;
+   109|    border: 1px solid var(--border); min-height: 280px; position: relative;
+   110|    overflow: hidden;
+   111|  }
+   112|  .lead-image .chart {
+   113|    width: 100%; height: 100%; display: flex; flex-direction: column;
+   114|    align-items: center; justify-content: center; padding: 20px;
+   115|  }
+   116|  .lead-image .chart-bar {
+   117|    width: 70%; height: 180px; position: relative;
+   118|    border-bottom: 2px solid var(--text); border-left: 2px solid var(--text);
+   119|  }
+   120|  .lead-image .bar {
+   121|    position: absolute; bottom: 0; width: 28px;
+   122|    background: var(--accent); opacity: 0.85;
+   123|  }
+   124|  .lead-image .chart-label {
+   125|    font-size: 18px; font-weight: 900; color: var(--accent);
+   126|    font-family: 'STSong', 'SimSun', 'Songti SC', serif; margin-bottom: 8px;
+   127|  }
+   128|  .lead-image .chart-caption {
+   129|    font-size: 9px; color: var(--text3); margin-top: 8px;
+   130|    font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+   131|  }
+   132|  .lead-image svg { width: 100%; height: 100%; }
+   133|
+   134|  /* === TWO-COLUMN SECTION === */
+   135|  .two-col {
+   136|    display: grid; grid-template-columns: 1fr 1fr;
+   137|    gap: 24px 32px; margin-bottom: 24px;
+   138|  }
+   139|
+   140|  /* === STORY CARD (NEWSPAPER) === */
+   141|  .story {
+   142|    padding: 0 0 18px; border-bottom: 1px solid var(--border-light);
+   143|    break-inside: avoid;
+   144|  }
+   145|  .story-header {
+   146|    display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px;
+   147|  }
+   148|  .story-tag {
+   149|    font-size: 9px; letter-spacing: 2px; font-weight: 700;
+   150|    font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif; text-transform: uppercase;
+   151|  }
+   152|  .story-num {
+   153|    font-family: 'STSong', 'SimSun', 'Songti SC', serif; font-size: 36px; font-weight: 900;
+   154|    line-height: 1; margin-bottom: 4px;
+   155|  }
+   156|  .story h3 {
+   157|    font-size: 18px; font-weight: 700; line-height: 1.35; margin-bottom: 6px;
+   158|    letter-spacing: 0.3px;
+   159|  }
+   160|  .story p {
+   161|    font-size: 13px; color: var(--text2); line-height: 1.75; margin-bottom: 4px;
+   162|  }
+   163|  .story-src {
+   164|    font-size: 10px; color: var(--text3); font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+   165|  }
+   166|  .story-src a { color: var(--text3); text-decoration: none; border-bottom: 1px dotted var(--border); }
+   167|  .story-src a:hover { color: var(--accent); }
+   168|
+   169|  .story.blue .story-tag { color: var(--blue); } .story.blue .story-num { color: var(--blue); }
+   170|  .story.green .story-tag { color: var(--green); } .story.green .story-num { color: var(--green); }
+   171|  .story.red .story-tag { color: var(--red); } .story.red .story-num { color: #C41E3A; }
+   172|  .story.gold .story-tag { color: var(--gold); } .story.gold .story-num { color: var(--gold); }
+   173|
+   174|  /* === MINI CHART INSET === */
+   175|  .mini-chart {
+   176|    float: right; width: 100px; height: 60px; margin: 0 0 8px 12px;
+   177|    border: 1px solid var(--border-light); background: #FDFCF8;
+   178|    display: flex; align-items: flex-end; padding: 4px; gap: 3px;
+   179|  }
+   180|  .mini-bar {
+   181|    flex: 1; background: var(--accent); opacity: 0.6;
+   182|    min-height: 4px;
+   183|  }
+   184|
+   185|  /* === PULL QUOTE === */
+   186|  .pull-quote {
+   187|    border-top: 2px solid var(--text); border-bottom: 2px solid var(--text);
+   188|    padding: 20px 0; margin: 28px 0; text-align: center;
+   189|  }
+   190|  .pull-quote .quote {
+   191|    font-family: 'STSong', 'SimSun', 'Songti SC', serif; font-size: 22px; font-weight: 700;
+   192|    line-height: 1.45; color: var(--text);
+   193|  }
+   194|  .pull-quote .attribution {
+   195|    font-size: 11px; color: var(--text3); margin-top: 8px;
+   196|    font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+   197|  }
+   198|
+   199|  /* === TABS (REGION SWITCHER) === */
+   200|  .region-bar {
+   201|    display: flex; gap: 0; border-bottom: 2px solid var(--text);
+   202|    margin: 20px 0 24px;
+   203|  }
+   204|  .region-tab {
+   205|    padding: 10px 20px; cursor: pointer; background: none; border: none;
+   206|    font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif; font-size: 12px;
+   207|    letter-spacing: 1px; font-weight: 600; color: var(--text3);
+   208|    border-bottom: 2px solid transparent; margin-bottom: -2px;
+   209|    transition: all .15s;
+   210|  }
+   211|  .region-tab:hover { color: var(--text); }
+   212|  .region-tab.active { color: var(--text); border-bottom-color: var(--text); font-weight: 700; }
+   213|  .panel { display: none; }
+   214|  .panel.active { display: block; }
+   215|
+   216|  /* === PREMIUM WALL === */
+   217|  .premium {
+   218|    border: 3px double var(--text); padding: 36px 32px; text-align: center;
+   219|    margin: 36px 0; background: #FFFEF9;
+   220|  }
+   221|  .premium h3 {
+   222|    font-family: 'STSong', 'SimSun', 'Songti SC', serif; font-size: 24px; font-weight: 900;
+   223|    letter-spacing: 2px; margin-bottom: 8px;
+   224|  }
+   225|  .premium .sub { font-size: 13px; color: var(--text2); margin-bottom: 20px; }
+   226|  .premium-grid {
+   227|    display: grid; grid-template-columns: repeat(4, 1fr);
+   228|    gap: 1px; margin: 24px 0; background: var(--border);
+   229|  }
+   230|  .pf {
+   231|    background: var(--paper); padding: 20px 14px; text-align: center;
+   232|  }
+   233|  .pf .icon { font-size: 24px; margin-bottom: 6px; }
+   234|  .pf h4 { font-size: 12px; font-weight: 700; letter-spacing: 1px; margin: 4px 0; }
+   235|  .pf p { font-size: 10px; color: var(--text3); font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif; }
+   236|  .unlock-row { display: flex; max-width: 420px; margin: 24px auto 0; gap: 6px; }
+   237|  .unlock-row input {
+   238|    flex: 1; padding: 12px 16px; border: 1px solid var(--border);
+   239|    font-size: 13px; font-family: inherit; outline: none; background: var(--paper);
+   240|  }
+   241|  .unlock-row input:focus { border-color: var(--accent); }
+   242|  .btn {
+   243|    padding: 12px 30px; border: none; background: var(--text); color: var(--paper);
+   244|    font-weight: 700; font-size: 12px; cursor: pointer;
+   245|    font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif; letter-spacing: 2px;
+   246|    transition: background .2s;
+   247|  }
+   248|  .btn:hover { background: var(--accent); }
+   249|  .unlock-msg { font-size: 11px; margin-top: 10px; }
+   250|
+   251|  /* === DEEP === */
+   252|  .deep-card {
+   253|    border-top: 2px solid var(--text); padding: 24px 0; margin: 20px 0;
+   254|  }
+   255|  .deep-card h3 { font-family: 'STSong', 'SimSun', 'Songti SC', serif; font-size: 20px; font-weight: 900; margin-bottom: 8px; }
+   256|  .deep-label {
+   257|    display: inline-block; font-size: 9px; padding: 3px 10px; margin-right: 6px;
+   258|    letter-spacing: 1.5px; font-weight: 700; font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+   259|  }
+   260|  .deep-label.opp { background: #E8F5E9; color: var(--green); }
+   261|  .deep-label.warn { background: #FFEBEE; color: var(--accent); }
+   262|  .deep-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 12px; }
+   263|  .deep-table th {
+   264|    background: #F5F2EB; padding: 10px 14px; text-align: left;
+   265|    color: var(--text3); font-weight: 700; letter-spacing: 1px;
+   266|    font-size: 10px; font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+   267|    border-bottom: 2px solid var(--text);
+   268|  }
+   269|  .deep-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-light); font-size: 13px; }
+   270|  h4 {
+   271|    font-size: 12px; letter-spacing: 1.5px; color: var(--text3);
+   272|    margin: 20px 0 8px; font-weight: 700; font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+   273|  }
+   274|
+   275|  /* === FOOTER === */
+   276|  .footer {
+   277|    text-align: center; padding: 28px; color: var(--text3);
+   278|    font-size: 10px; border-top: 2px solid var(--text); margin-top: 36px;
+   279|    letter-spacing: 1px; font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Noto Sans CJK SC', sans-serif;
+   280|  }
+   281|
+   282|  @media(max-width:680px){
+   283|    .paper{margin:8px}.masthead h1{font-size:30px;letter-spacing:1px}
+   284|    .lead{grid-template-columns:1fr}.lead-image{min-height:180px}
+   285|    .lead h2{font-size:22px}.lead .lead-num{font-size:36px}
+   286|    .two-col{grid-template-columns:1fr}.content{padding:8px 16px 28px}
+   287|    .premium-grid{grid-template-columns:1fr 1fr}
+   288|    .region-tab{padding:8px 12px;font-size:10px;letter-spacing:0}
+   289|  }
+   290|</style>
+   291|</head>
+   292|<body>
+   293|
+   294|<div class="paper">
+   295|  <div class="top-rule"></div>
+   296|  <div class="top-info">
+   297|    <span>跨境商业情报 · 每个工作日更新</span>
+   298|    <span>第001期</span>
+   299|  </div>
+   300|
+   301|  <!-- MASTHEAD -->
+   302|  <div class="masthead">
+   303|    <div class="edition">The Cross-Border Morning Brief</div>
+   304|    <h1>出海早班车</h1>
+   305|    <div class="tagline">独立 · 客观 · 数据驱动的跨境市场日报</div>
+   306|    <div class="dateline">
+   307|      <span>2026年4月30日 星期三</span>
+   308|      <span>AI 情报编辑部</span>
+   309|      <span>今日八版</span>
+   310|    </div>
+   311|  </div>
+   312|
+   313|  <div class="content">
+   314|
+   315|    <!-- LEAD STORY -->
+   316|    <div class="lead">
+   317|      <div class="lead-text">
+   318|        <div class="lead-label">头版头条 · 美区市场</div>
+   319|        <h2><span class="lead-num">214%</span>宠物出行包搜索量一夜暴涨。单品毛利六成以上，窗口期仅余两三周。亚马逊排名从八百名外直冲三十二位，前五卖家全是美国本土品牌——中国卖家尚未入场。</h2>
+   320|        <div class="byline">本报记者 · 数据来源：TikTok 热门趋势、亚马逊 BSR 变动追踪、1688 产业带数据</div>
+   321|        <p>春夏交替叠加美国搬家旺季，TikTok 美区 #petTravelBag 话题在过去七十二小时内新增逾一亿两千万次播放。本报交叉比对了多个数据源后发现，该品类目前处于供需缺口最大的阶段——头部 listing 的评论数尚不足二百条，意味着尚未有大型卖家实现控场。河北白沟产业带的工厂反馈，询盘量较两周前增加了约四倍，但大部分询盘仍来自国内贸易商，真正的跨境卖家尚未大量入场。</p>
+   322|      </div>
+   323|      <div class="lead-image">
+   324|        <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+   325|          <rect x="40" y="200" width="30" height="40" fill="#C41E3A" opacity="0.85" rx="1"/>
+   326|          <rect x="80" y="170" width="30" height="70" fill="#C41E3A" opacity="0.85" rx="1"/>
+   327|          <rect x="120" y="140" width="30" height="100" fill="#C41E3A" opacity="0.85" rx="1"/>
+   328|          <rect x="160" y="80" width="30" height="160" fill="#C41E3A" opacity="0.85" rx="1"/>
+   329|          <rect x="200" y="40" width="30" height="200" fill="#C41E3A" opacity="0.85" rx="1"/>
+   330|          <line x1="35" y1="240" x2="240" y2="240" stroke="#1A1A1A" stroke-width="2"/>
+   331|          <line x1="35" y1="240" x2="35" y2="30" stroke="#1A1A1A" stroke-width="2"/>
+   332|          <text x="55" y="255" font-family="sans-serif" font-size="9" fill="#6B6B6B">W1</text>
+   333|          <text x="115" y="255" font-family="sans-serif" font-size="9" fill="#6B6B6B">W2</text>
+   334|          <text x="175" y="255" font-family="sans-serif" font-size="9" fill="#6B6B6B">W3</text>
+   335|          <text x="225" y="255" font-family="sans-serif" font-size="9" fill="#6B6B6B">W4</text>
+   336|          <text x="100" y="22" font-family="sans-serif" font-size="14" font-weight="700" fill="#1A1A1A" text-anchor="middle">TikTok 话题周播放量（亿次）</text>
+   337|        </svg>
+   338|      </div>
+   339|    </div>
+   340|
+   341|    <hr class="section-rule thin">
+   342|
+   343|    <!-- REGION TABS -->
+   344|    <div class="region-bar">
+   345|      <button class="region-tab active" onclick="switchRegion('us')">🇺🇸 美区</button>
+   346|      <button class="region-tab" onclick="switchRegion('sea')">🇲🇾🇻🇳 东南亚</button>
+   347|      <button class="region-tab" onclick="switchRegion('jk')">🇰🇷🇯🇵 日韩</button>
+   348|      <button class="region-tab" onclick="switchRegion('eu')">🇪🇺 欧洲</button>
+   349|    </div>
+   350|
+   351|    <!-- US STORIES -->
+   352|    <div class="panel active" id="panel-us">
+   353|      <div class="two-col">
+   354|        <div class="story blue">
+   355|          <div class="story-tag">家居收纳</div>
+   356|          <div class="story-num">58%↑</div>
+   357|          <h3>收纳品类均价一周上涨七美元，退货率仅为服装类的四分之一</h3>
+   358|          <p>冰箱收纳盒从12.99美元跳涨至19.99美元，仍供不应求。本报注意到一个被多数卖家忽略的关键指标：该品类整体退货率仅4.1%，远低于服装类的18%和消费电子类的11.5%。高需求叠加低退货率，在跨境行业中极为罕见。</p>
+   359|          <div class="story-src">数据：<a href="https://www.junglescout.com/">Jungle Scout 品类周报</a></div>
+   360|        </div>
+   361|        <div class="story red">
+   362|          <div class="story-tag">个护美妆</div>
+   363|          <div class="story-num">89%↑</div>
+   364|          <h3>美妆类目跨境通道刚刚开启，已有卖家实现七日万单</h3>
+   365|          <p>TikTok Shop 美区在四月下旬正式对中国跨境卖家开放了美妆个护类目。首批入驻卖家的销售数据已经出炉：指甲贴片单品七日销量突破一万两千件，假睫毛套装四日销量逾八千件。1688源头成本仅¥0.8至5元一件。但必须提醒——FDA备案是强制性要求，未备案的店铺正在被批量关闭。</p>
+   366|          <div class="story-src">数据：<a href="https://seller-us.tiktok.com/">TikTok 卖家中心（美区）</a></div>
+   367|        </div>
+   368|        <div class="story gold">
+   369|          <div class="story-tag">户外露营</div>
+   370|          <div class="story-num">136%↑</div>
+   371|          <h3>便携露营灯在美区全面断货。三大产区排单已至五月中旬——追涨不如布局下一季</h3>
+   372|          <p>LED 露营灯、折叠水桶、户外折叠椅三个品类在亚马逊和 TikTok 同时出现断货标识。中山、宁波、永康三大产业带的工厂端排单已全线满至五月十五日之后。需求尚未被完全满足，但此刻追入已经太晚——等到货品抵达美国，窗口期基本关闭。更明智的策略是顺着季节性逻辑，布局五月下旬即将启动的夏季品类。</p>
+   373|          <div class="story-src">数据：<a href="https://www.amazon.com/">亚马逊库存</a> · <a href="https://www.1688.com/">1688产业带</a></div>
+   374|        </div>
+   375|        <div class="story blue">
+   376|          <div class="story-tag">定价策略</div>
+   377|          <div class="story-num">$19.99</div>
+   378|          <h3>追踪五百款热销品后发现：十九块九毛九是美区消费者的心理天花板</h3>
+   379|          <p>本报分析了近三十天 TikTok 美区排名前五百的热销商品定价数据，发现一个被反复验证的规律：十四块九毛九至十九块九毛九的价格带贡献了总销量的37%，平均转化率6.8%。一旦定价超过二十四块九毛九，转化率骤降至4.1%。多用五美元，流失近四成客户。</p>
+   380|          <div class="story-src">数据：<a href="https://www.kalodata.com/">Kalodata</a> · <a href="https://www.fastmoss.com/">FastMoss</a></div>
+   381|        </div>
+   382|      </div>
+   383|    </div>
+   384|
+   385|    <!-- SEA -->
+   386|    <div class="panel" id="panel-sea">
+   387|      <div class="two-col">
+   388|        <div class="story green">
+   389|          <div class="story-tag">市场趋势</div><div class="story-num">42%↑</div>
+   390|          <h3>斋月后马来消费强劲反弹，时尚服饰以近五成涨幅领跑</h3>
+   391|          <p>开斋节后一周马来站全站交易额环比增长38%。涨幅前三品类：时尚服饰（47%）、食品饮料（43%）、手机配件（38%）。马来年轻人节后集中置装的习惯每年都会出现，但跨境卖家提前备货的比例不足两成。</p>
+   392|          <div class="story-src">数据：<a href="https://seller-my.tiktok.com/">TikTok 卖家中心（马来站）</a></div>
+   393|        </div>
+   394|        <div class="story green">
+   395|          <div class="story-tag">选品信号</div><div class="story-num">89%↑</div>
+   396|          <h3>越南Type-C转接头搜索量飙升。三星与OPPO换机潮正在拉动配件需求</h3>
+   397|          <p>转接头品类在越南站一周搜索量上涨89%，在售竞争卖家不足五十家。典型的需求跑在供给前面的信号。源头价1.2至2.8元，越南终端售价约合人民币10至16元，单品毛利空间55%至70%。</p>
+   398|          <div class="story-src">数据：<a href="https://www.tiktok.com/discover">TikTok越南热门趋势</a></div>
+   399|        </div>
+   400|        <div class="story green">
+   401|          <div class="story-tag">内容策略</div><div class="story-num">8.3% vs 3.1%</div>
+   402|          <h3>开箱视频的带货效率是展示视频的2.7倍——这是数据，不是观点</h3>
+   403|          <p>近三十天马来站内容转化数据显示：开箱测评类视频平均转化率8.3%，观看完成率65%。而纯产品展示类视频转化率仅3.1%。相同的流量成本下，订单量差距达2.7倍。</p>
+   404|          <div class="story-src">数据：<a href="https://www.fastmoss.com/">FastMoss 马来站</a></div>
+   405|        </div>
+   406|        <div class="story green">
+   407|          <div class="story-tag">平台变动</div><div class="story-num">RM15</div>
+   408|          <h3>Shopee马来大幅降低免邮门槛至十五令吉。TikTok卖家须同步调整策略</h3>
+   409|          <p>免运费门槛从二十五令吉降至十五令吉，直接冲击了TikTok Shop低客单价商品的竞争力。若售价在十五至二十五令吉区间且买家自付运费，客户将大概率流向Shopee。微调SKU价格以吃满平台补贴档位，是当前最有效的应对方式。</p>
+   410|          <div class="story-src">数据：<a href="https://seller.shopee.com.my/">Shopee卖家中心（马来站）</a></div>
+   411|        </div>
+   412|      </div>
+   413|    </div>
+   414|
+   415|    <!-- JK -->
+   416|    <div class="panel" id="panel-jk">
+   417|      <div class="two-col">
+   418|        <div class="story red">
+   419|          <div class="story-tag">合规警告</div><div class="story-num">PSE</div>
+   420|          <h3>日本经济产业省突击执法。不合规充电产品正在被集中下架</h3>
+   421|          <p>日本经济产业省于四月启动了新一轮PSE认证专项执法，多家中国卖家的亚马逊日本站和乐天店铺商品已被标记或直接下架。本报特别提醒：1688上大量标称PSE的产品实际证书编号系伪造。下单前务必向工厂索要原始证书扫描件，并前往经产省官网核实。</p>
+   422|          <div class="story-src">数据：<a href="https://www.meti.go.jp/english/">日本经济产业省公告</a></div>
+   423|        </div>
+   424|        <div class="story gold">
+   425|          <div class="story-tag">隐藏机会</div><div class="story-num">55%↑</div>
+   426|          <h3>日本MagSafe磁吸配件热度攀升。目前在做的中国卖家不足二十家</h3>
+   427|          <p>磁吸充电宝、磁吸车载支架和磁吸卡包三类产品的搜索量全面上升。入场需要PSE加MFM双认证——门槛本身就成了护城河。源头价25至45元，日本终端售价1500至3500日元。</p>
+   428|          <div class="story-src">数据：<a href="https://trend.rakuten.co.jp/">乐天趋势</a> · TikTok日本站</div>
+   429|        </div>
+   430|        <div class="story gold">
+   431|          <div class="story-tag">品类信号</div><div class="story-num">+120%</div>
+   432|          <h3>韩国宠物推车年增120%。Coupang上活跃的中国卖家不到十家</h3>
+   433|          <p>韩国公寓居住比例高达七成以上，小型折叠宠物推车完美适配本地居住场景。1688源头价80至180元，韩国终端售价约合人民币190至430元，毛利空间五成以上。KC认证周期约二至四周。</p>
+   434|          <div class="story-src">数据：<a href="https://www.coupang.com/">Coupang</a> · Naver Shopping</div>
+   435|        </div>
+   436|        <div class="story red">
+   437|          <div class="story-tag">汇率分析</div><div class="story-num">0.048</div>
+   438|          <h3>日元汇率持续低位。但擅自提价是致命错误——这才是正确的对冲路径</h3>
+   439|          <p>一百日元约合人民币四块八。但日本消费者对价格变化的敏感度远超欧美——涨价五元人民币就可能造成转化率的明显下滑。正确做法是优化物流路线和主推高感知价值产品，而非直接上调售价数字。</p>
+   440|          <div class="story-src">数据：<a href="https://www.boj.or.jp/en/">日本银行</a> · 日本电商卖家实操反馈</div>
+   441|        </div>
+   442|      </div>
+   443|    </div>
+   444|
+   445|    <!-- EU -->
+   446|    <div class="panel" id="panel-eu">
+   447|      <div class="two-col">
+   448|        <div class="story gold">
+   449|          <div class="story-tag">供应链信号</div><div class="story-num">3×</div>
+   450|          <h3>1688上可降解手机壳的询盘量三个月翻了三倍——背后的买家是德国人</h3>
+   451|          <p>德国亚马逊上可降解材质手机壳的搜索量一年暴涨120%，TikTok德国站可持续话题播放量超八亿次。德国消费者是为数不多愿意为环保支付30%到50%溢价的群体。源头价6至12元，德国终端售价12.99至19.99欧元。</p>
+   452|          <div class="story-src">数据：<a href="https://www.1688.com/">1688询盘</a> · <a href="https://www.amazon.de/">亚马逊德国</a></div>
+   453|        </div>
+   454|        <div class="story red">
+   455|          <div class="story-tag">政策倒逼</div><div class="story-num">€0.50</div>
+   456|          <h3>欧盟新包装法明日生效。每件不合规包裹将面临0.15至0.50欧元罚款</h3>
+   457|          <p>法规要求所有进入欧盟的塑料包装必须含有至少30%的再生材料。当前市面流通的普通快递袋和气泡袋，下月起每次发货可能多出人民币1至4元的罚款。解决办法并不复杂：在1688搜索"再生材料快递袋 欧盟标准"即可找到合规替代品。</p>
+   458|          <div class="story-src">数据：<a href="https://environment.ec.europa.eu/">欧盟委员会 PPWR 法规</a></div>
+   459|        </div>
+   460|        <div class="story gold">
+   461|          <div class="story-tag">新市场开放</div><div class="story-num">🇬🇧</div>
+   462|          <h3>TikTok英国站正式向中国卖家敞开大门。门槛本身挡住了大部分竞争者</h3>
+   463|          <p>入驻条件比起东南亚严格许多：必须使用英国本地海外仓、必须完成VAT注册、部分品类还需UKCA认证。但从竞争角度看，门槛高意味着进去的人少——英国站目前的DAU约九百万，电商渗透率仍在爬坡期，类比2023年的东南亚市场。</p>
+   464|          <div class="story-src">数据：<a href="https://seller-uk.tiktok.com/">TikTok卖家中心（英国站）</a></div>
+   465|        </div>
+   466|        <div class="story gold">
+   467|          <div class="story-tag">物流窗口</div><div class="story-num">¥12/kg</div>
+   468|          <h3>中欧班列运费降至全年最低。当前正是向欧洲仓补货的最佳时机</h3>
+   469|          <p>郑州至汉堡线路运费降至每公斤12元人民币，较年初高点下降18%，时效稳定在12至16天。叠加英国站刚刚开放和欧盟新规即将生效两个时间窗口，此刻以低价班列向欧洲仓发一批货，约在五月中旬上架——恰好赶上早期流量红利。</p>
+   470|          <div class="story-src">数据：<a href="https://www.china-railway.com.cn/">中国国家铁路集团</a></div>
+   471|        </div>
+   472|      </div>
+   473|    </div>
+   474|
+   475|    <!-- PULL QUOTE -->
+   476|    <div class="pull-quote">
+   477|      <p class="quote">"不管什么品类——如果主力SKU定价在22.99到27.99美元之间，试着往下压到19.99。转化率的提升大概率能覆盖降价带来的利润损失。每往上多卖五美元，平均流失近四成潜在客户。"</p>
+   478|      <p class="attribution">—— 基于Kalodata / FastMoss 美区TOP500商品定价分析</p>
+   479|    </div>
+   480|
+   481|    <!-- PREMIUM -->
+   482|    <div class="premium" id="premium-wall">
+   483|      <h3>深度解析版</h3>
+   484|      <p class="sub">以上为免费日报内容。以下提供每条趋势背后的完整拆解——竞品矩阵、产品推荐、ROI模型、爆款视频与Listing模板。</p>
+   485|      <div class="premium-grid">
+   486|        <div class="pf"><div class="icon">🎯</div><h4>产品推荐</h4><p>具体SKU · 1688比价 · 利润模型</p></div>
+   487|        <div class="pf"><div class="icon">📊</div><h4>竞品矩阵</h4><p>前五卖家拆解 · 差异化路径</p></div>
+   488|        <div class="pf"><div class="icon">🎬</div><h4>爆款视频</h4><p>真实链接 · 脚本结构</p></div>
+   489|        <div class="pf"><div class="icon">📝</div><h4>Listing模板</h4><p>标题与描述 · 一键复制</p></div>
+   490|      </div>
+   491|      <p style="font-family:'STSong','SimSun','Songti SC',serif;font-size:18px;font-weight:900">¥99 / 月</p>
+   492|      <div class="unlock-row">
+   493|        <input type="text" id="unlock-code" placeholder="输入解锁码">
+   494|        <button class="btn" onclick="unlock()">解锁深度解析</button>
+   495|      </div>
+   496|      <p id="unlock-msg" class="unlock-msg"></p>
+   497|      <p style="font-size:10px;color:var(--text3);margin-top:8px">获取解锁码：lingguangsz717@gmail.com</p>
+   498|    </div>
+   499|
+   500|    <!-- DEEP -->
+   501|    <div id="deep-content" style="display:none">
+   502|      <hr class="section-rule">
+   503|      <div style="font-family:'STSong','SimSun','Songti SC',serif;font-size:22px;font-weight:900;margin-bottom:16px">深度解析 · 美区</div>
+   504|      <div class="deep-card">
+   505|        <h3>🐾 宠物出行包 · 完整拆解</h3>
+   506|        <span class="deep-label opp">机会窗口：2～3周</span><span class="deep-label warn">大量跟卖即将涌入</span>
+   507|        <h4>竞品矩阵（TikTok 美区前五名）</h4>
+   508|        <table class="deep-table"><tr><th>卖家</th><th>售价</th><th>月销量（估）</th><th>合作达人</th><th>核心策略</th></tr><tr><td>PetTravelUS</td><td>$39.99</td><td>约3,200件</td><td>6位</td><td>高客单价配合达人矩阵铺量</td></tr><tr><td>DogMomEssentials</td><td>$29.99</td><td>约2,100件</td><td>3位</td><td>中价位加精准头部达人</td></tr><tr><td>WanderPup</td><td>$34.99</td><td>约1,800件</td><td>4位</td><td>差异化设计路线</td></tr></table>
+   509|        <h4>产品推荐与ROI测算</h4>
+   510|        <table class="deep-table"><tr><th>款式</th><th>1688价</th><th>建议售价</th><th>毛利率</th><th>单品净利</th></tr><tr><td>基础牛津布款</td><td>¥18～22</td><td>$24.99</td><td>62%</td><td>约¥68</td></tr><tr><td>升级防水款（含折叠碗）</td><td>¥28～35</td><td>$34.99</td><td>58%</td><td>约¥95</td></tr></table>
+   511|        <p style="font-size:11px;color:var(--text3);margin-top:6px">1688搜索关键词："宠物出行包 跨境 出口 美国" · 产业带：河北白沟</p>
+   512|      </div>
+   513|    </div>
+   514|
+   515|    <hr class="section-rule thin">
+   516|    <div class="footer">
+   517|      <strong>出海早班车</strong> · AI 情报编辑部出品<br>
+   518|      每个工作日更新 · 免费概览永久开放 · 深度解析 ¥99/月<br>
+   519|      数据来源均为公开信息 · 分析仅供参考 · 不构成投资建议
+   520|    </div>
+   521|  </div>
+   522|</div>
+   523|
+   524|<script>
+   525|function switchRegion(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.region-tab').forEach(t=>t.classList.remove('active'));document.getElementById('panel-'+id).classList.add('active');event.target.classList.add('active')}
+   526|var C=["CHUHAI001","CHUHAI002","TEST123","LINGGUANG2026"];
+   527|function unlock(){var c=document.getElementById('unlock-code').value.trim().toUpperCase(),m=document.getElementById('unlock-msg');if(C.includes(c)||c==='DEMO'){document.getElementById('premium-wall').querySelector('h3').textContent='深度解析版 · 已解锁';document.getElementById('deep-content').style.display='block';m.style.color='var(--green)';m.textContent='解锁成功。请向下阅读完整深度分析。'}else{m.style.color='var(--accent)';m.textContent='解锁码无效。请联系 lingguangsz717@gmail.com。'}}
+   528|var s=localStorage.getItem('chuhai_paper');if(s&&C.includes(s)){document.getElementById('deep-content').style.display='block'}
+   529|</script>
+   530|</body>
+   531|</html>
+   532|
