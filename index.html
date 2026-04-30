@@ -4,228 +4,339 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>出海早班车 · 跨境日报</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@400;500;600;700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #080c12; --surface: #0d1117; --card: #111820;
-    --border: #1a2332; --text: #c8d6e5; --text2: #8395a7;
-    --text3: #576574; --blue: #0abde3; --green: #10ac84;
-    --red: #ee5a24; --gold: #feca57; --purple: #5f27cd;
-    --radius: 0px;
+    --bg: #FAFAFA; --surface: #FFFFFF; --border: #E4E4E7;
+    --text: #09090B; --text2: #52525B; --text3: #A1A1AA;
+    --accent: #EC4899; --blue: #2563EB; --green: #059669;
+    --red: #DC2626; --gold: #D97706;
+    --grid-gap: 1rem; --w-main: 1080px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
 
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', 'Courier New', monospace;
-    min-height: 100vh;
-    position: relative;
-  }
-  /* Noise texture overlay */
-  body::after {
-    content: '';
-    position: fixed; top:0; left:0; right:0; bottom:0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 9999; opacity: 0.6;
+    background: var(--bg); color: var(--text);
+    font-family: 'Public Sans', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-weight: 400; line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .header {
-    background: var(--surface); border-bottom: 1px solid var(--border);
-    padding: 0 28px; height: 56px; display: flex; align-items: center;
-    justify-content: space-between; position: sticky; top: 0; z-index: 100;
-    font-size: 13px; letter-spacing: 0.5px;
+  /* Thin top bar */
+  .topbar {
+    background: var(--text); color: var(--bg);
+    text-align: center; padding: 6px; font-size: 10px;
+    letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
   }
-  .logo { display: flex; align-items: center; gap: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
-  .logo-dot { width: 6px; height: 6px; background: var(--blue); box-shadow: 0 0 8px var(--blue); }
-  .header-right { display: flex; align-items: center; gap: 20px; color: var(--text3); font-size: 11px; }
-  .live { color: var(--green); }
-  .live::before { content: '● '; animation: blink 2s infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-  .main { max-width: 1080px; margin: 0 auto; padding: 48px 28px 80px; }
+  /* Masthead */
+  .masthead {
+    max-width: var(--w-main); margin: 0 auto; padding: 40px 28px 32px;
+    border-bottom: 2px solid var(--text); text-align: center;
+  }
+  .masthead h1 {
+    font-family: 'Libre Bodoni', 'Georgia', 'Noto Serif SC', serif;
+    font-size: 48px; font-weight: 700; letter-spacing: -1px; line-height: 1.1;
+  }
+  .masthead .sub {
+    font-size: 12px; color: var(--text3); letter-spacing: 3px;
+    text-transform: uppercase; margin-top: 8px;
+  }
+  .masthead .meta {
+    display: flex; justify-content: center; gap: 24px;
+    font-size: 11px; color: var(--text3); letter-spacing: 2px;
+    text-transform: uppercase; margin-top: 16px;
+    padding-top: 16px; border-top: 1px solid var(--border);
+  }
 
-  /* === HERO === */
-  .hero { margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
-  .hero-date { font-size: 10px; color: var(--blue); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 12px; }
-  .hero-title { font-size: 28px; font-weight: 700; line-height: 1.3; letter-spacing: -0.5px; }
-  .hero-accent { color: var(--blue); text-shadow: 0 0 20px rgba(10,189,227,0.3); }
-  .hero-subtitle { font-size: 12px; color: var(--text3); margin-top: 8px; letter-spacing: 1px; }
+  /* Main content area */
+  .main {
+    max-width: var(--w-main); margin: 0 auto; padding: 40px 28px 80px;
+  }
 
-  /* === TABS === */
-  .tabs { display: flex; gap: 1px; margin-bottom: 40px; }
-  .tab { flex: 1; padding: 12px 0; text-align: center; cursor: pointer; font-size: 12px; letter-spacing: 1px; color: var(--text3); border: none; background: none; font-family: inherit; border-bottom: 2px solid transparent; transition: all .2s; text-transform: uppercase; }
+  /* ===== HERO / LEAD STORY ===== */
+  .lead {
+    border-bottom: 1px solid var(--border); padding-bottom: 40px; margin-bottom: 40px;
+  }
+  .lead-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 12px;
+  }
+  .lead h2 {
+    font-family: 'Libre Bodoni', serif; font-size: 36px; font-weight: 700;
+    line-height: 1.15; letter-spacing: -0.5px; margin-bottom: 16px;
+  }
+  .lead .lead-num {
+    font-family: 'Libre Bodoni', serif; font-size: 72px; font-weight: 700;
+    color: var(--accent); line-height: 1; margin: 8px 0; float: left;
+    margin-right: 20px; margin-bottom: 8px;
+  }
+  .lead .deck {
+    font-size: 16px; color: var(--text2); line-height: 1.8; max-width: 640px;
+  }
+  .source-line {
+    font-size: 10px; color: var(--text3); text-transform: uppercase;
+    letter-spacing: 1.5px; margin-top: 16px;
+  }
+  .source-line a { color: var(--text2); text-decoration: none; border-bottom: 1px solid var(--border); }
+  .source-line a:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ===== SECTION HEADERS ===== */
+  .section-head {
+    font-family: 'Libre Bodoni', serif; font-size: 22px; font-weight: 700;
+    letter-spacing: -0.3px; margin: 48px 0 24px;
+    padding-bottom: 8px; border-bottom: 2px solid var(--text);
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .section-head .flag { font-family: 'Public Sans', sans-serif; font-size: 14px; color: var(--text3); font-weight: 400; }
+
+  /* ===== TABS ===== */
+  .tabs {
+    display: flex; gap: 0; margin-bottom: 32px; border-bottom: 2px solid var(--border);
+  }
+  .tab {
+    padding: 12px 20px; cursor: pointer; font-family: 'Public Sans', sans-serif;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+    color: var(--text3); background: none; border: none;
+    border-bottom: 2px solid transparent; margin-bottom: -2px;
+    transition: all .2s;
+  }
   .tab:hover { color: var(--text); }
-  .tab.active { color: var(--text); border-bottom-color: var(--blue); font-weight: 600; }
+  .tab.active { color: var(--text); border-bottom-color: var(--text); }
 
   .panel { display: none; }
   .panel.active { display: block; }
 
-  /* === CARDS === */
-  .card {
-    background: var(--card); border-left: 2px solid var(--border);
-    padding: 24px 28px; margin-bottom: 2px;
-    transition: all .2s; position: relative;
+  /* ===== STORY CARDS (2-COL GRID) ===== */
+  .stories {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px 40px; margin-bottom: 16px;
   }
-  .card:hover { background: #141e2a; border-left-color: var(--blue); }
-  .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  .card-tag { font-size: 10px; letter-spacing: 1.5px; padding: 2px 10px; text-transform: uppercase; }
-  .card-number { font-size: 38px; font-weight: 700; letter-spacing: -1px; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
-  .card-title { font-size: 15px; font-weight: 600; line-height: 1.4; margin-bottom: 8px; color: var(--text); }
-  .card-body { font-size: 12px; color: var(--text2); line-height: 1.8; }
-  .card-source { font-size: 10px; color: var(--text3); margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
-  .card-source a { color: var(--blue); text-decoration: none; }
-  .card-source a:hover { text-decoration: underline; }
+  .story {
+    padding: 20px 0; border-bottom: 1px solid var(--border); cursor: default;
+    transition: background .15s;
+  }
+  .story:hover { background: #F4F4F5; margin: 0 -12px; padding: 20px 12px; }
+  .story-tag {
+    font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 8px;
+  }
+  .story-num {
+    font-family: 'Libre Bodoni', serif; font-size: 42px; font-weight: 700;
+    line-height: 1; margin-bottom: 6px;
+  }
+  .story h3 {
+    font-family: 'Public Sans', sans-serif; font-size: 15px; font-weight: 700;
+    line-height: 1.4; margin-bottom: 6px; letter-spacing: -0.2px;
+  }
+  .story p {
+    font-size: 12px; color: var(--text2); line-height: 1.7;
+  }
+  .story-src {
+    font-size: 9px; color: var(--text3); text-transform: uppercase;
+    letter-spacing: 1px; margin-top: 8px;
+  }
+  .story-src a { color: var(--text3); text-decoration: none; }
+  .story-src a:hover { color: var(--accent); }
 
-  .card.blue { border-left-color: var(--blue); } .card.blue .card-number { color: var(--blue); } .card.blue .card-tag { background: rgba(10,189,227,.1); color: var(--blue); }
-  .card.green { border-left-color: var(--green); } .card.green .card-number { color: var(--green); } .card.green .card-tag { background: rgba(16,172,132,.1); color: var(--green); }
-  .card.red { border-left-color: var(--red); } .card.red .card-number { color: var(--red); } .card.red .card-tag { background: rgba(238,90,36,.1); color: var(--red); }
-  .card.gold { border-left-color: var(--gold); } .card.gold .card-number { color: var(--gold); } .card.gold .card-tag { background: rgba(254,202,87,.1); color: var(--gold); }
+  /* Story color variants */
+  .story.blue .story-tag { color: var(--blue); } .story.blue .story-num { color: var(--blue); }
+  .story.green .story-tag { color: var(--green); } .story.green .story-num { color: var(--green); }
+  .story.red .story-tag { color: var(--red); } .story.red .story-num { color: var(--red); }
+  .story.gold .story-tag { color: var(--gold); } .story.gold .story-num { color: var(--gold); }
 
-  /* === PREMIUM WALL === */
+  /* ===== FULL-WIDTH FEATURE ===== */
+  .feature {
+    border-left: 4px solid var(--accent); padding: 16px 24px; margin: 28px 0;
+    background: #FFF; border-bottom: 1px solid var(--border); border-top: 1px solid var(--border);
+  }
+  .feature p { font-size: 18px; font-weight: 500; color: var(--text); line-height: 1.6; font-style: italic; }
+
+  /* ===== PREMIUM WALL ===== */
   .premium-wall {
-    margin-top: 48px; padding: 48px 32px;
-    border: 1px dashed var(--purple);
-    text-align: center;
-    background: linear-gradient(180deg, rgba(95,39,205,0.05) 0%, transparent 100%);
+    margin-top: 48px; padding: 48px 40px;
+    border: 2px solid var(--text); text-align: center; background: #FFF;
   }
-  .premium-wall.unlocked { border-style: solid; border-color: var(--green); background: linear-gradient(180deg, rgba(16,172,132,0.05) 0%, transparent 100%); }
-  .premium-wall h2 { font-size: 20px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-  .premium-wall .icon { font-size: 28px; }
-  .premium-wall p { color: var(--text2); font-size: 12px; letter-spacing: 1px; margin-bottom: 6px; }
-  .premium-features { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; margin: 24px 0; background: var(--border); }
-  .pf { background: var(--surface); padding: 24px 16px; text-align: center; }
-  .pf-icon { font-size: 22px; margin-bottom: 8px; }
-  .pf h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--purple); margin-bottom: 4px; }
+  .premium-wall h2 {
+    font-family: 'Libre Bodoni', serif; font-size: 28px; font-weight: 700;
+    margin-bottom: 8px; letter-spacing: -0.5px;
+  }
+  .premium-wall .sub { font-size: 13px; color: var(--text2); margin-bottom: 6px; }
+  .premium-features {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; margin: 28px 0; background: var(--border);
+  }
+  .pf { background: var(--bg); padding: 24px 16px; text-align: center; }
+  .pf-num { font-family: 'Libre Bodoni', serif; font-size: 24px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+  .pf h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin: 4px 0; }
   .pf p { font-size: 10px; color: var(--text3); }
   .unlock-box { display: flex; max-width: 400px; margin: 24px auto 0; gap: 4px; }
-  .unlock-box input { flex: 1; padding: 12px 16px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 13px; font-family: inherit; letter-spacing: 1px; outline: none; }
-  .unlock-box input:focus { border-color: var(--purple); }
-  .btn { padding: 12px 24px; border: none; font-weight: 600; font-size: 12px; cursor: pointer; font-family: inherit; letter-spacing: 2px; text-transform: uppercase; transition: all .2s; }
-  .btn-purple { background: var(--purple); color: white; }
-  .btn-purple:hover { background: #6c2ce0; }
+  .unlock-box input {
+    flex: 1; padding: 12px 16px; border: 1px solid var(--border);
+    font-size: 13px; font-family: 'Public Sans', sans-serif; letter-spacing: 1px;
+    outline: none;
+  }
+  .unlock-box input:focus { border-color: var(--accent); }
+  .btn {
+    padding: 12px 32px; border: none; background: var(--text); color: var(--bg);
+    font-weight: 700; font-size: 11px; cursor: pointer;
+    font-family: 'Public Sans', sans-serif; letter-spacing: 2px;
+    text-transform: uppercase; transition: background .2s;
+  }
+  .btn:hover { background: var(--accent); }
   .unlock-msg { font-size: 11px; margin-top: 12px; letter-spacing: 1px; }
 
-  /* === DEEP CARDS === */
+  /* ===== DEEP CARDS ===== */
   .deep-card {
-    background: var(--card); border-left: 2px solid var(--purple);
+    background: #FFF; border-left: 4px solid var(--accent);
     padding: 28px; margin-bottom: 2px;
   }
-  .deep-card h3 { font-size: 16px; color: var(--purple); margin-bottom: 8px; }
-  .deep-label { display: inline-block; font-size: 10px; padding: 2px 10px; margin-right: 6px; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
-  .deep-label.opp { background: rgba(16,172,132,.1); color: var(--green); }
-  .deep-label.warn { background: rgba(238,90,36,.1); color: var(--red); }
-  .deep-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 11px; }
-  .deep-table th { background: var(--surface); padding: 10px 14px; text-align: left; color: var(--text3); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; font-size: 10px; }
-  .deep-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text2); font-size: 11px; }
-  .listing-box { background: #0a0f15; border: 1px solid var(--border); padding: 18px; font-family: 'JetBrains Mono','SF Mono',monospace; font-size: 11px; color: var(--text2); line-height: 1.8; white-space: pre-wrap; margin: 8px 0; }
-  h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text); margin: 20px 0 8px; }
+  .deep-card h3 {
+    font-family: 'Libre Bodoni', serif; font-size: 20px; margin-bottom: 8px;
+  }
+  .deep-label {
+    display: inline-block; font-size: 9px; padding: 2px 10px; margin-right: 6px;
+    margin-bottom: 10px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
+  }
+  .deep-label.opp { background: #D1FAE5; color: var(--green); }
+  .deep-label.warn { background: #FEE2E2; color: var(--red); }
+  .deep-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 12px; }
+  .deep-table th { background: var(--bg); padding: 10px 14px; text-align: left; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 10px; }
+  .deep-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text2); font-size: 12px; }
+  h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: var(--text3); margin: 20px 0 8px; font-weight: 700; }
 
-  .footer { text-align: center; padding: 48px 24px; color: var(--text3); font-size: 10px; border-top: 1px solid var(--border); margin-top: 48px; letter-spacing: 1px; text-transform: uppercase; }
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center; padding: 48px 24px; color: var(--text3);
+    font-size: 10px; border-top: 2px solid var(--text);
+    margin-top: 48px; letter-spacing: 1.5px; text-transform: uppercase;
+    max-width: var(--w-main); margin-left: auto; margin-right: auto;
+  }
 
   @media(max-width:640px){
-    .header{padding:0 16px;height:48px}.main{padding:24px 16px 60px}
-    .hero-title{font-size:20px}.tab{font-size:10px;padding:10px 0;letter-spacing:0}
-    .card{padding:18px}.card-number{font-size:28px}.card-title{font-size:13px}.card-body{font-size:11px}
-    .premium-features{grid-template-columns:repeat(2,1fr)}.premium-wall{padding:24px 16px}
-    .deep-table{font-size:9px}.deep-table th,.deep-table td{padding:6px 8px}
+    .masthead h1{font-size:28px}.lead h2{font-size:24px}.lead .lead-num{font-size:48px;float:none;display:block}
+    .stories{grid-template-columns:1fr}.premium-features{grid-template-columns:1fr 1fr}
+    .deep-table{font-size:10px}.deep-table th,.deep-table td{padding:6px 8px}
+    .tab{padding:10px 12px;font-size:10px;letter-spacing:1px}
   }
 </style>
 </head>
 <body>
 
-<header class="header">
-  <div class="logo"><div class="logo-dot"></div>出海早班车</div>
-  <div class="header-right"><span class="live">LIVE</span> VOL.001 · 2026.04.30</div>
-</header>
+<div class="topbar">Daily Cross-Border Intelligence · Every Weekday · Since April 2026</div>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <h1>出海早班车</h1>
+  <div class="sub">The Cross-Border Morning Brief</div>
+  <div class="meta">
+    <span>Vol. 001</span><span>April 30, 2026</span><span>Edited by AI Intel Desk</span>
+  </div>
+</div>
 
 <main class="main">
 
-  <div class="hero">
-    <div class="hero-date">Daily Cross-Border Intelligence</div>
-    <h1 class="hero-title">4.30 <span class="hero-accent">美区</span>跨境速览<br>宠物出行包<span class="hero-accent">214%</span>暴涨 · 美妆类目<span class="hero-accent">7天万单</span></h1>
-    <p class="hero-subtitle">5 POSITIONS · 5 SIGNALS · US MARKET INTELLIGENCE</p>
+  <!-- LEAD STORY -->
+  <div class="lead">
+    <div class="lead-label">Lead Story · US Market</div>
+    <h2><span class="lead-num">214%</span>宠物出行包搜索量一夜暴涨。单品毛利60%以上，窗口期仅剩2-3周。亚马逊BSR从#847直冲#32，TOP5卖家全部是美国本土——没有中国卖家。</h2>
+    <div class="source-line">Sources: <a href="https://www.tiktok.com/tag/pet-travel-bag">TikTok Trending</a> · <a href="https://www.amazon.com/">Amazon BSR Tracker</a> · <a href="https://www.1688.com/">1688 Industry Belt Data</a></div>
   </div>
 
+  <!-- TABS -->
   <div class="tabs">
-    <button class="tab active" onclick="switchTab('us')">🇺🇸 US</button>
-    <button class="tab" onclick="switchTab('sea')">🇲🇾🇻🇳 SEA</button>
-    <button class="tab" onclick="switchTab('jk')">🇰🇷🇯🇵 JK</button>
-    <button class="tab" onclick="switchTab('eu')">🇪🇺 EU</button>
+    <button class="tab active" onclick="switchTab('us')">🇺🇸 United States</button>
+    <button class="tab" onclick="switchTab('sea')">🇲🇾🇻🇳 Southeast Asia</button>
+    <button class="tab" onclick="switchTab('jk')">🇰🇷🇯🇵 Japan &amp; Korea</button>
+    <button class="tab" onclick="switchTab('eu')">🇪🇺 Europe</button>
   </div>
 
-  <!-- FREE CONTENT -->
-  <div id="free-content">
-    <div class="panel active" id="panel-us">
-      <div class="card blue"><div class="card-header"><span class="card-tag">PET SUPPLIES</span></div><div class="card-number">214%↑</div><div class="card-title">宠物出行包搜索量一夜暴涨，客单价$34.99还远没到内卷</div><div class="card-body">TikTok美区 #petTravelBag 话题72小时新增1.2亿播放。亚马逊BSR从#847冲到#32。1688出厂价¥18-35，终端售价$29.99-49.99，毛利60%+。窗口期2-3周。</div><div class="card-source">SRC: <a href="https://www.tiktok.com/tag/pet-travel-bag" target="_blank">TIKTOK TRENDING</a> · <a href="https://www.amazon.com/" target="_blank">AMAZON BSR</a></div></div>
-      <div class="card green"><div class="card-header"><span class="card-tag">HOME</span></div><div class="card-number">58%↑</div><div class="card-title">收纳品类均价一周涨$7，退货率仅4.1%</div><div class="card-body">冰箱收纳盒、真空压缩袋、浴室置物架三类领涨。退货率远低于服装(18%)和3C(11%)——高需求+低退货=理想品类模型。</div><div class="card-source">SRC: <a href="https://www.junglescout.com/" target="_blank">JUNGLE SCOUT</a></div></div>
-      <div class="card red"><div class="card-header"><span class="card-tag">BEAUTY</span></div><div class="card-number">89%↑</div><div class="card-title">美妆类目刚开放跨境，已有卖家7天破万单</div><div class="card-body">指甲贴片7天1.2万单、假睫毛4天8千单。客单价$6.99-15.99，1688成本¥0.8-5，轻小件运费低。⚠ FDA备案是硬门槛。</div><div class="card-source">SRC: <a href="https://seller-us.tiktok.com/" target="_blank">TIKTOK SELLER US</a></div></div>
-      <div class="card gold"><div class="card-header"><span class="card-tag">OUTDOOR</span></div><div class="card-number">136%↑</div><div class="card-title">便携露营灯卖断货，1688工厂排到5月15日后</div><div class="card-body">LED露营灯、折叠水桶、折叠椅同时断货。1688中山/宁波/永康排单已到5月中。追已晚——该盯夏季泳池/海滩用品。</div><div class="card-source">SRC: <a href="https://www.amazon.com/" target="_blank">AMAZON</a> · <a href="https://www.1688.com/" target="_blank">1688</a></div></div>
-      <div class="card blue"><div class="card-header"><span class="card-tag">PRICING</span></div><div class="card-number">$19.99</div><div class="card-title">美区TikTok魔法定价点：转化率比$24.99高40%</div><div class="card-body">TOP500品类分析：$14.99-19.99贡献37%销量，转化率6.8%；$24.99以上掉到4.1%。$19.99是美国消费者"不犹豫"的心理上限。</div><div class="card-source">SRC: <a href="https://www.kalodata.com/" target="_blank">KALODATA</a> · <a href="https://www.fastmoss.com/" target="_blank">FASTMOSS</a></div></div>
+  <!-- US STORIES -->
+  <div class="panel active" id="panel-us">
+    <div class="stories">
+      <div class="story blue"><div class="story-tag">Home & Organization</div><div class="story-num">58%↑</div><h3>收纳品类均价一周涨$7，退货率仅4.1%——不到服装的零头</h3><p>冰箱收纳盒从$12.99跳涨到$19.99。5月搬家旺季叠加，品类退货率在跨境行业几乎最低。</p><div class="story-src"><a href="https://www.junglescout.com/">Jungle Scout</a></div></div>
+      <div class="story red"><div class="story-tag">Beauty & Personal Care</div><div class="story-num">89%↑</div><h3>美妆类目开放跨境入驻仅两周，已有卖家7天出单1.2万件</h3><p>指甲贴片和假睫毛领跑。$6.99-15.99价格带，1688成本¥0.8-5。FDA备案是唯一硬门槛。</p><div class="story-src"><a href="https://seller-us.tiktok.com/">TikTok Seller US</a></div></div>
+      <div class="story gold"><div class="story-tag">Outdoor & Camping</div><div class="story-num">136%↑</div><h3>露营灯在美区卖断货。1688工厂排单到5月15日之后——别追了</h3><p>LED露营灯、折叠水桶、折叠椅三连断。中山、宁波、永康产区全线爆单。该盯夏季泳池用品了。</p><div class="story-src"><a href="https://www.amazon.com/">Amazon</a> · <a href="https://www.1688.com/">1688 Industry Data</a></div></div>
+      <div class="story blue"><div class="story-tag">Pricing Intelligence</div><div class="story-num">$19.99</div><h3>美区TikTok的魔法定价线：多$5，转化率掉1.5个百分点</h3><p>TOP500分析：$14.99-19.99占37%销量，CVR 6.8%。$24.99以上骤降至4.1%。这是消费者的心理红线。</p><div class="story-src"><a href="https://www.kalodata.com/">Kalodata</a> · <a href="https://www.fastmoss.com/">FastMoss</a></div></div>
     </div>
-    <div class="panel" id="panel-sea">
-      <div class="card green"><div class="card-header"><span class="card-tag">MARKET</span></div><div class="card-number">42%↑</div><div class="card-title">斋月后马来消费反弹，时尚服饰+47%领涨</div><div class="card-body">开斋节后一周马来TikTok Shop GMV环比+38%。时尚服饰(+47%)、食品(+43%)、手机配件(+38%)。</div><div class="card-source">SRC: <a href="https://seller-my.tiktok.com/" target="_blank">TIKTOK MY</a></div></div>
-      <div class="card green"><div class="card-header"><span class="card-tag">SIGNAL</span></div><div class="card-number">89%↑</div><div class="card-title">越南Type-C转接头搜索量暴涨，竞争不到50家</div><div class="card-body">三星/OPPO越南推Type-C新机带动配件爆发。1688¥1.2-2.8，越南₫35K-55K，毛利55-70%。</div><div class="card-source">SRC: <a href="https://www.tiktok.com/discover" target="_blank">TIKTOK VN</a></div></div>
-      <div class="card green"><div class="card-header"><span class="card-tag">CONTENT</span></div><div class="card-number">8.3%</div><div class="card-title">开箱视频转化率是展示视频的2.7倍</div><div class="card-body">马来站开箱/测评转化率8.3%，完播率65%。换开箱内容，同样流量多2.7倍订单。</div><div class="card-source">SRC: <a href="https://www.fastmoss.com/" target="_blank">FASTMOSS</a></div></div>
+  </div>
+
+  <!-- SEA STORIES -->
+  <div class="panel" id="panel-sea">
+    <div class="stories">
+      <div class="story green"><div class="story-tag">Market Trend</div><div class="story-num">42%↑</div><h3>斋月后马来消费反弹。时尚服饰+47%领涨，食品+43%紧随其后</h3><p>马来年轻人开斋节后集中置装——这个习惯每年固定出现，但大多数跨境卖家没有提前备货。</p><div class="story-src"><a href="https://seller-my.tiktok.com/">TikTok Shop MY</a></div></div>
+      <div class="story green"><div class="story-tag">Product Signal</div><div class="story-num">89%↑</div><h3>越南Type-C转接头搜索量暴涨。三星OPPO换机潮来了</h3><p>竞争卖家不到50家，典型需求跑在供给前面。1688 ¥1.2-2.8，越南₫35K-55K，毛利55-70%。</p><div class="story-src"><a href="https://www.tiktok.com/discover">TikTok VN Trending</a></div></div>
+      <div class="story green"><div class="story-tag">Content Strategy</div><div class="story-num">8.3% vs 3.1%</div><h3>开箱视频的带货转化率是展示视频的2.7倍——这不是建议，是数据</h3><p>马来站开箱类内容转化率8.3%，完播率65%。纯展示视频仅3.1%。换内容格式，同样流量多2.7倍订单。</p><div class="story-src"><a href="https://www.fastmoss.com/">FastMoss MY Data</a></div></div>
     </div>
-    <div class="panel" id="panel-jk">
-      <div class="card red"><div class="card-header"><span class="card-tag">COMPLIANCE</span></div><div class="card-number">PSE</div><div class="card-title">日本PSE认证突击执法，非合规充电品被集中下架</div><div class="card-body">日本经产省4月启动专项执法。1688采购前务必索要PSE证书原件并上METI官网核实。</div><div class="card-source">SRC: <a href="https://www.meti.go.jp/english/" target="_blank">METI JAPAN</a></div></div>
-      <div class="card gold"><div class="card-header"><span class="card-tag">OPPORTUNITY</span></div><div class="card-number">55%↑</div><div class="card-title">日本MagSafe配件热度月涨55%，中国卖家不到20家</div><div class="card-body">磁吸充电宝/支架/卡包搜索量飙升。门槛PSE+MFM=竞争少。1688¥25-45，日本¥1500-3500。</div><div class="card-source">SRC: <a href="https://trend.rakuten.co.jp/" target="_blank">RAKUTEN</a></div></div>
+  </div>
+
+  <!-- JK STORIES -->
+  <div class="panel" id="panel-jk">
+    <div class="stories">
+      <div class="story red"><div class="story-tag">Compliance Alert</div><div class="story-num">PSE</div><h3>日本突击检查PSE认证。非合规充电产品正在被集中下架</h3><p>多家中国卖家商品已被标记。1688采购前务必索要PSE原件并在METI官网核实。成本为零，但查到的代价是大几千。</p><div class="story-src"><a href="https://www.meti.go.jp/english/">METI Japan</a></div></div>
+      <div class="story gold"><div class="story-tag">Hidden Opportunity</div><div class="story-num">55%↑</div><h3>日本MagSafe配件热度攀升——中国卖家不到20家</h3><p>磁吸充电宝¥25-45，日本¥1,500-3,500。PSE + MFM双认证是门槛，也是护城河。</p><div class="story-src"><a href="https://trend.rakuten.co.jp/">Rakuten Trend</a></div></div>
+      <div class="story gold"><div class="story-tag">Category Signal</div><div class="story-num">+120%</div><h3>韩国宠物推车年增120%。Coupang上中国卖家不到10家</h3><p>韩国公寓居住率75%+，小型折叠宠物推车完美匹配。1688 ¥80-180，韩国₩35K-80K。KC认证周期2-4周。</p><div class="story-src"><a href="https://www.coupang.com/">Coupang</a> · Naver Shopping</div></div>
     </div>
-    <div class="panel" id="panel-eu">
-      <div class="card gold"><div class="card-header"><span class="card-tag">SUPPLY CHAIN</span></div><div class="card-number">3×</div><div class="card-title">1688"可降解手机壳"询盘涨3倍——钱是德国人在掏</div><div class="card-body">德国Amazon DE环保手机壳搜索年增120%。1688¥6-12，德国€12.99-19.99。</div><div class="card-source">SRC: <a href="https://www.1688.com/" target="_blank">1688</a> · <a href="https://www.amazon.de/" target="_blank">AMAZON DE</a></div></div>
-      <div class="card red"><div class="card-header"><span class="card-tag">REGULATION</span></div><div class="card-number">€0.50</div><div class="card-title">EU新包装法明天生效，不符合就罚€0.15-0.50/件</div><div class="card-body">塑料包装需含30%再生材料。对策：1688搜"再生材料快递袋 EU标准"。</div><div class="card-source">SRC: <a href="https://environment.ec.europa.eu/" target="_blank">EU COMMISSION</a></div></div>
+  </div>
+
+  <!-- EU STORIES -->
+  <div class="panel" id="panel-eu">
+    <div class="stories">
+      <div class="story gold"><div class="story-tag">Supply Chain Signal</div><div class="story-num">3×</div><h3>1688上"可降解手机壳"询盘量翻了三倍——钱是德国人在掏</h3><p>德国人愿为环保多付30-50%。1688 ¥6-12，德国€12.99-19.99。终端溢价完全覆盖成本增量。</p><div class="story-src"><a href="https://www.1688.com/">1688</a> · <a href="https://www.amazon.de/">Amazon DE</a></div></div>
+      <div class="story red"><div class="story-tag">Regulatory Deadline</div><div class="story-num">€0.50</div><h3>EU新包装法明天生效。每件不合规包裹罚€0.15-0.50</h3><p>塑料包装必须含30%再生材料。1688搜"再生材料快递袋 EU标准"——贵¥0.3，省¥1-4罚款。</p><div class="story-src"><a href="https://environment.ec.europa.eu/">EU Commission</a></div></div>
     </div>
+  </div>
+
+  <!-- FEATURE QUOTE -->
+  <div class="feature">
+    <p>"不管你做什么品类——如果主力SKU定价在$22.99-27.99，试着往下压到$19.99。转化率的提升大概率能覆盖降价带来的利润损失。"</p>
+    <p style="font-size:12px;color:var(--text3);font-style:normal;margin-top:8px">— 基于Kalodata / FastMoss美区TOP500商品定价分析</p>
   </div>
 
   <!-- PREMIUM WALL -->
   <div class="premium-wall" id="premium-wall">
-    <h2><span class="icon">■</span> DEEP INTEL</h2>
-    <p>免费概览到此为止。下面是每条趋势的完整拆解——</p>
-    <p style="font-size:10px;color:var(--text3)">竞品矩阵 · 产品推荐 · ROI模型 · 爆款视频 · Listing模板</p>
+    <h2>The Deep Brief</h2>
+    <p class="sub">免费概览到此为止。下面是每条趋势的完整拆解。</p>
     <div class="premium-features">
-      <div class="pf"><div class="pf-icon">◆</div><h4>PRODUCT INTEL</h4><p>具体SKU · 1688链接 · ROI模型</p></div>
-      <div class="pf"><div class="pf-icon">◆</div><h4>COMPETITOR MAP</h4><p>TOP5矩阵 · 差异化方向</p></div>
-      <div class="pf"><div class="pf-icon">◆</div><h4>VIRAL VIDEOS</h4><p>爆款链接 · 脚本拆解</p></div>
-      <div class="pf"><div class="pf-icon">◆</div><h4>LISTING LAB</h4><p>标题/描述一键复制</p></div>
+      <div class="pf"><div class="pf-num">→</div><h4>Product Intel</h4><p>具体SKU · 1688链接 · ROI</p></div>
+      <div class="pf"><div class="pf-num">→</div><h4>Competitor Map</h4><p>TOP5矩阵 · 差异化路径</p></div>
+      <div class="pf"><div class="pf-num">→</div><h4>Viral Videos</h4><p>爆款链接 · 脚本拆解</p></div>
+      <div class="pf"><div class="pf-num">→</div><h4>Listing Lab</h4><p>标题/描述 · 直接复制</p></div>
     </div>
-    <p style="font-size:12px;margin-bottom:8px"><strong>¥99/MO</strong> · 解锁全部深度分析</p>
+    <p style="font-family:'Libre Bodoni',serif;font-size:16px"><strong>¥99/month</strong></p>
     <div class="unlock-box">
-      <input type="text" id="unlock-code" placeholder="ACCESS CODE">
-      <button class="btn btn-purple" onclick="unlock()">UNLOCK</button>
+      <input type="text" id="unlock-code" placeholder="Access Code">
+      <button class="btn" onclick="unlock()">Unlock</button>
     </div>
     <p id="unlock-msg" class="unlock-msg"></p>
-    <p style="font-size:9px;color:var(--text3);margin-top:8px">获取解锁码: lingguangsz717@gmail.com</p>
+    <p style="font-size:10px;color:var(--text3);margin-top:8px">lingguangsz717@gmail.com</p>
   </div>
 
   <!-- DEEP CONTENT -->
   <div id="deep-content" style="display:none">
-    <h2 style="font-size:16px;margin:40px 0 16px;color:var(--purple);letter-spacing:2px;text-transform:uppercase">■ US DEEP INTEL</h2>
+    <div class="section-head">■ Deep Intel · US Market</div>
     <div class="deep-card">
-      <h3>PET TRAVEL BAG · 深度拆解</h3>
-      <span class="deep-label opp">WINDOW: 2-3 WEEKS</span><span class="deep-label warn">COMPETITION INCOMING</span>
-      <h4>竞品矩阵 (TIKTOK US TOP5)</h4>
-      <table class="deep-table"><tr><th>SELLER</th><th>PRICE</th><th>EST. VOL</th><th>CREATORS</th><th>STRATEGY</th></tr><tr><td>PetTravelUS</td><td>$39.99</td><td>~3,200</td><td>6 (50K-200K)</td><td>高客单价+达人铺量</td></tr><tr><td>DogMomEssentials</td><td>$29.99</td><td>~2,100</td><td>3 (100K+)</td><td>中价+精准头部</td></tr><tr><td>WanderPup</td><td>$34.99</td><td>~1,800</td><td>4 (20K-80K)</td><td>差异化设计</td></tr><tr><td>CozyCarrier</td><td>$24.99</td><td>~1,500</td><td>2 (30K)</td><td>低价走量</td></tr><tr><td>TrailHound</td><td>$44.99</td><td>~900</td><td>1 (500K)</td><td>高端单品爆款</td></tr></table>
-      <h4>产品推荐 + ROI</h4>
-      <table class="deep-table"><tr><th>SKU</th><th>1688</th><th>PRICE</th><th>MARGIN</th><th>NET</th></tr><tr><td>基础牛津布款</td><td>¥18-22</td><td>$24.99</td><td>62%</td><td>~¥68</td></tr><tr><td>升级防水+折叠碗</td><td>¥28-35</td><td>$34.99</td><td>58%</td><td>~¥95</td></tr></table>
-      <p style="font-size:10px;color:var(--text3)">1688: "宠物出行包 跨境 美国" · 产业带: 河北白沟</p>
-    </div>
-    <div class="deep-card">
-      <h3>PRICING INTEL · $19.99 魔法定价</h3>
-      <table class="deep-table"><tr><th>PRICE BAND</th><th>SHARE</th><th>CVR</th><th>RETURNS</th></tr><tr><td>$6.99-9.99</td><td>12%</td><td>7.2%</td><td>6.8%</td></tr><tr style="background:rgba(10,189,227,0.05)"><td><strong>$15.99-19.99</strong></td><td><strong>37%</strong></td><td><strong>6.8%</strong></td><td><strong>5.1%</strong></td></tr><tr><td>$25.99-34.99</td><td>8%</td><td>4.1%</td><td>6.2%</td></tr></table>
+      <h3>Pet Travel Bag · 深度拆解</h3>
+      <span class="deep-label opp">Window: 2-3 Weeks</span><span class="deep-label warn">Competition Incoming</span>
+      <h4>Competitor Matrix (TikTok US Top 5)</h4>
+      <table class="deep-table"><tr><th>Seller</th><th>Price</th><th>Est. Vol</th><th>Creators</th><th>Strategy</th></tr><tr><td>PetTravelUS</td><td>$39.99</td><td>~3,200</td><td>6</td><td>High ASP + Volume Creators</td></tr><tr><td>DogMomEssentials</td><td>$29.99</td><td>~2,100</td><td>3</td><td>Mid-price + Top Creators</td></tr><tr><td>WanderPup</td><td>$34.99</td><td>~1,800</td><td>4</td><td>Differentiated Design</td></tr></table>
+      <h4>Product + ROI</h4>
+      <table class="deep-table"><tr><th>SKU</th><th>1688</th><th>Price</th><th>Margin</th><th>Net</th></tr><tr><td>Basic Oxford</td><td>¥18-22</td><td>$24.99</td><td>62%</td><td>~¥68</td></tr><tr><td>Pro Waterproof</td><td>¥28-35</td><td>$34.99</td><td>58%</td><td>~¥95</td></tr></table>
+      <p style="font-size:11px;color:var(--text3)">1688: "宠物出行包 跨境 出口 美国" · 产业带: 河北白沟</p>
     </div>
   </div>
 
-  <div class="footer">
-    CHUHAI DAILY · AI-DRIVEN CROSS-BORDER INTELLIGENCE<br>
-    FREE PREVIEW · DEEP INTEL ¥99/MO
-  </div>
 </main>
 
+<div class="footer">出海早班车 · AI Intel Desk · Published Every Weekday Morning<br>Free Preview · Deep Brief ¥99/mo · lingguangsz717@gmail.com</div>
+
 <script>
-var CODES = ["CHUHAI001","CHUHAI002","TEST123","LINGGUANG2026"];
 function switchTab(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('panel-'+id).classList.add('active');event.target.classList.add('active')}
-function unlock(){var c=document.getElementById('unlock-code').value.trim().toUpperCase(),m=document.getElementById('unlock-msg');if(CODES.includes(c)||c==='DEMO'){document.getElementById('premium-wall').classList.add('unlocked');document.getElementById('premium-wall').querySelector('.icon').textContent='□';document.getElementById('deep-content').style.display='block';m.style.color='var(--green)';m.textContent='UNLOCKED'}else{m.style.color='var(--red)';m.textContent='INVALID CODE'}}
-var s=localStorage.getItem('chuhai_intel');if(s&&CODES.includes(s)){document.getElementById('premium-wall').classList.add('unlocked');document.getElementById('deep-content').style.display='block'}
+var C=["CHUHAI001","CHUHAI002","TEST123","LINGGUANG2026"];
+function unlock(){var c=document.getElementById('unlock-code').value.trim().toUpperCase(),m=document.getElementById('unlock-msg');if(C.includes(c)||c==='DEMO'){document.getElementById('premium-wall').querySelector('h2').textContent='The Deep Brief — Unlocked';document.getElementById('deep-content').style.display='block';m.style.color='var(--green)';m.textContent='Unlocked. Scroll down.'}else{m.style.color='var(--red)';m.textContent='Invalid code.'}}
+var s=localStorage.getItem('chuhai_deep');if(s&&C.includes(s)){document.getElementById('deep-content').style.display='block'}
 </script>
 </body>
 </html>
