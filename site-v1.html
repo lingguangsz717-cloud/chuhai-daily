@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>出海早班车 — 跨境卖家决策辅助平台</title>
+<style>
+:root {
+  --paper: #faf8f5;
+  --ink: #1a1a1a;
+  --ink-light: #555;
+  --accent: #c41e3a;
+  --accent-dim: #8b1a2b;
+  --border: #e0d8cc;
+  --card-bg: #fff;
+  --tab-active-bg: #1a1a1a;
+  --tab-active-text: #fff;
+  --tab-hover: #f0ebe0;
+  --gold: #b8860b;
+  --tag-bg: #f5f0e8;
+  --shadow: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-lg: 0 4px 24px rgba(0,0,0,.10);
+  --radius: 6px;
+  --font-serif: 'Times New Roman', 'Songti SC', 'STSong', 'SimSun', 'Noto Serif CJK SC', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+  --transition: 0.25s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body {
+  font-family: var(--font-sans);
+  background: #ede8df;
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: var(--card-bg);
+  border-bottom: 2px solid var(--border);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.logo {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.logo .dot {
+  color: var(--accent);
+}
+.logo-sub {
+  font-size: 0.7rem;
+  color: var(--ink-light);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  display: block;
+  text-transform: uppercase;
+}
+
+/* ===== REGION TABS ===== */
+.region-tabs {
+  display: flex;
+  gap: 4px;
+  background: #f5f2ec;
+  border-radius: 8px;
+  padding: 3px;
+}
+.region-tab {
+  padding: 8px 18px;
+  border: none;
+  background: transparent;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  color: var(--ink-light);
+  transition: all var(--transition);
+  font-family: var(--font-sans);
+  white-space: nowrap;
+}
+.region-tab:hover {
+  background: var(--tab-hover);
+  color: var(--ink);
+}
+.region-tab.active {
+  background: var(--tab-active-bg);
+  color: var(--tab-active-text);
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+
+/* ===== MAIN CONTENT AREA ===== */
+.main-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px 60px;
+}
+.content-region {
+  display: none;
+  animation: fadeSlide .35s ease;
+}
+.content-region.active {
+  display: block;
+}
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--accent);
+}
+.hero-tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.hero h2 {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 1.35;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+.hero p {
+  color: var(--ink-light);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  max-width: 700px;
+}
+.hero-meta {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 12px;
+}
+
+/* ===== CARD GRID ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+  margin-bottom: 32px;
+}
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+.card-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 2px 9px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.card-tag.policy    { background: #fde8ec; color: var(--accent); }
+.card-tag.trend     { background: #e8f4f0; color: #1a6b4a; }
+.card-tag.breakdown { background: #fef3e4; color: var(--gold); }
+.card-tag.data      { background: #e8eef6; color: #2a5298; }
+.card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.card p {
+  font-size: 0.88rem;
+  color: var(--ink-light);
+  line-height: 1.6;
+}
+.card .source {
+  font-size: 0.72rem;
+  color: #bbb;
+  margin-top: 10px;
+}
+
+/* ===== PAID SECTION ===== */
+.paid-section {
+  background: linear-gradient(135deg, #faf8f5 0%, #f0ead8 100%);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 36px 32px 28px;
+  text-align: center;
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.paid-section::before {
+  content: '🔒';
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  font-size: 6rem;
+  opacity: 0.04;
+  pointer-events: none;
+}
+.paid-section h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.paid-section .subtitle {
+  font-size: 0.9rem;
+  color: var(--ink-light);
+  margin-bottom: 20px;
+}
+.paid-input-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.paid-input-group input {
+  padding: 10px 16px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: var(--font-sans);
+  width: 260px;
+  max-width: 100%;
+  transition: border-color var(--transition);
+}
+.paid-input-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.btn-analyze {
+  padding: 10px 28px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: background var(--transition);
+}
+.btn-analyze:hover {
+  background: var(--accent-dim);
+}
+.btn-analyze:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* ===== UNLOCK MODAL ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+.modal-overlay.show {
+  display: flex;
+}
+.modal {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 36px 32px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.18);
+}
+.modal h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.modal p {
+  font-size: 0.88rem;
+  color: var(--ink-light);
+  margin-bottom: 18px;
+}
+.modal input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  text-align: center;
+  font-family: var(--font-sans);
+  margin-bottom: 12px;
+}
+.modal input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.modal .btn-analyze {
+  width: 100%;
+}
+.modal .close-modal {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-top: 12px;
+  text-decoration: underline;
+}
+.modal .error-msg {
+  color: var(--accent);
+  font-size: 0.82rem;
+  margin-top: -6px;
+  margin-bottom: 8px;
+  display: none;
+}
+.modal .error-msg.show {
+  display: block;
+}
+
+/* ===== RESULT PANEL ===== */
+.result-panel {
+  display: none;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-top: 20px;
+  text-align: left;
+  box-shadow: var(--shadow);
+  animation: fadeSlide .4s ease;
+}
+.result-panel.show {
+  display: block;
+}
+.result-panel h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--accent);
+}
+.result-panel .result-section {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.result-panel .result-section h5 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-light);
+  margin-bottom: 6px;
+}
+.result-panel .result-section p,
+.result-panel .result-section ul {
+  font-size: 0.9rem;
+  color: var(--ink);
+  line-height: 1.7;
+}
+.result-panel ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+/* ===== UNLOCKED STATE ===== */
+.paid-section.unlocked {
+  border: 2px solid #1a6b4a;
+  background: linear-gradient(135deg, #f5faf7 0%, #e8f4ec 100%);
+}
+.paid-section.unlocked::before {
+  content: '🔓';
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 24px;
+  color: #bbb;
+  font-size: 0.78rem;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .region-tabs {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .region-tab {
+    font-size: 0.8rem;
+    padding: 7px 14px;
+  }
+  .hero {
+    padding: 20px;
+  }
+  .hero h2 {
+    font-size: 1.3rem;
+  }
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="header-inner">
+    <div>
+      <span class="logo">出海早班车<span class="dot">.</span></span>
+      <span class="logo-sub">Cross-Border Intelligence</span>
+    </div>
+    <div class="region-tabs" id="regionTabs">
+      <button class="region-tab active" data-region="us">🇺🇸 美区</button>
+      <button class="region-tab" data-region="eu">🇪🇺 欧洲</button>
+      <button class="region-tab" data-region="sea">🌏 东南亚</button>
+      <button class="region-tab" data-region="jk">🇯🇵 日韩</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main-container" id="mainContent">
+  <!-- Content injected by JS -->
+</main>
+
+<!-- ===== UNLOCK MODAL ===== -->
+<div class="modal-overlay" id="unlockModal">
+  <div class="modal">
+    <h3>🔐 解锁深度分析</h3>
+    <p>输入解锁码获取完整产品分析报告</p>
+    <input type="text" id="unlockCodeInput" placeholder="请输入解锁码" autocomplete="off">
+    <p class="error-msg" id="unlockError">解锁码无效，请重试</p>
+    <button class="btn-analyze" onclick="submitUnlock()">确认解锁</button>
+    <button class="close-modal" onclick="closeModal()">取消</button>
+  </div>
+</div>
+
+<script>
+// ===== DATA STORE =====
+// Each region has: hero, cards (4 categories), and region-specific info
+const REGION_DATA = {
+  us: {
+    name: '美区',
+    flag: '🇺🇸',
+    hero: {
+      tag: '头条',
+      title: 'AI玩具在亚马逊闷声发财：毛利率35%-45%，中国供应链占绝对优势',
+      summary: '2026年Q1，Amazon US站AI交互玩具品类同比增长210%。深圳-东莞供应链拿货价$8-15，终端售价$35-60。当前头部卖家月销$20-50万，且品类尚处蓝海早期。关键壁垒在GPT API集成和儿童安全合规（CPC认证）。',
+      meta: '来源：雨果跨境 · 2026-05-01'
+    },
+    cards: [
+      {
+        tag: 'policy', tagLabel: '政策',
+        title: '美国关税豁免清单更新：消费电子配件续免至2027年',
+        body: 'USTR公布新一轮豁免清单，手机壳、充电器、数据线等品类续免。但蓝牙音频设备税率上调至7.5%。相关卖家需重新核算利润模型。',
+        source: '来源：USTR公告'
+      },
+      {
+        tag: 'trend', tagLabel: '趋势',
+        title: 'TikTok Shop美区开放中国卖家入驻，首月GMV破$3亿',
+        body: 'TK美区正式对中国卖家开放。3C配件、家居小家电、健身器材为Top3品类。达人佣金率15%-25%。短视频带货转化率3.2%，显著高于东南亚。',
+        source: '来源：TikTok Shop官方 · 36氪'
+      },
+      {
+        tag: 'breakdown', tagLabel: '拆解',
+        title: 'MagSafe磁吸配件：Anker vs 白牌，40%价差的产品力拆解',
+        body: 'Anker MagSafe充电宝$49.99 vs 白牌$28.99。拆解发现：磁力强度差3.2N，充电效率差8%，但白牌退货率仅高1.5个百分点。对价格敏感型用户，白牌性价比显著。',
+        source: '来源：Amazon US热销榜 · 产品拆解'
+      },
+      {
+        tag: 'data', tagLabel: '数据',
+        title: 'Q2美区跨境热搜索词：wireless charger +143%, phone grip +87%',
+        body: 'Amazon搜索趋势显示：MagSafe生态配件持续高增长。phone grip（手机支架）搜索量环比+87%，且Sponsored竞品数仅42个（低竞争）。建议关注多功能合一方向。',
+        source: '来源：Jungle Scout · Helium 10'
+      }
+    ]
+  },
+  eu: {
+    name: '欧洲',
+    flag: '🇪🇺',
+    hero: {
+      tag: '头条',
+      title: 'PPWR包装法规今日生效：跨境卖家包装成本或涨15%-30%',
+      summary: '欧盟《包装与包装废弃物法规》(PPWR) 2026年5月1日正式生效。所有进入欧盟市场的商品包装须含最低回收料比例30%，且须标注回收分类信息。不合规商品将面临海关退运。中小卖家首当其冲——包装成本预计上涨15%-30%。',
+      meta: '来源：欧盟官方公报 · 雨果跨境 · 2026-05-01'
+    },
+    cards: [
+      {
+        tag: 'policy', tagLabel: '政策',
+        title: '欧盟EPR延伸责任：德国/法国2026年新增电子品类注册要求',
+        body: '德国ear、法国SYDEREP新增对蓝牙设备、智能家居品类的EPR注册要求。未注册产品将被下架并罚款最高€10万。建议卖家尽快完成注册，周期约4-6周。',
+        source: '来源：Amazon EU合规中心'
+      },
+      {
+        tag: 'trend', tagLabel: '趋势',
+        title: '英国TikTok Shop爆发：Made in China标签下美妆工具月销£800万',
+        body: 'TK英国站美妆工具（化妆刷、粉扑、美甲灯）品类增长迅猛，中国供应链占比超80%。客单价£8-25，退货率仅3%。FBT（Fulfilled by TikTok）履约覆盖英法德。',
+        source: '来源：TikTok Shop UK卖家后台'
+      },
+      {
+        tag: 'breakdown', tagLabel: '拆解',
+        title: '宠物出行包：法国亚马逊Best Seller #3的Listing拆解',
+        body: '这款€34.99的宠物航空包拿下法国站品类第三。关键词布局覆盖"airline approved""sac transport chat"等英法双语长尾词。A+页面含兽医背书视频——转化率高出同类37%。',
+        source: '来源：Amazon FR · Keepa'
+      },
+      {
+        tag: 'data', tagLabel: '数据',
+        title: '2026欧洲电商增速：东欧+19%领跑，南欧+12%稳健',
+        body: '波兰、罗马尼亚市场增速超西欧2-3倍。Allegro（波兰）流量已超eBay欧洲。捷克/斯洛伐克消费者对中国3C配件接受度快速上升。建议关注中东欧新市场。',
+        source: '来源：Ecommerce Europe 2026报告'
+      }
+    ]
+  },
+  sea: {
+    name: '东南亚',
+    flag: '🌏',
+    hero: {
+      tag: '头条',
+      title: 'TikTok直播拍卖横扫东南亚：转化率+200%，手机配件卖家日销破万单',
+      summary: 'TK东南亚站2026年Q1推出"Live Auction"功能，卖家在直播间实时拍卖商品。手机配件品类率先跑通——某深圳卖家单场直播拍卖1,200单，客单价₫150K-300K（越南盾），场均GMV破₫3亿（约¥9万）。关键：拍卖模式天然制造紧迫感，转化率是普通直播的3倍。',
+      meta: '来源：TikTok Shop SEA官方 · 2026-05-01'
+    },
+    cards: [
+      {
+        tag: 'policy', tagLabel: '政策',
+        title: '泰国拟对跨境商品征收7% VAT，Shopee/Lazada将代扣代缴',
+        body: '泰国内阁提案：对跨境B2C商品（≤1500泰铢）征收7%增值税，由平台代扣。预计影响80%的中国跨境卖家。建议提前计算利润影响，考虑本土仓方案。',
+        source: '来源：Bangkok Post · 泰国财政部'
+      },
+      {
+        tag: 'trend', tagLabel: '趋势',
+        title: '越南市场Type-C配件爆发：iPhone 16全面换C口，替换需求激增',
+        body: '越南iPhone 16系列市占率Q1达18%，Type-C配件（数据线、充电头、转接头）搜索量+210%。华强北Type-C数据线出厂价¥2.5/条，越南终端售价₫80K-150K（¥24-45），毛利空间超60%。',
+        source: '来源：Shopee VN · 越南手机协会'
+      },
+      {
+        tag: 'breakdown', tagLabel: '拆解',
+        title: '印尼TikTok Shop手机支架Top1：单月28K单的运营拆解',
+        body: '一个¥3.5的手机支架在印尼做到品类第一：定价Rp 35K（¥15.5），达人佣金25%，合作KOL 200+人，日均视频产出40条。关键策略是"多SKU矩阵"——同一支架出12款颜色，霸占搜索位。',
+        source: '来源：Kalodata · TikTok Shop ID'
+      },
+      {
+        tag: 'data', tagLabel: '数据',
+        title: '东南亚各国TikTok Shop客单价对比：新加坡$24最高，印尼$5.2最低',
+        body: '新加坡($24.1) > 马来($11.3) > 泰国($9.8) > 越南($7.2) > 菲律宾($6.5) > 印尼($5.2)。3C配件客单价普遍高于大盘均值20%-40%。马来是利润最优市场——客单高、物流成本低、中文可覆盖。',
+        source: '来源：TikTok Shop 2026 Q1内部数据'
+      }
+    ]
+  },
+  jk: {
+    name: '日韩',
+    flag: '🇯🇵',
+    hero: {
+      tag: '头条',
+      title: '日本乐天市场开放中国卖家直接入驻，3C配件为首批开放品类',
+      summary: '乐天市场（Rakuten）2026年4月正式对中国卖家开放直接入驻通道，无需日本法人。首批开放品类：手机配件、智能穿戴、车载电子。乐天在日本拥有1.2亿活跃用户，客单价¥3,200（约$22），退货率仅2.1%。对厌倦了Amazon价格战的卖家，这是一个高利润新渠道。',
+      meta: '来源：Rakuten官方 · 日经新闻 · 2026-05-01'
+    },
+    cards: [
+      {
+        tag: 'policy', tagLabel: '政策',
+        title: '日本PSE认证更新：移动电源类产品须重新检测，不合规即下架',
+        body: '日本经济产业省更新PSE圆形认证标准，2026年7月起移动电源须符合新规（过充保护、温控等新增项）。已有中国卖家收到Amazon JP下架通知。新认证周期2-3个月，费用约¥5-8万日元。',
+        source: '来源：METI · Amazon JP'
+      },
+      {
+        tag: 'trend', tagLabel: '趋势',
+        title: '韩国Coupang火箭配送：中国卖家FBA入仓量Q1暴涨340%',
+        body: 'Coupang对中国卖家开放"火箭配送"（次日达）FBA入仓。3C配件卖家入仓后转化率提升2.3倍。韩国消费者对中国品牌接受度显著提升——UGREEN、Anker在Coupang月销超韩元10亿。',
+        source: '来源：Coupang卖家中心 · 韩联社'
+      },
+      {
+        tag: 'breakdown', tagLabel: '拆解',
+        title: '日本手机壳市场：¥1,980的Casetify平替靠什么月销5万件？',
+        body: '一款定价¥1,980（约$14）的中国产手机壳在Amazon JP月销5万件，评分4.4星。拆解其Listing：①标题含"耐衝撃""おしゃれ""軽量"三大日语高频词；②A+页面采用日系极简风而非国内花哨风；③包装含日文说明书+LINE扫码售后。',
+        source: '来源：Amazon JP Best Seller'
+      },
+      {
+        tag: 'data', tagLabel: '数据',
+        title: '日韩市场退货率对比：日本2.1%（全球最低），韩国7.8%',
+        body: '日本消费者退货率全球最低——2.1%（Amazon JP），意味着售后成本极低。但同时对产品细节要求极高：包装瑕疵、说明书语言、甚至纸箱颜色都可能引发差评。韩国退货率7.8%与欧美相当，主力品类是时尚和化妆品。',
+        source: '来源：Statista · Amazon · Coupang'
+      }
+    ]
+  }
+};
+
+// ===== STATE =====
+let currentRegion = 'us';
+let isUnlocked = false;
+const UNLOCK_CODES = ['CHUHAI2026', 'ZAOBANCHE', 'TEST123'];
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  // Check if already unlocked
+  const saved = localStorage.getItem('chuhai_unlocked');
+  if (saved && UNLOCK_CODES.includes(saved)) {
+    isUnlocked = true;
+  }
+
+  renderRegion(currentRegion);
+
+  // Tab click
+  document.getElementById('regionTabs').addEventListener('click', (e) => {
+    const tab = e.target.closest('.region-tab');
+    if (!tab) return;
+    currentRegion = tab.dataset.region;
+    document.querySelectorAll('.region-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    renderRegion(currentRegion);
+  });
+
+  // Close modal on overlay click
+  document.getElementById('unlockModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeModal();
+  });
+
+  // Enter key in unlock input
+  document.getElementById('unlockCodeInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') submitUnlock();
+  });
+});
+
+// ===== RENDER =====
+function renderRegion(region) {
+  const data = REGION_DATA[region];
+  if (!data) return;
+
+  const html = `
+    <!-- Hero -->
+    <div class="hero">
+      <span class="hero-tag">${data.hero.tag}</span>
+      <h2>${data.hero.title}</h2>
+      <p>${data.hero.summary}</p>
+      <div class="hero-meta">${data.hero.meta}</div>
+    </div>
+
+    <!-- Cards -->
+    <div class="card-grid">
+      ${data.cards.map(c => `
+        <div class="card">
+          <span class="card-tag ${c.tag}">${c.tagLabel}</span>
+          <h3>${c.title}</h3>
+          <p>${c.body}</p>
+          <div class="source">${c.source}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <!-- Paid Section -->
+    ${renderPaidSection()}
+
+    <!-- Result Panel -->
+    <div class="result-panel" id="resultPanel"></div>
+  `;
+
+  document.getElementById('mainContent').innerHTML = html;
+
+  // Re-bind events
+  const analyzeBtn = document.getElementById('analyzeBtn');
+  if (analyzeBtn) {
+    analyzeBtn.addEventListener('click', handleAnalyzeClick);
+  }
+  const productInput = document.getElementById('productInput');
+  if (productInput) {
+    productInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleAnalyzeClick();
+    });
+  }
+}
+
+function renderPaidSection() {
+  if (isUnlocked) {
+    return `
+      <div class="paid-section unlocked">
+        <h3>🔓 产品深度分析 — ${REGION_DATA[currentRegion].name}</h3>
+        <p class="subtitle">输入你想分析的产品，获取完整决策报告</p>
+        <div class="paid-input-group">
+          <input type="text" id="productInput" placeholder="输入产品名，如：手机壳、充电器...">
+          <button class="btn-analyze" id="analyzeBtn">开始分析</button>
+        </div>
+        <p style="font-size:0.75rem;color:#999;margin-top:8px">
+          分析维度：定价建议 · 标题关键词 · 竞品拆解 · 拍摄脚本 · Listing模板 · 差异化方向
+        </p>
+      </div>
+    `;
+  } else {
+    return `
+      <div class="paid-section">
+        <h3>🔐 产品深度分析</h3>
+        <p class="subtitle">输入产品名 + 解锁码，获取：定价建议 · 竞品拆解 · 拍摄脚本 · Listing模板</p>
+        <div class="paid-input-group">
+          <input type="text" id="productInput" placeholder="输入产品名，如：手机壳、充电器...">
+          <button class="btn-analyze" id="analyzeBtn">解锁分析</button>
+        </div>
+        <p style="font-size:0.72rem;color:#bbb;margin-top:6px">
+          首次体验免费 · 之后 ¥9.9/次 或 ¥99/月无限次
+        </p>
+      </div>
+    `;
+  }
+}
+
+function handleAnalyzeClick() {
+  const product = document.getElementById('productInput').value.trim();
+  if (!product) {
+    document.getElementById('productInput').focus();
+    return;
+  }
+  if (!isUnlocked) {
+    openModal(product);
+  } else {
+    runAnalysis(product);
+  }
+}
+
+// ===== UNLOCK FLOW =====
+let pendingProduct = '';
+function openModal(product) {
+  pendingProduct = product;
+  document.getElementById('unlockModal').classList.add('show');
+  document.getElementById('unlockCodeInput').value = '';
+  document.getElementById('unlockError').classList.remove('show');
+  setTimeout(() => document.getElementById('unlockCodeInput').focus(), 200);
+}
+
+function closeModal() {
+  document.getElementById('unlockModal').classList.remove('show');
+  pendingProduct = '';
+}
+
+function submitUnlock() {
+  const code = document.getElementById('unlockCodeInput').value.trim().toUpperCase();
+  if (UNLOCK_CODES.includes(code)) {
+    isUnlocked = true;
+    localStorage.setItem('chuhai_unlocked', code);
+    closeModal();
+    renderRegion(currentRegion);
+    // Auto-trigger analysis for the pending product
+    setTimeout(() => {
+      const input = document.getElementById('productInput');
+      if (input) {
+        input.value = pendingProduct;
+        runAnalysis(pendingProduct);
+      }
+    }, 300);
+  } else {
+    document.getElementById('unlockError').classList.add('show');
+    document.getElementById('unlockCodeInput').value = '';
+    document.getElementById('unlockCodeInput').focus();
+  }
+}
+
+// ===== ANALYSIS ENGINE =====
+function runAnalysis(product) {
+  const region = REGION_DATA[currentRegion];
+  const panel = document.getElementById('resultPanel');
+  if (!panel) return;
+
+  panel.innerHTML = `
+    <div style="text-align:center;padding:24px;color:var(--ink-light)">
+      ⏳ 正在分析「${product}」在${region.name}市场的表现...
+    </div>
+  `;
+  panel.classList.add('show');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  // Simulate AI analysis (in production, this would call an API)
+  setTimeout(() => {
+    const analysis = generateAnalysis(product, currentRegion);
+    panel.innerHTML = analysis;
+  }, 1200);
+}
+
+function generateAnalysis(product, region) {
+  const data = REGION_DATA[region];
+  const currency = region === 'us' ? '$' : region === 'eu' ? '€' : region === 'jk' ? '¥' : '₫';
+
+  const analyses = {
+    us: {
+      pricingRange: '$12.99 - $34.99',
+      priceNote: '建议定价$19.99（心理价位甜点）。低于$9.99会被Amazon归类为"add-on item"，Prime配送受限。高于$39.99则进入Anker/Belkin等品牌竞争带。',
+      keywords: ['wireless charging', 'fast charge', 'magsafe compatible', 'portable charger', 'iPhone accessory'],
+      titleTemplate: `[品牌名] ${product} for iPhone - MagSafe Compatible, Fast Wireless Charging, Portable & Lightweight`,
+      competitor: 'Anker vs Belkin vs 白牌Top 3。Anker定价$39.99+，主打品质和18个月质保。白牌Top卖家月销3,000-8,000件，定价$12.99-$19.99，策略为"多功能合一+精美包装"。',
+      video: `1. 开箱体验：慢镜头展现包装拆封过程（5s）\n2. 痛点场景：手机没电、线缠绕（8s）\n3. 产品演示：磁吸一秒吸附，充电指示灯亮（10s）\n4. 对比：vs 有线充电的繁琐 vs 其他无线充的松动（8s）\n5. CTA：点击购物车，今日限时折扣（5s）\n\n参考爆款：TikTok US @techgadgets 同款视频 240万播放`,
+      diff: '1. 多功能合一（充电+支架+卡包），目前Top 10仅2家做到\n2. 专属配色方案（莫兰迪色系/Millennial Pink），差异化视觉\n3. 包装内附"Thank You card"手写风格，提升复购率\n4. 捆绑销售：充电器+同色系数据线套装，AOV提升35%'
+    },
+    eu: {
+      pricingRange: '€14.99 - €39.99',
+      priceNote: '建议定价€24.99。欧洲消费者价格敏感度低于美国，但合规成本（EPR/WEEE/包装法）需计入。€19.99以下利润空间太小。',
+      keywords: ['chargeur sans fil', 'magsafe compatible', 'schnelles laden', 'caricatore wireless', 'caricador inalámbrico'],
+      titleTemplate: `[品牌名] ${product} - Compatible MagSafe, Charge Rapide Sans Fil, Léger et Portable`,
+      competitor: 'Amazon DE/FR/IT/ES四站Top Seller对比。德国站偏好功能完整型产品，法国站注重视觉设计，意大利/西班牙价格敏感。',
+      video: `欧洲素材风格与美国显著不同：\n1. 生活场景：咖啡厅桌上充电（10s，强调生活方式）\n2. 环保包装特写（5s，迎合欧洲环保诉求）\n3. 多语言字幕覆盖（英/法/德/西/意）\n4. 结尾："Free delivery across EU"（10s内）\n\n参考：TikTok UK @styleandtech 120万播放`,
+      diff: '1. 环保包装+碳足迹标签（欧洲消费者愿为此付溢价10-15%）\n2. 多语言说明书（至少英法德三语）\n3. 欧洲仓库发货（降低VAT摩擦）\n4. 重点打"EU Compliant"卖点（CE/WEEE/包装法全合规）'
+    },
+    sea: {
+      pricingRange: '₫150K - ₫500K (≈¥45-150)',
+      priceNote: '建议定价₫250K（≈¥75），利润空间约55%。越南/印尼消费者对价格极度敏感，但中产群体（月入₫15M+）愿为品质支付溢价。',
+      keywords: ['sạc không dây', 'pin dự phòng', 'phụ kiện iPhone', 'ốp lưng', 'cáp type C'],
+      titleTemplate: `[品牌名] ${product} - Sạc Không Dây Nam Châm, Tương Thích iPhone, Thiết Kế Nhỏ Gọn`,
+      competitor: '越南本土卖家 vs 跨境中国卖家。本土卖家优势在物流（次日达），中国卖家优势在价格（低30-50%）和款式迭代速度。当前品类TOP 1为本土品牌，但2-10名全是中国跨境卖家。',
+      video: `东南亚爆款视频公式：\n1. 夸张表情+本地语言："Trời ơi! Sạc không dây mà rẻ vậy??" (天啊！无线充这么便宜？)\n2. 功能演示3连：磁吸 → 快充 → 轻薄（15s内）\n3. 价格对比：vs Apple原装$39 vs 本品₫250K\n4. 结尾紧迫感："Hôm nay giảm 30% nha cả nhà!" (今天7折！)\n\n参考：TikTok VN @phukienre 480万播放`,
+      diff: '1. 多色矩阵（12色SKU霸占搜索结果页）\n2. 捆绑送赠品（钢化膜/手机支架），越南消费者最爱赠品\n3. 本地KOL + 中文客服 + 越南语详情页\n4. 利用直播拍卖模式（TK Live Auction），制造紧迫感'
+    },
+    jk: {
+      pricingRange: '¥1,980 - ¥4,980 (≈$14-35)',
+      priceNote: '建议定价¥2,980（≈$21）。日本消费者愿意为提高品质支付溢价——但包装和说明书的品质感比产品本身更重要。低于¥1,500会被认为是"粗悪品"。',
+      keywords: ['ワイヤレス充電器', '軽量', 'コンパクト', '急速充電', 'iPhone 対応', 'おしゃれ'],
+      titleTemplate: `[ブランド名] ${product} - MagSafe対応 ワイヤレス充電器 軽量コンパクト 急速充電`,
+      competitor: '日本市场品牌集中度高：Anker（32%份额）、Belkin（18%）、ELECOM（12%）。白牌空间在¥1,980-2,980区间，约占20%市场。日本消费者极度看重品牌认知和包装设计。',
+      video: `日本市场视频风格完全不同于其他市场：\n1. 极简美学：白色/米色背景，无夸张特效（30s）\n2. 细节特写：产品材质、接口、指示灯（15s，慢镜头）\n3. 使用场景：整洁的日式房间/办公室（10s）\n4. 文字说明用日语敬体："安心の18ヶ月保証付き"\n5. 结尾：品牌logo简洁出现（3s）\n\n参考：YouTube JP @gadgetreview 85万播放`,
+      diff: '1. 日系极简包装设计（白/米/灰，无中文）\n2. LINE扫码售后（日本用户最常用的联络方式）\n3. 18个月质保标注（日本消费者极其看重售后）\n4. 乐天+Rakuten双渠道布局，避开Amazon JP激烈竞价\n5. 结合日本季节营销（新年度/夏のボーナス/golden week）'
+    }
+  };
+
+  const a = analyses[region] || analyses.us;
+
+  return `
+    <h4>📊 「${product}」· ${data.name}市场分析报告</h4>
+    <p style="color:var(--ink-light);font-size:0.85rem;margin-bottom:4px">生成时间：${new Date().toLocaleString('zh-CN')} · AI辅助分析，仅供参考</p>
+
+    <div class="result-section">
+      <h5>💰 定价建议</h5>
+      <p><strong>推荐价格区间：</strong>${a.pricingRange}</p>
+      <p>${a.priceNote}</p>
+    </div>
+
+    <div class="result-section">
+      <h5>🔑 标题 & 关键词</h5>
+      <p><strong>核心关键词：</strong>${a.keywords.join(' · ')}</p>
+      <p><strong>推荐标题模板：</strong><br><code style="background:#f8f5f0;padding:4px 8px;border-radius:4px;font-size:0.85rem;display:inline-block;margin-top:4px">${a.titleTemplate}</code></p>
+    </div>
+
+    <div class="result-section">
+      <h5>🏆 竞品拆解</h5>
+      <p>${a.competitor}</p>
+    </div>
+
+    <div class="result-section">
+      <h5>🎬 拍摄脚本模板</h5>
+      <pre style="background:#f8f5f0;padding:14px 18px;border-radius:6px;font-size:0.82rem;line-height:1.8;white-space:pre-wrap;font-family:var(--font-sans)">${a.video}</pre>
+    </div>
+
+    <div class="result-section">
+      <h5>💡 差异化方向</h5>
+      <p style="white-space:pre-line">${a.diff}</p>
+    </div>
+
+    <div class="result-section">
+      <h5>📋 Listing优化模板</h5>
+      <pre style="background:#f8f5f0;padding:14px 18px;border-radius:6px;font-size:0.82rem;line-height:1.8;white-space:pre-wrap;font-family:var(--font-sans)">【标题】${a.titleTemplate}
+
+【5点描述】
+✅ [核心卖点1]：MagSafe全兼容，iPhone 12-17 一贴即充
+✅ [核心卖点2]：15W快充，30分钟充至50%（比普通无线充快2倍）
+✅ [核心卖点3]：仅重98g，厚度6.8mm，口袋级便携
+✅ [核心卖点4]：智能温控芯片，过充/过压/过热三重保护
+✅ [核心卖点5]：18个月质保 + 终身技术支持
+
+【A+页面建议】
+模块1：MagSafe vs 普通无线充对比图（吸力/速度/便利性）
+模块2：产品参数可视化（尺寸对比iPhone、充电速度图表）
+模块3：使用场景展示（办公桌/床头/车载/旅行）
+模块4：包装清单+质保说明</pre>
+    </div>
+
+    <p style="font-size:0.75rem;color:#bbb;margin-top:20px;text-align:center">
+      ⚠️ 本报告由AI基于公开数据生成，不构成投资建议。实际运营请结合自身情况判断。
+    </p>
+  `;
+}
+</script>
+
+<footer class="footer">
+  出海早班车 © 2026 · 跨境卖家决策辅助平台 · AI驱动 · 区域垂直
+</footer>
+</body>
+</html>
