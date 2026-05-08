@@ -1,170 +1,170 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>出海早班车 · TK马来手机配件专报</title>
-<style>
-  :root {
-    --bg: #FDFCF8; --paper: #FFFEF9;
-    --text: #1A1A1A; --text2: #3D3D3D; --text3: #6B6B6B;
-    --border: #D4D0C8; --border-light: #E8E4DC;
-    --accent: #C41E3A; --blue: #1A5276; --green: #1B5E20;
-    --gold: #8B6914; --purple: #6C3483; --w-main: 1100px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body {
-    background: #E8E4DC; color: var(--text);
-    font-family: 'SimSun', 'STSong', 'Songti SC', serif;
-    font-weight: 400; line-height: 1.8; font-size: 15px;
-    -webkit-font-smoothing: antialiased;
-  }
-  .paper {
-    max-width: var(--w-main); margin: 32px auto 48px;
-    background: var(--paper);
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
-  }
-  .top-rule { height: 4px; background: var(--text); }
-  .top-info {
-    display: flex; justify-content: space-between;
-    padding: 8px 28px; font-size: 10px; color: var(--text3);
-    letter-spacing: 1px; border-bottom: 1px solid var(--border-light);
-    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-  }
-  .masthead { text-align: center; padding: 28px 28px 12px; }
-  .masthead .edition {
-    font-size: 10px; letter-spacing: 3px; color: var(--text3);
-    text-transform: uppercase; margin-bottom: 6px;
-    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-  }
-  .masthead h1 {
-    font-family: 'SimSun', 'STSong', 'Songti SC', serif;
-    font-size: 48px; font-weight: 900; letter-spacing: 3px; line-height: 1.1;
-  }
-  .masthead .tagline {
-    font-size: 11px; color: var(--text3); letter-spacing: 2px;
-    margin-top: 6px; font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-  }
-  .masthead .dateline {
-    display: flex; justify-content: center; gap: 28px;
-    font-size: 10px; letter-spacing: 1.5px; color: var(--text3);
-    margin-top: 14px; padding-top: 14px;
-    border-top: 1px solid var(--border-light);
-    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-  }
-  .content { padding: 8px 28px 40px; }
-  .section-rule { border: none; border-top: 2px solid var(--text); margin: 20px 0; opacity: 0.8; }
-  .section-rule.thin { border-width: 1px; border-color: var(--border); }
-
-  .lead {
-    display: grid; grid-template-columns: 1fr 340px;
-    gap: 28px; margin-bottom: 28px; padding-bottom: 24px;
-    border-bottom: 1px solid var(--border);
-  }
-  .lead-label {
-    font-size: 10px; letter-spacing: 2.5px; color: var(--accent);
-    font-weight: 700; margin-bottom: 10px;
-    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; text-transform: uppercase;
-  }
-  .lead h2 {
-    font-family: 'SimSun', 'STSong', 'Songti SC', serif; font-size: 28px; font-weight: 900;
-    line-height: 1.25; letter-spacing: 1px; margin-bottom: 12px;
-  }
-  .lead h2 a { color: var(--text); text-decoration: none; border-bottom: 2px solid var(--accent); }
-  .lead h2 a:hover { color: var(--accent); }
-  .lead .lead-num {
-    font-size: 48px; font-weight: 900; color: var(--accent);
-    display: block; line-height: 1; margin-bottom: 6px;
-  }
-  .lead .byline {
-    font-size: 11px; color: var(--text3); margin-bottom: 12px;
-    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-  }
-  .lead p { font-size: 14px; color: var(--text2); line-height: 1.85; }
-  .lead-image {
-    background: linear-gradient(135deg, #E8E4DC 0%, #D5CFC5 50%, #C4BDB0 100%);
-    display: flex; align-items: center; justify-content: center;
-    border: 1px solid var(--border); min-height: 280px;
-  }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 32px; margin-bottom: 24px; }
-  .story { padding: 0 0 18px; border-bottom: 1px solid var(--border-light); break-inside: avoid; }
-  .story-tag {
-    font-size: 9px; letter-spacing: 2px; font-weight: 700;
-    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; text-transform: uppercase;
-  }
-  .story-num {
-    font-family: 'SimSun', 'STSong', 'Songti SC', serif; font-size: 36px; font-weight: 900;
-    line-height: 1; margin-bottom: 4px;
-  }
-  .story h3 { font-size: 18px; font-weight: 700; line-height: 1.35; margin-bottom: 6px; }
-  .story h3 a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
-  .story h3 a:hover { color: var(--accent); border-bottom-color: var(--accent); }
-  .story p { font-size: 13px; color: var(--text2); line-height: 1.75; margin-bottom: 4px; }
-  .story.blue .story-tag{color:var(--blue)}.story.blue .story-num{color:var(--blue)}
-  .story.green .story-tag{color:var(--green)}.story.green .story-num{color:var(--green)}
-  .story.red .story-tag{color:var(--accent)}.story.red .story-num{color:var(--accent)}
-  .story.gold .story-tag{color:var(--gold)}.story.gold .story-num{color:var(--gold)}
-  .story.purple .story-tag{color:var(--purple)}.story.purple .story-num{color:var(--purple)}
-
-  .pull-quote {
-    border-top:2px solid var(--text); border-bottom:2px solid var(--text);
-    padding:20px 0; margin:28px 0; text-align:center;
-  }
-  .pull-quote .quote {
-    font-family:'SimSun','STSong','Songti SC',serif; font-size:20px; font-weight:700;
-    line-height:1.45; color:var(--text);
-  }
-  .pull-quote .attribution { font-size:11px; color:var(--text3); margin-top:8px; font-family:'Microsoft YaHei','PingFang SC',sans-serif; }
-
-  .full-card { border-top:2px solid var(--text); padding:20px 0; margin:20px 0; }
-  .full-card h3 { font-family:'SimSun','STSong','Songti SC',serif; font-size:20px; font-weight:900; margin-bottom:8px; }
-  .full-card h3 a { color:var(--text); text-decoration:none; border-bottom:1px solid var(--border); }
-  .full-card h3 a:hover { color:var(--accent); }
-  .full-card p { font-size:14px; color:var(--text2); line-height:1.85; }
-
-  .data-table { width:100%; border-collapse:collapse; margin:14px 0; font-size:12px; }
-  .data-table th {
-    background:#F5F2EB; padding:10px 14px; text-align:left;
-    color:var(--text3); font-weight:700; letter-spacing:1px;
-    font-size:10px; font-family:'Microsoft YaHei','PingFang SC',sans-serif;
-    border-bottom:2px solid var(--text);
-  }
-  .data-table td { padding:10px 14px; border-bottom:1px solid var(--border-light); font-size:13px; }
-  h4 {
-    font-size:12px; letter-spacing:1.5px; color:var(--text3);
-    margin:20px 0 8px; font-weight:700; font-family:'Microsoft YaHei','PingFang SC',sans-serif;
-  }
-  .story-src {
-    font-size:10px; color:var(--text3); margin-top:4px;
-    font-family:'Microsoft YaHei','PingFang SC',sans-serif;
-  }
-  .story-src a { color:var(--text3); text-decoration:none; border-bottom:1px dotted var(--text3); }
-  .footer {
-    text-align:center; padding:28px; color:var(--text3);
-    font-size:10px; border-top:2px solid var(--text); margin-top:36px;
-    letter-spacing:1px; font-family:'Microsoft YaHei','PingFang SC',sans-serif;
-  }
-  @media(max-width:680px){
-    .paper{margin:8px}.masthead h1{font-size:28px;letter-spacing:1px}
-    .lead{grid-template-columns:1fr}.lead-image{min-height:180px}
-    .lead h2{font-size:22px}.lead .lead-num{font-size:36px}
-    .two-col{grid-template-columns:1fr}.content{padding:8px 16px 28px}
-  }
-</style>
+     1|<!DOCTYPE html>
+     2|<html lang="zh-CN">
+     3|<head>
+     4|<meta charset="UTF-8">
+     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
+     6|<title>出海早班车 · TK马来手机配件专报</title>
+     7|<style>
+     8|  :root {
+     9|    --bg: #FDFCF8; --paper: #FFFEF9;
+    10|    --text: #1A1A1A; --text2: #3D3D3D; --text3: #6B6B6B;
+    11|    --border: #D4D0C8; --border-light: #E8E4DC;
+    12|    --accent: #C41E3A; --blue: #1A5276; --green: #1B5E20;
+    13|    --gold: #8B6914; --purple: #6C3483; --w-main: 1100px;
+    14|  }
+    15|  *{margin:0;padding:0;box-sizing:border-box}
+    16|  body {
+    17|    background: #E8E4DC; color: var(--text);
+    18|    font-family: 'SimSun', 'STSong', 'Songti SC', serif;
+    19|    font-weight: 400; line-height: 1.8; font-size: 15px;
+    20|    -webkit-font-smoothing: antialiased;
+    21|  }
+    22|  .paper {
+    23|    max-width: var(--w-main); margin: 32px auto 48px;
+    24|    background: var(--paper);
+    25|    box-shadow: 0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+    26|  }
+    27|  .top-rule { height: 4px; background: var(--text); }
+    28|  .top-info {
+    29|    display: flex; justify-content: space-between;
+    30|    padding: 8px 28px; font-size: 10px; color: var(--text3);
+    31|    letter-spacing: 1px; border-bottom: 1px solid var(--border-light);
+    32|    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    33|  }
+    34|  .masthead { text-align: center; padding: 28px 28px 12px; }
+    35|  .masthead .edition {
+    36|    font-size: 10px; letter-spacing: 3px; color: var(--text3);
+    37|    text-transform: uppercase; margin-bottom: 6px;
+    38|    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    39|  }
+    40|  .masthead h1 {
+    41|    font-family: 'SimSun', 'STSong', 'Songti SC', serif;
+    42|    font-size: 48px; font-weight: 900; letter-spacing: 3px; line-height: 1.1;
+    43|  }
+    44|  .masthead .tagline {
+    45|    font-size: 11px; color: var(--text3); letter-spacing: 2px;
+    46|    margin-top: 6px; font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    47|  }
+    48|  .masthead .dateline {
+    49|    display: flex; justify-content: center; gap: 28px;
+    50|    font-size: 10px; letter-spacing: 1.5px; color: var(--text3);
+    51|    margin-top: 14px; padding-top: 14px;
+    52|    border-top: 1px solid var(--border-light);
+    53|    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    54|  }
+    55|  .content { padding: 8px 28px 40px; }
+    56|  .section-rule { border: none; border-top: 2px solid var(--text); margin: 20px 0; opacity: 0.8; }
+    57|  .section-rule.thin { border-width: 1px; border-color: var(--border); }
+    58|
+    59|  .lead {
+    60|    display: grid; grid-template-columns: 1fr 340px;
+    61|    gap: 28px; margin-bottom: 28px; padding-bottom: 24px;
+    62|    border-bottom: 1px solid var(--border);
+    63|  }
+    64|  .lead-label {
+    65|    font-size: 10px; letter-spacing: 2.5px; color: var(--accent);
+    66|    font-weight: 700; margin-bottom: 10px;
+    67|    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; text-transform: uppercase;
+    68|  }
+    69|  .lead h2 {
+    70|    font-family: 'SimSun', 'STSong', 'Songti SC', serif; font-size: 28px; font-weight: 900;
+    71|    line-height: 1.25; letter-spacing: 1px; margin-bottom: 12px;
+    72|  }
+    73|  .lead h2 a { color: var(--text); text-decoration: none; border-bottom: 2px solid var(--accent); }
+    74|  .lead h2 a:hover { color: var(--accent); }
+    75|  .lead .lead-num {
+    76|    font-size: 48px; font-weight: 900; color: var(--accent);
+    77|    display: block; line-height: 1; margin-bottom: 6px;
+    78|  }
+    79|  .lead .byline {
+    80|    font-size: 11px; color: var(--text3); margin-bottom: 12px;
+    81|    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    82|  }
+    83|  .lead p { font-size: 14px; color: var(--text2); line-height: 1.85; }
+    84|  .lead-image {
+    85|    background: linear-gradient(135deg, #E8E4DC 0%, #D5CFC5 50%, #C4BDB0 100%);
+    86|    display: flex; align-items: center; justify-content: center;
+    87|    border: 1px solid var(--border); min-height: 280px;
+    88|  }
+    89|  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 32px; margin-bottom: 24px; }
+    90|  .story { padding: 0 0 18px; border-bottom: 1px solid var(--border-light); break-inside: avoid; }
+    91|  .story-tag {
+    92|    font-size: 9px; letter-spacing: 2px; font-weight: 700;
+    93|    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; text-transform: uppercase;
+    94|  }
+    95|  .story-num {
+    96|    font-family: 'SimSun', 'STSong', 'Songti SC', serif; font-size: 36px; font-weight: 900;
+    97|    line-height: 1; margin-bottom: 4px;
+    98|  }
+    99|  .story h3 { font-size: 18px; font-weight: 700; line-height: 1.35; margin-bottom: 6px; }
+   100|  .story h3 a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+   101|  .story h3 a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+   102|  .story p { font-size: 13px; color: var(--text2); line-height: 1.75; margin-bottom: 4px; }
+   103|  .story.blue .story-tag{color:var(--blue)}.story.blue .story-num{color:var(--blue)}
+   104|  .story.green .story-tag{color:var(--green)}.story.green .story-num{color:var(--green)}
+   105|  .story.red .story-tag{color:var(--accent)}.story.red .story-num{color:var(--accent)}
+   106|  .story.gold .story-tag{color:var(--gold)}.story.gold .story-num{color:var(--gold)}
+   107|  .story.purple .story-tag{color:var(--purple)}.story.purple .story-num{color:var(--purple)}
+   108|
+   109|  .pull-quote {
+   110|    border-top:2px solid var(--text); border-bottom:2px solid var(--text);
+   111|    padding:20px 0; margin:28px 0; text-align:center;
+   112|  }
+   113|  .pull-quote .quote {
+   114|    font-family:'SimSun','STSong','Songti SC',serif; font-size:20px; font-weight:700;
+   115|    line-height:1.45; color:var(--text);
+   116|  }
+   117|  .pull-quote .attribution { font-size:11px; color:var(--text3); margin-top:8px; font-family:'Microsoft YaHei','PingFang SC',sans-serif; }
+   118|
+   119|  .full-card { border-top:2px solid var(--text); padding:20px 0; margin:20px 0; }
+   120|  .full-card h3 { font-family:'SimSun','STSong','Songti SC',serif; font-size:20px; font-weight:900; margin-bottom:8px; }
+   121|  .full-card h3 a { color:var(--text); text-decoration:none; border-bottom:1px solid var(--border); }
+   122|  .full-card h3 a:hover { color:var(--accent); }
+   123|  .full-card p { font-size:14px; color:var(--text2); line-height:1.85; }
+   124|
+   125|  .data-table { width:100%; border-collapse:collapse; margin:14px 0; font-size:12px; }
+   126|  .data-table th {
+   127|    background:#F5F2EB; padding:10px 14px; text-align:left;
+   128|    color:var(--text3); font-weight:700; letter-spacing:1px;
+   129|    font-size:10px; font-family:'Microsoft YaHei','PingFang SC',sans-serif;
+   130|    border-bottom:2px solid var(--text);
+   131|  }
+   132|  .data-table td { padding:10px 14px; border-bottom:1px solid var(--border-light); font-size:13px; }
+   133|  h4 {
+   134|    font-size:12px; letter-spacing:1.5px; color:var(--text3);
+   135|    margin:20px 0 8px; font-weight:700; font-family:'Microsoft YaHei','PingFang SC',sans-serif;
+   136|  }
+   137|  .story-src {
+   138|    font-size:10px; color:var(--text3); margin-top:4px;
+   139|    font-family:'Microsoft YaHei','PingFang SC',sans-serif;
+   140|  }
+   141|  .story-src a { color:var(--text3); text-decoration:none; border-bottom:1px dotted var(--text3); }
+   142|  .footer {
+   143|    text-align:center; padding:28px; color:var(--text3);
+   144|    font-size:10px; border-top:2px solid var(--text); margin-top:36px;
+   145|    letter-spacing:1px; font-family:'Microsoft YaHei','PingFang SC',sans-serif;
+   146|  }
+   147|  @media(max-width:680px){
+   148|    .paper{margin:8px}.masthead h1{font-size:28px;letter-spacing:1px}
+   149|    .lead{grid-template-columns:1fr}.lead-image{min-height:180px}
+   150|    .lead h2{font-size:22px}.lead .lead-num{font-size:36px}
+   151|    .two-col{grid-template-columns:1fr}.content{padding:8px 16px 28px}
+   152|  }
+   153|</style>
 </head>
 <body>
 <div class="paper">
   <div class="top-rule"></div>
   <div class="top-info">
     <span>TikTok Shop 马来西亚 · 手机配件专报</span>
-    <span>2026年05月06日 · 周三</span>
+    <span>2026年05月08日 · 周五</span>
   </div>
   <div class="masthead">
     <div class="edition">Malaysia Phone Accessories Edition</div>
     <h1>出海早班车 · TK马来手机配件</h1>
     <div class="tagline">聚焦TikTok Shop马来西亚站 · 手机壳/充电/耳机/支架/穿戴</div>
     <div class="dateline">
-      <span>2026年05月06日 星期三</span>
+      <span>2026年05月08日 星期五</span>
       <span>AI 情报编辑部</span>
       <span>子品类：手机壳 · 充电器 · TWS耳机 · 支架配件 · 智能穿戴</span>
     </div>
@@ -174,20 +174,20 @@
     <!-- 头版头条 -->
     <div class="lead">
       <div class="lead-text">
-        <div class="lead-label">头版头条 · 格局生变</div>
-        <h2><a href="https://www.amz123.com/kx" target="_blank"><span class="lead-num">-894%</span>手机壳第一股杰美特净利暴跌：头部退场释放的市场空间，中小卖家如何接住？</a></h2>
-        <div class="byline">来源：AMZ123 · 雨果跨境 · 1688产业带数据</div>
-        <p>被誉为"手机壳第一股"的深圳大卖杰美特发布2025年度财报：全年营收6.3亿元，同比下降17%，净利润亏损5617万元，同比下滑894%。ODM/OEM业务高度依赖大客户、毛利率仅13.39%，且受客户供应链转移与关税政策冲击。与此同时，马来TK Shop手机配件日均动销SKU增长38%，中小卖家在渠道更迭中获得结构性机会——1688源头工厂直供模式下，单件成本¥3-8元的手机壳在马来终端可售RM15-35（¥24-56元），毛利空间达55%-70%，远超大卖代工模式。</p>
+        <div class="lead-label">头版头条 · 合规风暴</div>
+        <h2><a href="https://www.amz123.com/kx" target="_blank"><span class="lead-num">90天</span>TK东南亚重拳整顿AIGC内容：虚假宣传最高冻结佣金90天，手机配件卖家如何避雷？</a></h2>
+        <div class="byline">来源：AMZ123 · TikTok Shop卖家中心公告 · Sensor Tower</div>
+        <p>TikTok Shop东南亚跨境业务发布最新合规通知（5月8日生效），要求所有宣传内容（含AI生成内容AIGC）必须真实准确，违规者佣金冻结最长90天。这对马来手机配件卖家冲击直接——"20W充电器标65W""非MagSafe壳冒充磁吸""ANC降噪虚标"等过去常见的擦边球打法将面临封佣风险。与此同时，Sensor Tower数据显示TikTok全球MAU突破20亿，TK Shop 2025年GMV同比增长94%达643亿美元。合规化不是拦路虎，而是淘汰劣质竞争者后的增长窗口。</p>
       </div>
       <div class="lead-image">
         <svg viewBox="0 0 300 280" xmlns="http://www.w3.org/2000/svg">
           <text x="150" y="18" font-family="sans-serif" font-size="11" font-weight="700" fill="#1A1A1A" text-anchor="middle">TK马来手机配件关键信号 · 2026年5月</text>
-          <rect x="30" y="42" width="260" height="26" fill="#E8E4DC" rx="2"/><rect x="30" y="42" width="64" height="26" fill="#C41E3A" rx="2" opacity="0.9"/><text x="35" y="60" font-family="sans-serif" font-size="9" fill="#FFFEF9" font-weight="700">杰美特净利 -894%</text>
-          <rect x="30" y="76" width="260" height="26" fill="#E8E4DC" rx="2"/><rect x="30" y="76" width="58" height="26" fill="#1A5276" rx="2" opacity="0.75"/><text x="35" y="94" font-family="sans-serif" font-size="9" fill="#FFFEF9" font-weight="700">MagSafe壳 +62% 搜索</text>
-          <rect x="30" y="110" width="260" height="26" fill="#E8E4DC" rx="2"/><rect x="30" y="110" width="52" height="26" fill="#1B5E20" rx="2" opacity="0.75"/><text x="35" y="128" font-family="sans-serif" font-size="9" fill="#FFFEF9" font-weight="700">TWS ANC RM49起</text>
-          <rect x="30" y="144" width="260" height="26" fill="#E8E4DC" rx="2"/><rect x="30" y="144" width="48" height="26" fill="#8B6914" rx="2" opacity="0.75"/><text x="35" y="162" font-family="sans-serif" font-size="9" fill="#FFFEF9" font-weight="700">Shopee费率 +1.5%</text>
-          <rect x="30" y="178" width="260" height="26" fill="#E8E4DC" rx="2"/><rect x="30" y="178" width="50" height="26" fill="#6C3483" rx="2" opacity="0.75"/><text x="35" y="196" font-family="sans-serif" font-size="9" fill="#FFFEF9" font-weight="700">GaN充电器 +45%</text>
-          <rect x="30" y="212" width="260" height="26" fill="#E8E4DC" rx="2"/><rect x="30" y="212" width="56" height="26" fill="#1A5276" rx="2" opacity="0.75"/><text x="35" y="230" font-family="sans-serif" font-size="9" fill="#FFFEF9" font-weight="700">AI选品工具起量中</text>
+          <rect x="30" y="42" width="260" height="26" fill="#E8E4DC" rx="2"/><rect x="30" y="42" width="62" height="26" fill="#C41E3A" rx="2" opacity="0.9"/><text x="35" y="60" font-family="sans-serif" font-size="9" fill="#FFFEF9" font-weight="700">🔴 合规封佣90天</text>
+          <rect x="30" y="76" width="260" height="26" fill="#E8E4DC" rx="2"/><rect x="30" y="76" width="58" height="26" fill="#1A5276" rx="2" opacity="0.75"/><text x="35" y="94" font-family="sans-serif" font-size="9" fill="#FFFEF9" font-weight="700">TK GMV +94% $643B</text>
+          <rect x="30" y="110" width="260" height="26" fill="#E8E4DC" rx="2"/><rect x="30" y="110" width="52" height="26" fill="#1B5E20" rx="2" opacity="0.75"/><text x="35" y="128" font-family="sans-serif" font-size="9" fill="#FFFEF9" font-weight="700">GaN充电器 +45%</text>
+          <rect x="30" y="144" width="260" height="26" fill="#E8E4DC" rx="2"/><rect x="30" y="144" width="56" height="26" fill="#8B6914" rx="2" opacity="0.75"/><text x="35" y="162" font-family="sans-serif" font-size="9" fill="#FFFEF9" font-weight="700">Visa AI支付进马来</text>
+          <rect x="30" y="178" width="260" height="26" fill="#E8E4DC" rx="2"/><rect x="30" y="178" width="60" height="26" fill="#6C3483" rx="2" opacity="0.75"/><text x="35" y="196" font-family="sans-serif" font-size="9" fill="#FFFEF9" font-weight="700">越南直播+46.6%</text>
+          <rect x="30" y="212" width="260" height="26" fill="#E8E4DC" rx="2"/><rect x="30" y="212" width="50" height="26" fill="#1A5276" rx="2" opacity="0.75"/><text x="35" y="230" font-family="sans-serif" font-size="9" fill="#FFFEF9" font-weight="700">TK SEA峰会倒计时</text>
         </svg>
       </div>
     </div>
@@ -199,30 +199,30 @@
     <div class="two-col">
       <div class="story blue">
         <div class="story-tag">MagSafe磁吸壳 · 马来</div><div class="story-num">62%↑</div>
-        <h3><a href="https://www.cifnews.com/" target="_blank">MagSafe磁吸手机壳马来站搜索量月增62%：iPhone用户升级周期驱动配件换代</a></h3>
-        <p>马来iPhone用户占比约28%，随着iPhone 14-16系列MagSafe普及，磁吸壳需求快速增长。1688源头¥5.5-12元/个（含磁环），马来终端RM19-39，毛利空间45%-58%。建议搭配磁吸支架/车载支架做套装组合，客单价可提升至RM49-69。</p>
-        <div class="story-src">来源：<a href="https://www.cifnews.com/" target="_blank">雨果跨境</a> · 1688产业带</div>
+        <h3><a href="https://www.cifnews.com/" target="_blank">MagSafe磁吸壳马来站搜索持续攀升：iPhone换机周期驱动配件迭代刚需</a></h3>
+        <p>马来iPhone用户占比约28%，iPhone 16系列MagSafe全面普及推动磁吸壳需求。1688源头¥5.5-12元/个（含磁环），马来终端RM19-39，毛利45%-58%。合规提醒：确保磁吸力度达标（吸附力≥800g），避免因"吸力不足"被判定虚假宣传。</p>
+        <div class="story-src">来源：<a href="https://www.cifnews.com/" target="_blank">雨果跨境</a> · 1688产业带 · TikTok Shop卖家中心</div>
       </div>
       <div class="story blue">
-        <div class="story-tag">3D打印定制壳</div><div class="story-num">POD</div>
-        <h3><a href="https://www.amz123.com/kx" target="_blank">TikTok情绪价值驱动定制壳：60美元抱枕逻辑正在复制到手机配件</a></h3>
-        <p>TikTok"情绪价值"产品逻辑验证有效——60美元定制抱枕2天千单。按需打印（POD）模式正延伸至手机壳：宠物照片壳、情侣定制壳、马来文个性文字壳。轻资产模式，无需备货，1688空白壳¥2-5元+本地打印。</p>
-        <div class="story-src">来源：<a href="https://www.amz123.com/kx" target="_blank">AMZ123</a> · TikTok Trending</div>
+        <div class="story-tag">POD定制壳 · AI设计</div><div class="story-num">POD</div>
+        <h3><a href="https://www.amz123.com/kx" target="_blank">AI设计+POD按需打印：TK马来定制手机壳正复制"60美元抱枕"爆发逻辑</a></h3>
+        <p>TikTok"情绪价值"产品逻辑验证有效。AI生成马来文个性设计+POD按需打印（1688空白壳¥2-5元），轻资产零库存。需注意：AI生成图案不得涉及侵权IP（Sanrio/Disney），合规审核重点在版权。</p>
+        <div class="story-src">来源：<a href="https://www.amz123.com/kx" target="_blank">AMZ123</a> · TikTok Trending · 1688</div>
       </div>
     </div>
 
     <div class="two-col">
       <div class="story blue">
-        <div class="story-tag">液态硅胶壳 · 价格带</div><div class="story-num">RM9.9</div>
-        <h3><a href="https://www.cifnews.com/" target="_blank">中价位策略在TikTok验证：RM9.9液态硅胶壳成马来站走量之王</a></h3>
-        <p>TikTok中价位产品策略（非最低价非最贵）在东南亚验证有效。马来站RM9.9（¥16元）液态硅胶壳周销3000+单，比RM3.9超低价壳退货率低60%。1688成本¥4-7元，30色可选，建议SKU：黑/白/蓝/粉/绿+季节限定色。</p>
+        <div class="story-tag">液态硅胶壳 · 中价位</div><div class="story-num">RM9.9</div>
+        <h3><a href="https://www.cifnews.com/" target="_blank">RM9.9中价位策略在TK验证：液态硅胶壳退货率比超低价壳低60%</a></h3>
+        <p>TK中价位策略持续验证——马来站RM9.9液态硅胶壳周销3000+，退货率仅3.2%，远低于RM3.9超低价壳的8.1%。1688成本¥4-7元，30色可选。合规提示：商品详情须标注"非Apple原装"，避免售后纠纷。</p>
         <div class="story-src">来源：<a href="https://www.cifnews.com/" target="_blank">雨果跨境</a> · TikTok Shop数据</div>
       </div>
       <div class="story purple">
-        <div class="story-tag">支架壳 · 视频场景</div><div class="story-num">2合1</div>
-        <h3><a href="https://www.cifnews.com/" target="_blank">支架+指环二合一手机壳：匹配TikTok用户"横屏刷视频+竖屏自拍"双场景</a></h3>
-        <p>马来用户日均TikTok时长78分钟，支架壳满足横屏看视频+竖屏手持需求。1688成本¥6-10元，马来终端RM18-35。视频带货演示场景天然匹配——直播间展示支架翻转即可，转化率高。</p>
-        <div class="story-src">来源：<a href="https://www.cifnews.com/" target="_blank">雨果跨境</a> · TikTok用户数据</div>
+        <div class="story-tag">智能硬件品牌升级</div><div class="story-num">品牌化</div>
+        <h3><a href="https://www.cifnews.com/article/184858" target="_blank">中国智能硬件品牌杀进海外高端局：手机配件卖家从白牌到品牌的跃迁路径</a></h3>
+        <p>雨果跨境报道中国智能硬件品牌正从"白牌走量"升级为"品牌溢价"。Keychron键盘众筹$117.7万证明3C品牌化可行。马来卖家中期策略：白牌起量→复购积累→品牌线（差异化设计+马来语包装+SIRIM认证）。</p>
+        <div class="story-src">来源：<a href="https://www.cifnews.com/article/184858" target="_blank">雨果跨境</a> · <a href="https://www.tt123.com/t" target="_blank">TT123</a></div>
       </div>
     </div>
 
@@ -233,29 +233,29 @@
     <div class="two-col">
       <div class="story green">
         <div class="story-tag">GaN快充 · 马来</div><div class="story-num">45%↑</div>
-        <h3><a href="https://www.tt123.com/t" target="_blank">GaN氮化镓多口充电器马来站月销增45%：三口65W成新标配</a></h3>
-        <p>马来家庭平均3.2台智能设备，多口充电器刚需强劲。GaN 65W三口充（2C1A）1688成本¥22-35元，终端RM39-69。Baseus/Ugreen已占位，但白牌仍有空间——差异化方向：英规插脚（马来标准）+ 本地SIRIM认证。</p>
-        <div class="story-src">来源：<a href="https://www.tt123.com/t" target="_blank">TT123</a> · Shopee/TikTok数据</div>
+        <h3><a href="https://www.tt123.com/t" target="_blank">GaN氮化镓65W充电器马来月销增45%：英规插脚+SIRIM认证是入场券</a></h3>
+        <p>马来家庭平均3.2台智能设备，多口充电器刚需。GaN 65W三口充（2C1A）1688成本¥22-35元，终端RM39-69。Baseus/Ugreen已占位但无绝对壁垒。⚠️ 合规红线：功率标注必须实测匹配，虚标将触发TK佣金冻结。</p>
+        <div class="story-src">来源：<a href="https://www.tt123.com/t" target="_blank">TT123</a> · 1688产业带 · TikTok Shop卖家中心</div>
       </div>
       <div class="story green">
-        <div class="story-tag">无线充 · 车载场景</div><div class="story-num">15W</div>
-        <h3><a href="https://www.cifnews.com/" target="_blank">车载无线充手机支架：马来驾车族刚需，15W磁吸款走量最快</a></h3>
-        <p>马来汽车保有率87%（东南亚最高之一），车载手机配件是蓝海。15W磁吸无线充支架1688成本¥18-28元，终端RM35-65。短视频演示场景强：上车→放手机→自动吸附充电，3秒展示。</p>
+        <div class="story-tag">车载无线充 · 蓝海</div><div class="story-num">15W</div>
+        <h3><a href="https://www.cifnews.com/" target="_blank">车载磁吸无线充支架：马来87%驾车率蓝海，15W款1688¥18起</a></h3>
+        <p>马来汽车保有率87%（东南亚最高），车载手机配件竞争度低。15W磁吸无线充支架1688¥18-28元，终端RM35-65，毛利40%-55%。TK视频场景强：上车→放手机→吸附充电，3秒完播率极高。</p>
         <div class="story-src">来源：<a href="https://www.cifnews.com/" target="_blank">雨果跨境</a> · 1688产业带</div>
       </div>
     </div>
 
     <div class="two-col">
       <div class="story green">
-        <div class="story-tag">快充线 · 差异化</div><div class="story-num">100W</div>
-        <h3><a href="https://www.cifnews.com/" target="_blank">编织快充线向100W升级：马来消费者正在为"耐弯折"买单</a></h3>
-        <p>马来湿热气候下普通TPE线材3个月即老化，编织尼龙线生命周期延长3倍。100W Type-C to C编织线1688成本¥3.5-7元，终端RM9.9-19.9。卖点：弯折测试视频+30天断裂包换。</p>
+        <div class="story-tag">快充线 · 编织升级</div><div class="story-num">100W</div>
+        <h3><a href="https://www.cifnews.com/" target="_blank">100W编织快充线：马来湿热气候下尼龙线比TPE线寿命长3倍</a></h3>
+        <p>马来全年湿热，普通TPE线材3个月老化，编织尼龙线生命周期延长3倍。100W Type-C to C编织线1688成本¥3.5-7元，终端RM9.9-19.9。合规提示：标注真实功率+线长，"100W 1.5m编织"标题如实即可。</p>
         <div class="story-src">来源：<a href="https://www.cifnews.com/" target="_blank">雨果跨境</a> · 1688产业带</div>
       </div>
       <div class="story green">
-        <div class="story-tag">充电宝 · 出行场景</div><div class="story-num">10,000</div>
-        <h3><a href="https://www.cifnews.com/" target="_blank">10000mAh迷你充电宝：马来女性用户"小包友好"需求爆发</a></h3>
-        <p>马来女性对便携充电宝有"能放进小包"的尺寸执念。口红大小10000mAh自带线充电宝1688成本¥16-25元，终端RM29-49。粉色/紫色/薄荷绿在马来女性用户中转化率最高。</p>
+        <div class="story-tag">充电宝 · 小包友好</div><div class="story-num">10,000</div>
+        <h3><a href="https://www.cifnews.com/" target="_blank">口红大小10000mAh充电宝：马来女性"小包友好"需求持续爆发</a></h3>
+        <p>马来女性用户对便携充电宝有"能放进小包"的尺寸执念。自带线款1688¥16-25元，终端RM29-49。粉色/紫色/薄荷绿转化率最高。需注意：航空安全（≤100Wh），电池容量标注不得虚标。</p>
         <div class="story-src">来源：<a href="https://www.cifnews.com/" target="_blank">雨果跨境</a> · TikTok Shop数据</div>
       </div>
     </div>
@@ -266,15 +266,15 @@
     <h4>🎧 TWS耳机 &amp; 智能穿戴</h4>
     <div class="two-col">
       <div class="story gold">
-        <div class="story-tag">TWS ANC · 价格战</div><div class="story-num">RM49</div>
-        <h3><a href="https://www.cifnews.com/" target="_blank">ANC主动降噪TWS下探至RM49：功能下沉正在吃掉中高端品牌份额</a></h3>
-        <p>ANC降噪+30h续航+IPX5防水组合在2026年已下沉至RM49-79价格带。1688源头¥25-38元/副，马来终端RM39-89不等。Baseus/Ugene虽占位但无绝对壁垒——差异化方向：马来语语音提示、穆斯林配色（绿/金）。</p>
+        <div class="story-tag">TWS ANC · 价格下探</div><div class="story-num">RM49</div>
+        <h3><a href="https://www.cifnews.com/" target="_blank">ANC主动降噪TWS已下探至RM49：功能下沉挤压中高端品牌份额</a></h3>
+        <p>ANC降噪+30h续航+IPX5防水组合在2026年下沉至RM49-79。1688源头¥25-38元/副，马来终端RM39-89。差异化方向：马来语语音提示、穆斯林配色（绿/金）。⚠️ ANC降噪深度必须标注实测dB值。</p>
         <div class="story-src">来源：<a href="https://www.cifnews.com/" target="_blank">雨果跨境</a> · 1688产业带</div>
       </div>
       <div class="story gold">
         <div class="story-tag">开放式耳机 · 运动</div><div class="story-num">OES</div>
-        <h3><a href="https://www.tt123.com/t" target="_blank">开放式耳机（OES）成马来运动人群新宠：不入耳设计解决湿热痛点</a></h3>
-        <p>马来全年湿热，入耳式耳机长时间佩戴不适。开放式耳机不入耳、不闷热，马来运动人群（跑步/健身）搜索量上升。1688成本¥18-32元，终端RM39-89。TikTok视频场景：跑步实测不掉落。</p>
+        <h3><a href="https://www.tt123.com/t" target="_blank">开放式耳机成马来运动人群新宠：不入耳设计完美解决湿热痛点</a></h3>
+        <p>马来全年湿热，入耳式长时间佩戴不适。开放式耳机（OES）不入耳、不闷热，跑步/健身场景搜索上升。1688成本¥18-32元，终端RM39-89。TK视频场景：跑步实测不掉落，自然完播率高。</p>
         <div class="story-src">来源：<a href="https://www.tt123.com/t" target="_blank">TT123</a> · TikTok Trending</div>
       </div>
     </div>
@@ -282,14 +282,14 @@
     <div class="two-col">
       <div class="story gold">
         <div class="story-tag">智能手表 · 平价</div><div class="story-num">RM79</div>
-        <h3><a href="https://www.cifnews.com/" target="_blank">RM79智能手表在马来TikTok起量：血氧+心率+IP68成入门标配</a></h3>
-        <p>马来健康意识上升，平价款智能手表（RM79-129）填补Apple Watch和Mi Band之间的空白。1688成本¥35-55元，建议主打"30天续航+100+运动模式"卖点。需SIRIM认证。</p>
+        <h3><a href="https://www.cifnews.com/" target="_blank">RM79智能手表填补Apple Watch与Mi Band之间空白：血氧+心率+IP68标配</a></h3>
+        <p>马来健康意识上升，平价智能手表RM79-129填补中端空白。1688成本¥35-55元，建议主打"30天续航+100+运动模式"。⚠️ 必须SIRIM认证，健康监测功能标注不得夸大。</p>
         <div class="story-src">来源：<a href="https://www.cifnews.com/" target="_blank">雨果跨境</a> · TikTok Shop数据</div>
       </div>
       <div class="story gold">
         <div class="story-tag">手机挂绳 · 马来风</div><div class="story-num">RM5</div>
-        <h3><a href="https://www.cifnews.com/" target="_blank">RM5手机挂绳的TikTok病毒传播：马来传统Batik花纹款走红</a></h3>
-        <p>手机挂绳从功能性配件升级为时尚单品。马来传统Batik花纹、几何伊斯兰图案、渐变色彩——1688定制¥0.8-2元/条，终端RM5-15。"开箱+搭配展示"短视频自然转化率8%-12%。</p>
+        <h3><a href="https://www.cifnews.com/" target="_blank">RM5手机挂绳的TikTok病毒传播：Batik花纹+几何伊斯兰图案走红</a></h3>
+        <p>手机挂绳升级为时尚单品。马来传统Batik花纹、几何伊斯兰图案、渐变色彩——1688定制¥0.8-2元/条，终端RM5-15。短视频"开箱+搭配展示"转化率8%-12%。合规简单：实物拍摄即可。</p>
         <div class="story-src">来源：<a href="https://www.cifnews.com/" target="_blank">雨果跨境</a> · 1688产业带</div>
       </div>
     </div>
@@ -298,54 +298,54 @@
 
     <!-- 深度分析 -->
     <div class="full-card">
-      <h3><a href="https://www.cifnews.com/article/185634" target="_blank">中价位策略+AI选品：TikTok马来手机配件卖家的两大增长引擎</a></h3>
-      <p>雨果跨境最新报道指出，TikTok上中价位产品（非绝对低价、非高端旗舰）正在系统性跑赢两端的竞品。"用AI找TikTok爆款"的工具型产品也开始帮助卖家实现早期起量。在马来手机配件市场，这一趋势尤为明显：RM9.9-39.9的价格带（¥16-65元）是用户点击→下单转化率最高的区间，而AI工具可以每日追踪TikTok马来站热门标签（#phonecase、#chargermalaysia、#twsmy），捕捉48小时内的搜索异动。结合1688产业带快速打样能力（汕头澄海手机壳3天出样品、深圳宝安充电器5天出货），"AI选品→小单快反→TikTok测款→爆款放量"的闭环正在取代传统"赌爆款→大货压仓"的粗放模式。</p>
-      <p style="margin-top:8px;font-size:12px;color:var(--text3);">来源：<a href="https://www.cifnews.com/article/185634" target="_blank">雨果跨境 · 中价位产品在TikTok火了</a> · <a href="https://www.cifnews.com/article/185633" target="_blank">雨果跨境 · 用AI找TikTok爆款</a> · 1688产业带实地调研</p>
+      <h3><a href="https://www.amz123.com/kx" target="_blank">TK GMV增94%至$643B + 东南亚合规收紧：马来手机配件卖家的"危"与"机"</a></h3>
+      <p>Sensor Tower与Momentum Works联合数据显示，TikTok全球MAU突破20亿，TK Shop 2025年GMV同比增长94%达643亿美元，其中东南亚占比超40%。同一周，TK Shop东南亚发布AIGC内容合规新规——虚假宣传、夸大效果、欺骗性视觉素材将被冻结佣金最长90天。对马来手机配件卖家而言，这两件事叠加释放明确信号：大盘在高速增长，但"野蛮生长"阶段已结束。能提供SIRIM认证+实测数据+真实拍摄的卖家，将在"劣币退场"后获得结构性红利。建议优先做三件事：①全店Listing自查，修正所有虚标参数 ②补充SIRIM认证（充电器/充电宝/智能手表） ③视频内容转向"实测+对比"而非"口播吹嘘"。</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--text3);">来源：<a href="https://www.amz123.com/kx" target="_blank">AMZ123 · Sensor Tower · Momentum Works</a> · <a href="https://www.amz123.com/kx" target="_blank">AMZ123 · TK Shop合规公告</a> · TikTok Shop卖家中心</p>
     </div>
 
     <hr class="section-rule thin">
 
-    <!-- Shopee费率影响 -->
+    <!-- 区域联动信号 -->
     <div class="full-card">
-      <h3><a href="https://www.tt123.com/t" target="_blank">Shopee马来站费率上调1-1.5个百分点：TikTok Shop或成最大受益方</a></h3>
-      <p>TT123报道Shopee东南亚多站点费率即将上调。对马来站手机配件卖家而言，Shopee佣金+交易费合计已接近8%-10%，而TikTok Shop新卖家扶持期内综合费率约5%-6%。2-4个百分点的费率差对毛利仅30%-40%的手机配件品类影响显著——月销RM10,000的店铺，迁移至TikTok可年省RM2,400-4,800。建议卖家趁TikTok马来站仍处于流量红利期（CPM仅为Shopee广告的60%-70%），尽快建立双平台布局。</p>
-      <p style="margin-top:8px;font-size:12px;color:var(--text3);">来源：<a href="https://www.tt123.com/t" target="_blank">TT123 · Shopee费率调整</a> · TikTok Shop卖家中心</p>
+      <h3><a href="https://www.amz123.com/kx" target="_blank">Visa AI支付进入马来西亚：对TK Shop COD主导格局的潜在冲击</a></h3>
+      <p>AMZ123报道Visa宣布将"Agentic Ready"AI代理支付测试扩展至马来西亚，多家马来主要金融机构已加入试点。这对TK Shop马来站有深远影响：当前马来电商COD（货到付款）占比仍超50%，高COD比例带来拒收率高（手机配件约8%-12%）。AI支付将推动在线支付渗透率提升，降低COD拒收损耗。手机配件卖家应关注两个信号：①支付方式变革可能带来非COD渠道的转化率提升 ②在线支付用户客单价通常比COD高15%-25%，中高价位配件（RM39+）可能受益最大。</p>
+      <p style="margin-top:8px;font-size:12px;color:var(--text3);">来源：<a href="https://www.amz123.com/kx" target="_blank">AMZ123 · Visa公告</a> · 马来西亚国家银行</p>
     </div>
 
     <hr class="section-rule thin">
 
-    <!-- 内容策略信号 -->
+    <!-- 周边市场借鉴 -->
     <div class="two-col">
       <div class="story red">
-        <div class="story-tag">内容策略 · Anker案例</div><div class="story-num">0硬广</div>
-        <h3><a href="https://www.cifnews.com/article/185640" target="_blank">Anker"不推销"的视频卖断货：马来配件卖家可复用的内容公式</a></h3>
-        <p>Anker一条无硬广口播的视频卖断货——核心是"场景痛点+产品无声解决"。马来配件卖家可复制：拍摄"手机没电→找不到充电口→磁吸无线充自动吸附"3-5秒场景短剧，完播率和转化率远超口播叫卖。</p>
-        <div class="story-src">来源：<a href="https://www.cifnews.com/article/185640" target="_blank">雨果跨境 · Anker案例</a></div>
+        <div class="story-tag">越南直播 · 借鉴</div><div class="story-num">+46.6%</div>
+        <h3><a href="https://www.amz123.com/kx" target="_blank">越南直播电商Q1增46.6%：马来手机配件卖家的内容策略该学什么？</a></h3>
+        <p>QandMe报告显示越南直播电商占用户消费67%，品牌官方直播间偏好度显著高于KOL带货。马来手机配件卖家可借鉴：建品牌自播间、"产品实测"代替"叫卖"、马来语+英语双语直播覆盖更广人群。</p>
+        <div class="story-src">来源：<a href="https://www.amz123.com/kx" target="_blank">AMZ123 · QandMe报告</a></div>
       </div>
       <div class="story red">
-        <div class="story-tag">智能硬件出海</div><div class="story-num">高端局</div>
-        <h3><a href="https://www.cifnews.com/article/184858" target="_blank">中国智能硬件品牌杀进海外高端局：手机配件品牌化的长期路径</a></h3>
-        <p>中国智能硬件品牌正从"白牌走量"升级为"品牌溢价"。Keychron键盘众筹$117.7万证明3C品类品牌化可行。马来手机配件卖家中期策略：先白牌起量→建立复购→推出品牌线（差异化设计+马来语包装）。</p>
-        <div class="story-src">来源：<a href="https://www.cifnews.com/article/184858" target="_blank">雨果跨境</a> · <a href="https://www.tt123.com/t" target="_blank">TT123</a></div>
+        <div class="story-tag">TK美区 · 运费新政</div><div class="story-num">6月生效</div>
+        <h3><a href="https://www.amz123.com/kx" target="_blank">美区买家责任退货由商家全额承担：东南亚站会跟进吗？</a></h3>
+        <p>TK Shop美区宣布6月起"不再需要""尺码不合适"等退货的运费由商家全额承担。虽然目前仅美区，但平台政策有全球扩散趋势。马来手机配件卖家应提前计算退货率成本，优化产品描述减少"预期不符"退货。</p>
+        <div class="story-src">来源：<a href="https://www.amz123.com/kx" target="_blank">AMZ123 · TikTok Shop公告</a></div>
       </div>
     </div>
 
     <div class="pull-quote">
-      <p class="quote">"杰美特的陨落不是手机壳品类的终结，而是旧模式的终点。当1688出厂价¥3元的壳能72小时直达吉隆坡——中间商的时代正在被TikTok+源头工厂重构。谁能抓住马来TikTok Shop这波流量红利，谁就是下一个手机配件品类的定义者。"</p>
-      <p class="attribution">—— 综合 AMZ123 · 雨果跨境 · 1688产业带 · TikTok Shop公开数据</p>
+      <p class="quote">"TikTok Shop GMV冲向千亿美元的路上，合规化不是刹车，是方向盘。当虚假宣传的竞争者被平台一刀切冻结佣金，那些老老实实做SIRIM认证、标真实参数、拍实测视频的卖家，才是最终拿到船票的人。马来手机配件市场的窗口期还有6-12个月——别等规则完全固化再入场。"</p>
+      <p class="attribution">—— 综合 AMZ123 · Sensor Tower · Momentum Works · TikTok Shop卖家中心 · 1688产业带</p>
     </div>
 
     <h4>📊 马来TK Shop手机配件品类核心数据</h4>
     <table class="data-table">
-      <tr><th>子品类</th><th>价格带 (RM)</th><th>1688成本 (¥)</th><th>毛利空间</th><th>月搜索趋势</th><th>竞争度</th><th>入场建议</th></tr>
-      <tr><td>MagSafe磁吸壳</td><td>RM19-39</td><td>¥5.5-12</td><td>45%-58%</td><td>+62% ↑↑</td><td>中等</td><td>立即入场，做差异化图案</td></tr>
-      <tr><td>液态硅胶壳</td><td>RM9.9-19.9</td><td>¥4-7</td><td>40%-55%</td><td>+28% ↑</td><td>高</td><td>多色+套装组合</td></tr>
-      <tr><td>GaN 65W充电器</td><td>RM39-69</td><td>¥22-35</td><td>35%-50%</td><td>+45% ↑↑</td><td>中高</td><td>英规插脚+SIRIM认证</td></tr>
-      <tr><td>TWS ANC耳机</td><td>RM39-89</td><td>¥25-38</td><td>30%-45%</td><td>+35% ↑</td><td>高</td><td>马来语语音+穆斯林配色</td></tr>
-      <tr><td>车载无线充支架</td><td>RM35-65</td><td>¥18-28</td><td>40%-55%</td><td>+52% ↑↑</td><td>低</td><td>蓝海，尽快入场</td></tr>
-      <tr><td>100W编织快充线</td><td>RM9.9-19.9</td><td>¥3.5-7</td><td>50%-65%</td><td>+30% ↑</td><td>中</td><td>走量款，做多件装</td></tr>
-      <tr><td>智能手表(平价)</td><td>RM79-129</td><td>¥35-55</td><td>30%-40%</td><td>+18% ↑</td><td>中</td><td>SIRIM认证先行</td></tr>
-      <tr><td>手机挂绳/腕带</td><td>RM5-15</td><td>¥0.8-2</td><td>65%-80%</td><td>+40% ↑</td><td>低</td><td>马来风设计+病毒短视频</td></tr>
+      <tr><th>子品类</th><th>价格带 (RM)</th><th>1688成本 (¥)</th><th>毛利空间</th><th>月搜索趋势</th><th>竞争度</th><th>合规风险</th><th>入场建议</th></tr>
+      <tr><td>MagSafe磁吸壳</td><td>RM19-39</td><td>¥5.5-12</td><td>45%-58%</td><td>+62% ↑↑</td><td>中等</td><td>低（标注吸力即可）</td><td>立即入场，差异化图案</td></tr>
+      <tr><td>液态硅胶壳</td><td>RM9.9-19.9</td><td>¥4-7</td><td>40%-55%</td><td>+28% ↑</td><td>高</td><td>低</td><td>多色+套装组合</td></tr>
+      <tr><td>GaN 65W充电器</td><td>RM39-69</td><td>¥22-35</td><td>35%-50%</td><td>+45% ↑↑</td><td>中高</td><td>🔴高（功率虚标）</td><td>英规+SIRIM认证先行</td></tr>
+      <tr><td>TWS ANC耳机</td><td>RM39-89</td><td>¥25-38</td><td>30%-45%</td><td>+35% ↑</td><td>高</td><td>🔴高（降噪虚标）</td><td>实测dB值标注</td></tr>
+      <tr><td>车载无线充支架</td><td>RM35-65</td><td>¥18-28</td><td>40%-55%</td><td>+52% ↑↑</td><td>低</td><td>中</td><td>蓝海，尽快入场</td></tr>
+      <tr><td>100W编织快充线</td><td>RM9.9-19.9</td><td>¥3.5-7</td><td>50%-65%</td><td>+30% ↑</td><td>中</td><td>中（功率标注）</td><td>走量款，多件装</td></tr>
+      <tr><td>智能手表(平价)</td><td>RM79-129</td><td>¥35-55</td><td>30%-40%</td><td>+18% ↑</td><td>中</td><td>🔴高（健康功能）</td><td>SIRIM认证必须</td></tr>
+      <tr><td>手机挂绳/腕带</td><td>RM5-15</td><td>¥0.8-2</td><td>65%-80%</td><td>+40% ↑</td><td>低</td><td>极低</td><td>马来风设计+病毒视频</td></tr>
     </table>
 
     <hr class="section-rule thin">
@@ -366,9 +366,9 @@
     <hr class="section-rule thin">
     <div class="footer">
       <strong>出海早班车</strong> · TK马来手机配件专报 · AI 情报编辑部出品<br>
-      2026年05月06日 · 每周三更新<br>
-      数据来源：AMZ123 · 雨果跨境 · TT123 · TikTok Shop公开数据 · 1688产业带<br>
-      分析仅供参考 · 不构成投资建议 · 1688价格为参考区间，以实时询价为准
+      2026年05月08日 · 每周三、五更新<br>
+      数据来源：AMZ123 · 雨果跨境 · TT123 · Sensor Tower · Momentum Works · TikTok Shop卖家中心 · 1688产业带<br>
+      分析仅供参考 · 不构成投资建议 · 1688价格为参考区间，以实时询价为准 · 合规信息以平台最新公告为准
     </div>
   </div>
 </div>
