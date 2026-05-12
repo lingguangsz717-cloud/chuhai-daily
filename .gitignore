@@ -7,3 +7,7 @@ Thumbs.db
 # 启动脚本（本地用，不上传）
 start.bat
 start.sh
+
+# 邮件脚本（含密码，不上传）
+send_email.py
+subscribers.txt
