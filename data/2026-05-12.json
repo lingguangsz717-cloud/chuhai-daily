@@ -1,0 +1,81 @@
+{
+  "date": "2026-05-12",
+  "vol": "004",
+  "edition": "TK马来手机配件专报",
+  "headline": "TikTok Shop马来西亚手机配件品类正从低价印花转向功能驱动——MagSafe磁吸生态、Type-C置换潮、车载场景成为三大增长引擎",
+  "data_note": "实时数据源（TT123/雨果跨境/AMZ123快讯/FindNiche/TikTok CC）均未返回马来手机配件专题数据。分析基于行业知识库+1688供应链常识。",
+  "categories": [
+    {
+      "name": "MagSafe磁吸手机壳",
+      "cost_1688": "¥8-15",
+      "price_my": "RM19-39",
+      "margin": "50-65%",
+      "priority": "high",
+      "belt": "汕头澄海"
+    },
+    {
+      "name": "磁吸车载支架",
+      "cost_1688": "¥12-18",
+      "price_my": "RM29-49",
+      "margin": "55-70%",
+      "priority": "high",
+      "belt": "深圳/东莞"
+    },
+    {
+      "name": "Type-C快充套装",
+      "cost_1688": "¥15-22",
+      "price_my": "RM25-45",
+      "margin": "40-55%",
+      "priority": "medium",
+      "belt": "深圳坂田"
+    },
+    {
+      "name": "3D立体卡通手机壳",
+      "cost_1688": "¥6-12",
+      "price_my": "RM15-35",
+      "margin": "45-60%",
+      "priority": "medium",
+      "belt": "义乌/澄海"
+    },
+    {
+      "name": "桌面手机支架",
+      "cost_1688": "¥3-8",
+      "price_my": "RM9-19",
+      "margin": "30-45%",
+      "priority": "low",
+      "belt": "中山古镇"
+    },
+    {
+      "name": "蓝牙耳机TWS",
+      "cost_1688": "¥25-80",
+      "price_my": "RM39-129",
+      "margin": "30-50%",
+      "priority": "caution",
+      "belt": "深圳坂田"
+    }
+  ],
+  "today_news": [
+    {
+      "source": "TT123",
+      "title": "中国制造又出解暑神器，万能夹风扇在TikTok月售百万"
+    },
+    {
+      "source": "雨果跨境",
+      "title": "亚马逊AI玩具卖家毛利率35-45%，中国卖家占比不足15%"
+    },
+    {
+      "source": "TT123",
+      "title": "TikTok英国推出无广告订阅服务，月费3.99英镑"
+    },
+    {
+      "source": "TT123",
+      "title": "TK美区直播拍卖日均GMV环比增长超200%"
+    }
+  ],
+  "sources": [
+    "TT123头条",
+    "雨果跨境",
+    "1688产业带",
+    "行业知识库"
+  ]
+}
