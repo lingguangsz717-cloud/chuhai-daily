@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>跨境利润计算器 — 出海早班车</title>
+<style>
+:root {
+  --paper: #faf8f5;
+  --ink: #1a1a1a;
+  --ink-light: #555;
+  --accent: #c41e3a;
+  --accent-dim: #8b1a2b;
+  --border: #e0d8cc;
+  --card-bg: #fff;
+  --gold: #b8860b;
+  --green: #1a7a3a;
+  --red: #c41e3a;
+  --tag-bg: #f5f0e8;
+  --shadow: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-lg: 0 4px 24px rgba(0,0,0,.10);
+  --radius: 6px;
+  --font-serif: 'Times New Roman', 'Songti SC', 'STSong', 'SimSun', 'Noto Serif CJK SC', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+  --transition: 0.25s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body {
+  font-family: var(--font-sans);
+  background: #ede8df;
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ===== LOCK SCREEN ===== */
+.lock-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.lock-screen.unlocked {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.lock-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 48px 40px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+.lock-card .icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+.lock-card h2 {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+.lock-card p {
+  color: var(--ink-light);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+.lock-card .price-tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.lock-card input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 16px;
+  text-align: center;
+  font-family: var(--font-sans);
+  transition: var(--transition);
+  letter-spacing: 2px;
+}
+.lock-card input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(196,30,58,.1);
+}
+.lock-card .unlock-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.lock-card .unlock-btn:hover {
+  background: var(--accent-dim);
+}
+.lock-card .error-msg {
+  color: var(--red);
+  font-size: 13px;
+  margin-top: 8px;
+  min-height: 20px;
+}
+.lock-card .hint {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #999;
+}
+.lock-card .hint a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: var(--card-bg);
+  border-bottom: 2px solid var(--border);
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.brand span {
+  color: var(--accent);
+}
+.badge {
+  background: var(--accent);
+  color: #fff;
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ===== MAIN ===== */
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+.intro {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.intro h1 {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+.intro p {
+  color: var(--ink-light);
+  font-size: 14px;
+}
+
+/* ===== CALCULATOR GRID ===== */
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 700px) {
+  .calc-grid { grid-template-columns: 1fr; }
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+.card h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+  color: var(--ink);
+}
+.card h3 .badge-small {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.badge-cny { background: #fff3cd; color: #856404; }
+.badge-myr { background: #d4edda; color: #155724; }
+
+.form-group {
+  margin-bottom: 14px;
+}
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-light);
+  margin-bottom: 4px;
+}
+.form-group .input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.form-group input, .form-group select {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 15px;
+  font-family: var(--font-sans);
+  transition: var(--transition);
+  background: #fdfcf9;
+}
+.form-group input:focus, .form-group select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(196,30,58,.08);
+  background: #fff;
+}
+.form-group .unit {
+  font-size: 13px;
+  color: var(--ink-light);
+  font-weight: 600;
+  min-width: 36px;
+}
+
+/* ===== RESULT SECTION ===== */
+.result-section {
+  grid-column: 1 / -1;
+}
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.result-item {
+  text-align: center;
+  padding: 18px 12px;
+  border-radius: var(--radius);
+  background: #fdfcf9;
+  border: 1px solid var(--border);
+}
+.result-item .label {
+  font-size: 12px;
+  color: var(--ink-light);
+  margin-bottom: 4px;
+}
+.result-item .value {
+  font-size: 24px;
+  font-weight: 700;
+  font-family: var(--font-serif);
+}
+.result-item .value.profit-positive { color: var(--green); }
+.result-item .value.profit-negative { color: var(--red); }
+.result-item .value.profit-zero { color: var(--ink-light); }
+.result-item .sub {
+  font-size: 12px;
+  color: #999;
+  margin-top: 2px;
+}
+
+.result-summary {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: var(--radius);
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+}
+.summary-good {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+.summary-bad {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+.summary-warn {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+/* ===== NOTES ===== */
+.notes {
+  margin-top: 24px;
+  padding: 16px;
+  background: #fdfcf9;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.8;
+}
+.notes strong {
+  color: var(--ink);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 32px 20px;
+  font-size: 12px;
+  color: #999;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+}
+.footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ===== TIPS ===== */
+.tip-box {
+  grid-column: 1 / -1;
+  margin-top: 8px;
+  padding: 14px 18px;
+  background: #fff8e1;
+  border-left: 4px solid var(--gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 13px;
+  color: #6d5109;
+}
+.tip-box strong {
+  color: #4a3506;
+}
+
+/* ===== RESET BUTTON ===== */
+.reset-btn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  color: var(--ink-light);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-sans);
+}
+.reset-btn:hover {
+  background: #f5f0e8;
+  border-color: #ccc;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== LOCK SCREEN ===== -->
+<div class="lock-screen" id="lockScreen">
+  <div class="lock-card">
+    <div class="icon">🔐</div>
+    <h2>跨境利润计算器</h2>
+    <p>TikTok Shop 马来站专用 · 实时汇率 · 隐藏费用全算</p>
+    <div class="price-tag">$5 / 永久使用</div>
+    <input type="text" id="accessCode" placeholder="请输入解锁码" autocomplete="off">
+    <button class="unlock-btn" onclick="unlock()">解 锁</button>
+    <div class="error-msg" id="lockError"></div>
+    <div class="hint">
+      获取解锁码 → <a href="https://forms.gle/GxBYzatwjf6BDUDA7" target="_blank">点击这里</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div class="header">
+  <div class="header-inner">
+    <div class="brand">出海<span>早班车</span></div>
+    <div class="badge">PRO 工具</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="intro">
+    <h1>💰 跨境利润计算器</h1>
+    <p>TikTok Shop 马来站专用 — 从1688采购到售出，每一分钱都算清楚</p>
+  </div>
+
+  <div class="calc-grid">
+    <!-- LEFT: 成本输入 -->
+    <div class="card">
+      <h3>📦 成本端 <span class="badge-small badge-cny">CNY</span></h3>
+      <div class="form-group">
+        <label>1688采购单价（元）</label>
+        <div class="input-row">
+          <input type="number" id="cost1688" value="15" step="0.01" min="0" oninput="calc()" placeholder="如 15">
+          <span class="unit">¥</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>国内运费（元/件）</label>
+        <div class="input-row">
+          <input type="number" id="domesticShipping" value="3" step="0.01" min="0" oninput="calc()" placeholder="如 3">
+          <span class="unit">¥</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>头程物流（元/件）</label>
+        <div class="input-row">
+          <input type="number" id="intlShipping" value="8" step="0.01" min="0" oninput="calc()" placeholder="海运通常5-12元">
+          <span class="unit">¥</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>打包耗材（元/件）</label>
+        <div class="input-row">
+          <input type="number" id="packaging" value="1.5" step="0.01" min="0" oninput="calc()" placeholder="如 1.5">
+          <span class="unit">¥</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>广告预算（元/件）</label>
+        <div class="input-row">
+          <input type="number" id="adCost" value="3" step="0.01" min="0" oninput="calc()" placeholder="如 3">
+          <span class="unit">¥</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>退货损耗预留（%）</label>
+        <div class="input-row">
+          <input type="number" id="returnRate" value="3" step="0.1" min="0" max="30" oninput="calc()" placeholder="通常2-5%">
+          <span class="unit">%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: 售价输入 -->
+    <div class="card">
+      <h3>🏷️ 售价端 <span class="badge-small badge-myr">MYR</span></h3>
+      <div class="form-group">
+        <label>TikTok Shop售价（马币）</label>
+        <div class="input-row">
+          <input type="number" id="sellingPrice" value="29.90" step="0.01" min="0" oninput="calc()" placeholder="如 29.90">
+          <span class="unit">RM</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>平台佣金率（%）</label>
+        <div class="input-row">
+          <input type="number" id="commissionRate" value="2.0" step="0.1" min="0" max="30" oninput="calc()" placeholder="马来站2%">
+          <span class="unit">%</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>交易手续费率（%）</label>
+        <div class="input-row">
+          <input type="number" id="txFeeRate" value="2.0" step="0.1" min="0" max="10" oninput="calc()" placeholder="约2%">
+          <span class="unit">%</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>固定服务费（马币/单）</label>
+        <div class="input-row">
+          <input type="number" id="fixedFee" value="0.50" step="0.01" min="0" oninput="calc()" placeholder="RM 0.50">
+          <span class="unit">RM</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>MYR → CNY 汇率</label>
+        <div class="input-row">
+          <input type="number" id="exchangeRate" value="1.58" step="0.01" min="0.1" oninput="calc()" placeholder="如 1.58">
+          <span class="unit">¥/RM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="card result-section">
+      <h3>📊 利润分析</h3>
+      <div class="result-grid" id="resultGrid">
+        <div class="result-item">
+          <div class="label">总成本 (CNY)</div>
+          <div class="value" id="totalCost">—</div>
+          <div class="sub">含所有费用</div>
+        </div>
+        <div class="result-item">
+          <div class="label">实际收入 (CNY)</div>
+          <div class="value" id="actualRevenue">—</div>
+          <div class="sub">扣除平台费用后</div>
+        </div>
+        <div class="result-item">
+          <div class="label">单品净利润</div>
+          <div class="value" id="netProfit">—</div>
+          <div class="sub" id="netProfitMYR"></div>
+        </div>
+        <div class="result-item">
+          <div class="label">利润率</div>
+          <div class="value" id="profitMargin">—</div>
+          <div class="sub">净利润 ÷ 收入</div>
+        </div>
+        <div class="result-item">
+          <div class="label">月利润 (×500件)</div>
+          <div class="value" id="monthlyProfit">—</div>
+          <div class="sub">预估月出单500件</div>
+        </div>
+        <div class="result-item">
+          <div class="label">回本销量</div>
+          <div class="value" id="breakeven">—</div>
+          <div class="sub">收回固定成本需售</div>
+        </div>
+      </div>
+      <div class="result-summary" id="summary" style="display:none"></div>
+    </div>
+
+    <div class="tip-box" id="tipBox">
+      <strong>💡 提示：</strong>马来站佣金基准2%，部分品类（电子产品、时尚）可能有差异。头程海运成本约¥5-12/件（普货），空运¥15-35/件。建议利润率低于20%时谨慎入场。
+    </div>
+
+    <div style="text-align:center;grid-column:1/-1">
+      <button class="reset-btn" onclick="resetAll()">🔄 重置默认值</button>
+    </div>
+  </div>
+
+  <div class="notes">
+    <strong>📌 说明：</strong><br>
+    · 平台佣金按TikTok Shop马来站基准2%计算，实际因品类可能有差异<br>
+    · 交易手续费含支付网关费用，约2%<br>
+    · 退货损耗按售价比例预留，实际因品类和品控差异大<br>
+    · 头程物流按海运普货估算，带电/大件/敏感品请自行调整<br>
+    · 汇率实时变动，建议以结算日实际汇率为准<br>
+    · 此工具仅供决策参考，不构成投资建议
+  </div>
+</div>
+
+<div class="footer">
+  出海早班车 © 2026 · <a href="https://lingguangsz717-cloud.github.io/chuhai-daily/">日报首页</a> · 
+  <a href="https://forms.gle/GxBYzatwjf6BDUDA7">订阅日报</a>
+</div>
+
+<script>
+// ===== UNLOCK =====
+const VALID_CODES = ['PROFIT5', 'CHUHAI2026'];
+
+function unlock() {
+  const input = document.getElementById('accessCode');
+  const code = input.value.trim().toUpperCase();
+  const err = document.getElementById('lockError');
+  
+  if (VALID_CODES.includes(code)) {
+    document.getElementById('lockScreen').classList.add('unlocked');
+    // Store in session so refresh doesn't re-lock
+    sessionStorage.setItem('profit_calc_unlocked', '1');
+  } else {
+    err.textContent = '❌ 解锁码无效，请重试';
+    input.value = '';
+    input.focus();
+  }
+}
+
+// Enter key triggers unlock
+document.getElementById('accessCode').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') unlock();
+});
+
+// Check session on load
+if (sessionStorage.getItem('profit_calc_unlocked') === '1') {
+  document.getElementById('lockScreen').classList.add('unlocked');
+}
+
+// ===== CALCULATION =====
+function calc() {
+  // Cost side (CNY)
+  const cost1688 = parseFloat(document.getElementById('cost1688').value) || 0;
+  const domesticShipping = parseFloat(document.getElementById('domesticShipping').value) || 0;
+  const intlShipping = parseFloat(document.getElementById('intlShipping').value) || 0;
+  const packaging = parseFloat(document.getElementById('packaging').value) || 0;
+  const adCost = parseFloat(document.getElementById('adCost').value) || 0;
+  const returnRate = parseFloat(document.getElementById('returnRate').value) || 0;
+  
+  // Revenue side (MYR)
+  const sellingPriceMYR = parseFloat(document.getElementById('sellingPrice').value) || 0;
+  const commissionRate = parseFloat(document.getElementById('commissionRate').value) || 0;
+  const txFeeRate = parseFloat(document.getElementById('txFeeRate').value) || 0;
+  const fixedFeeMYR = parseFloat(document.getElementById('fixedFee').value) || 0;
+  const exchangeRate = parseFloat(document.getElementById('exchangeRate').value) || 1.58;
+  
+  // Calculate
+  const totalCostCNY_beforeReturn = cost1688 + domesticShipping + intlShipping + packaging + adCost;
+  const returnCostCNY = (sellingPriceMYR * exchangeRate) * (returnRate / 100);
+  const totalCostCNY = totalCostCNY_beforeReturn + returnCostCNY;
+  
+  const revenueMYR = sellingPriceMYR;
+  const commissionMYR = sellingPriceMYR * (commissionRate / 100);
+  const txFeeMYR = sellingPriceMYR * (txFeeRate / 100);
+  const totalPlatformFeeMYR = commissionMYR + txFeeMYR + fixedFeeMYR;
+  const netRevenueMYR = revenueMYR - totalPlatformFeeMYR;
+  const netRevenueCNY = netRevenueMYR * exchangeRate;
+  
+  const netProfitCNY = netRevenueCNY - totalCostCNY;
+  const netProfitMYR = netProfitCNY / exchangeRate;
+  const profitMargin = netRevenueCNY > 0 ? (netProfitCNY / netRevenueCNY) * 100 : 0;
+  
+  // Update results
+  document.getElementById('totalCost').textContent = '¥' + totalCostCNY.toFixed(2);
+  document.getElementById('actualRevenue').textContent = '¥' + netRevenueCNY.toFixed(2);
+  
+  const profitEl = document.getElementById('netProfit');
+  profitEl.textContent = '¥' + netProfitCNY.toFixed(2);
+  profitEl.className = 'value';
+  if (netProfitCNY > 0) profitEl.classList.add('profit-positive');
+  else if (netProfitCNY < 0) profitEl.classList.add('profit-negative');
+  else profitEl.classList.add('profit-zero');
+  
+  document.getElementById('netProfitMYR').textContent = 'RM ' + netProfitMYR.toFixed(2);
+  
+  const marginEl = document.getElementById('profitMargin');
+  marginEl.textContent = profitMargin >= 0 ? profitMargin.toFixed(1) + '%' : '亏损';
+  marginEl.className = 'value';
+  if (profitMargin > 20) marginEl.classList.add('profit-positive');
+  else if (profitMargin >= 0) marginEl.classList.add('profit-zero');
+  else marginEl.classList.add('profit-negative');
+  
+  const monthlyProfitEl = document.getElementById('monthlyProfit');
+  const monthlyProfit = netProfitCNY * 500;
+  monthlyProfitEl.textContent = '¥' + monthlyProfit.toFixed(0);
+  monthlyProfitEl.className = 'value';
+  if (monthlyProfit > 0) monthlyProfitEl.classList.add('profit-positive');
+  else if (monthlyProfit < 0) monthlyProfitEl.classList.add('profit-negative');
+  else monthlyProfitEl.classList.add('profit-zero');
+  
+  // Breakeven
+  const breakevenEl = document.getElementById('breakeven');
+  if (netProfitCNY > 0) {
+    breakevenEl.textContent = '1 件即盈利';
+    breakevenEl.className = 'value profit-positive';
+  } else if (netProfitCNY === 0) {
+    breakevenEl.textContent = '持平';
+    breakevenEl.className = 'value profit-zero';
+  } else {
+    breakevenEl.textContent = '⚠ 单件亏损';
+    breakevenEl.className = 'value profit-negative';
+  }
+  
+  // Summary
+  const summaryEl = document.getElementById('summary');
+  summaryEl.style.display = 'block';
+  if (profitMargin > 30) {
+    summaryEl.textContent = '✅ 高利润模型！单品利润率 ' + profitMargin.toFixed(1) + '%，月利润 ¥' + monthlyProfit.toFixed(0) + '（按500件/月），值得放大规模。';
+    summaryEl.className = 'result-summary summary-good';
+  } else if (profitMargin > 15) {
+    summaryEl.textContent = '👍 健康利润模型。单品利润率 ' + profitMargin.toFixed(1) + '%，月利润 ¥' + monthlyProfit.toFixed(0) + '（按500件/月）。关注广告成本优化可进一步提升。';
+    summaryEl.className = 'result-summary summary-good';
+  } else if (profitMargin >= 0) {
+    summaryEl.textContent = '⚠️ 薄利模型。单品利润率仅 ' + profitMargin.toFixed(1) + '%，月利润 ¥' + monthlyProfit.toFixed(0) + '（按500件/月）。建议：压1688采购价、换更便宜头程、或提售价。';
+    summaryEl.className = 'result-summary summary-warn';
+  } else {
+    summaryEl.textContent = '❌ 亏损！每卖一件亏 ¥' + Math.abs(netProfitCNY).toFixed(2) + '。必须立即调整：降采购成本、提售价、或放弃该品。';
+    summaryEl.className = 'result-summary summary-bad';
+  }
+  
+  // Update tip
+  const tipBox = document.getElementById('tipBox');
+  if (netProfitCNY < 0) {
+    const reduction = (Math.abs(netProfitCNY) / exchangeRate).toFixed(2);
+    tipBox.innerHTML = '<strong>⚠️ 当前亏损 ¥' + Math.abs(netProfitCNY).toFixed(2) + '/件。止损建议：</strong>售价提高 RM ' + reduction + ' 或采购成本降低 ¥' + Math.abs(netProfitCNY).toFixed(2) + ' 即可保本。';
+  } else if (profitMargin < 15) {
+    tipBox.innerHTML = '<strong>💡 优化建议：</strong>尝试从1688找替代供应商（同款低价），或与物流商谈头程协议价。每降 ¥1 成本，月利润增 ¥500。';
+  } else {
+    tipBox.innerHTML = '<strong>💡 提示：</strong>马来站佣金基准2%，部分品类（电子产品、时尚）可能有差异。头程海运成本约¥5-12/件（普货），空运¥15-35/件。利润率>30%可放心放大。';
+  }
+}
+
+function resetAll() {
+  document.getElementById('cost1688').value = '15';
+  document.getElementById('domesticShipping').value = '3';
+  document.getElementById('intlShipping').value = '8';
+  document.getElementById('packaging').value = '1.5';
+  document.getElementById('adCost').value = '3';
+  document.getElementById('returnRate').value = '3';
+  document.getElementById('sellingPrice').value = '29.90';
+  document.getElementById('commissionRate').value = '2.0';
+  document.getElementById('txFeeRate').value = '2.0';
+  document.getElementById('fixedFee').value = '0.50';
+  document.getElementById('exchangeRate').value = '1.58';
+  calc();
+}
+
+// Calc on load
+calc();
+</script>
+</body>
+</html>
